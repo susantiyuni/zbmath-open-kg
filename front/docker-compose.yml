@@ -1,0 +1,16 @@
+services:
+  fuseki:
+    image: stain/jena-fuseki
+    container_name: fuseki
+    ports:
+      - "3030:3030"
+    environment:
+      - ADMIN_PASSWORD=admin
+    volumes:
+      - fuseki_data:/fuseki
+      - ./zbmath-100-cleaned.ttl:/data.ttl
+      - ./fuseki-entrypoint.sh:/docker-entrypoint-initdb.d/fuseki-entrypoint.sh
+    entrypoint: ["/bin/bash", "/docker-entrypoint-initdb.d/fuseki-entrypoint.sh"]
+
+volumes:
+  fuseki_data:
