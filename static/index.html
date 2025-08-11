@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>zbMATH Open KG - SPARQL Query and Graph Visualization</title>
+<script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+<style>
+  #network {
+    width: 100%;
+    height: 600px;
+    border: 1px solid lightgray;
+    margin-top: 10px;
+  }
+  textarea {
+    width: 100%;
+    height: 150px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Enter SPARQL Query</h2>
+<textarea id="query" placeholder="Write your SPARQL query here...">
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/> 
+
+SELECT ?article ?title ?year ?author ?keyword ?publisher ?msc ?review WHERE {
+  ?article dcterms:title ?title ;
+           dcterms:issued ?year ;
+           schema:keywords ?keyword;
+           dcterms:publisher ?publisher;
+           dcterms:subject ?msc;
+           schema:reviewText ?review;
+           dcterms:creator ?author .
+}
+LIMIT 40
+
+</textarea>
+<br />
+<button onclick="runQuery()">Run Query</button>
+
+<div id="result">
+  <h3>Graph Visualization</h3>
+  <div id="network"></div>
+</div>
+
+<script>
+
+const prefixMap = {
+  "https://zbmath.org/keyword/": "keyword",
+  "https://zbmath.org/author/": "author",
+  "https://zbmath.org/publisher/": "publisher",
+  "https://zbmath.org/": "zbmath",  // keep this LAST
+  "http://purl.org/dc/terms/": "dcterms",
+  "https://schema.org/": "schema",
+  "http://xmlns.com/foaf/0.1/": "foaf",
+  "http://msc2010.org/resources/MSC/2010/": "msc",
+  "http://www.w3.org/2004/02/skos/core#": "skos",
+  "http://www.w3.org/2001/XMLSchema#": "xsd"
+};
+
+
+function shrinkUri(uri) {
+  // Show zbmath:ID only for article URIs (numeric)
+  if (/https?:\/\/zbmath\.org\/\d+$/.test(uri)) {
+    return "zbmath:" + uri.split('/').pop();
+  }
+
+  // For zbmath.org/* (like keyword, author, etc.), return only the last part
+  if (uri.startsWith("https://zbmath.org/") || uri.startsWith("http://zbmath.org/")) {
+    return uri.split('/').pop();
+  }
+
+  // Other known prefixes
+  for (const [base, prefix] of Object.entries(prefixMap)) {
+    if (uri.startsWith(base)) {
+      const local = uri.slice(base.length);
+      return local || uri;
+    }
+  }
+
+  // Fallback: just return the last path segment
+  return uri.split('/').pop();
+}
+
+function getGroupForId(id) {
+  if (id.includes("zbmath.org/keyword")) return "keyword";
+  if (id.includes("zbmath.org/author")) return "author";
+  if (id.includes("zbmath.org/publisher")) return "publisher";
+  if (id.includes("msc")) return "msc";
+  if (id.includes("language")) return "language";
+  if (id.includes("review")) return "review";
+  if (/^\d{4}$/.test(id)) return "year";
+  if (id.includes("zbmath.org")) return "article";
+//   if (/zbmath\.org\/\d+$/.test(id)) return "article";  // ✅ only numeric zbmath URIs
+  return "other";
+}
+
+async function runQuery() {
+  const queryText = document.getElementById("query").value;
+
+  const response = await fetch("/query", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query: queryText }),
+  });
+
+  const data = await response.json();
+
+  if (data.error) {
+    alert("Error: " + data.error);
+    return;
+  }
+
+  const vars = data.head.vars;
+  const bindings = data.results.bindings;
+
+  const nodesMap = new Map();
+  const edges = [];
+
+  const edgeKeySet = new Set();
+
+  function addEdge(from, to, label) {
+    const key = `${from}->${to}->${label}`;
+    if (!edgeKeySet.has(key)) {
+        edges.push({ from, to, label, arrows: 'to' });
+        edgeKeySet.add(key);
+    }
+  }
+
+  function addNode(id, label) {
+    if (!nodesMap.has(id)) {
+        const resolvedLabel = label || shrinkUri(id);
+        const group = getGroupForId(id);
+        nodesMap.set(id, { id, label: resolvedLabel, group });
+    }
+  }
+
+  // If standard triple vars present, visualize as triple graph
+  if (vars.includes('s') && vars.includes('p') && vars.includes('o')) {
+    bindings.forEach(row => {
+      const s = row.s.value;
+      const p = row.p.value;
+      const o = row.o.value;
+
+      addNode(s);
+      addNode(o);
+
+      addEdge(s, o, p.split('/').pop());
+    });
+    
+  } else {
+    // Otherwise, connect first var to others, label edges with var names
+    bindings.forEach(row => {
+      const mainVar = vars[0];
+      if (!row[mainVar]) return;
+
+      const mainVal = row[mainVar].value;
+
+      // Article nodes always labeled by shrunk URI id, never title
+      if (getGroupForId(mainVal) === 'article') {
+        addNode(mainVal, shrinkUri(mainVal));
+      } else {
+        // Other nodes: use title if present, else fallback label
+        const titleVar = vars.find(v => v.toLowerCase().includes('title'));
+        const label = titleVar && row[titleVar] ? row[titleVar].value : shrinkUri(mainVal);
+        addNode(mainVal, label);
+      }
+
+      vars.slice(1).forEach(v => {
+        if (row[v]) {
+          const val = row[v].value;
+          addNode(val);
+          addEdge(mainVal, val, v);
+        }
+      });
+    });
+  }
+
+  const nodes = Array.from(nodesMap.values());
+
+  const container = document.getElementById("network");
+  container.innerHTML = "";  // clear previous graph
+
+  const dataVis = {
+    nodes: nodes,
+    edges: edges
+  };
+
+  const options = {
+    edges: { font: { align: 'middle' }, smooth: true },
+    nodes: {
+      shape: 'dot',
+      size: 15,
+      font: { size: 14 },
+      borderWidth: 2,
+    },
+    physics: { stabilization: true },
+    groups: {
+        article:   { color: { background: '#e63946', border: '#a4161a' }, shape: 'star' },
+        author:    { color: { background: '#ff7f51', border: '#cc5803' }, shape: 'dot' },
+        publisher: { color: { background: '#f4a261', border: '#e76f51' }, shape: 'triangle' },
+        keyword:   { color: { background: '#90be6d', border: '#43aa8b' }, shape: 'square' },
+        msc:       { color: { background: '#3a86ff', border: '#264653' }, shape: 'diamond' },
+        year:      { color: { background: '#577590', border: '#1d3557' }, shape: 'hexagon' },
+        language:  { color: { background: '#6a994e', border: '#386641' }, shape: 'dot' },
+        review:    { color: { background: '#8338ec', border: '#5f0f40' }, shape: 'star' },
+        other:     { color: { background: '#adb5bd', border: '#495057' }, shape: 'dot' }
+    }
+  };
+
+  new vis.Network(container, dataVis, options);
+}
+</script>
+
+</body>
+</html>
