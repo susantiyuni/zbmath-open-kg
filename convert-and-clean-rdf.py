@@ -6,8 +6,8 @@ from rdflib.namespace import DCTERMS, SKOS, FOAF, RDF, XSD
 import urllib.parse
 
 # ==== FILES ====
-INPUT_FILE = "out-100.jsonl"
-OUTPUT_FILE = "out-100.ttl"
+INPUT_FILE = "out-200.jsonl"
+OUTPUT_FILE = "out-200.ttl"
 
 # ==== NAMESPACES ====
 ZBMATH = Namespace("https://zbmath.org/")
@@ -68,7 +68,12 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 for i, aid in enumerate(author_ids):
                     if not aid:
                         continue
-                    name = split_names(authors[i])[0] if i < len(authors) else aid
+                    # name = split_names(authors[i])[0] if i < len(authors) else aid
+                    if i < len(authors):
+                        raw_names = split_names(authors[i])
+                        name = raw_names[0] if raw_names else aid
+                    else:
+                        name = aid
                     author_uri = URIRef(f"https://zbmath.org/author/{aid}")
                     g.add((record_uri, DCTERMS.creator, author_uri))
                     g.add((author_uri, RDF.type, FOAF.Person))
@@ -136,19 +141,52 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
             if zbl_id:
                 g.add((record_uri, SCHEMA.identifier, Literal(zbl_id)))
 
+            # # Review
+            # review_text = data.get("review_text", [None])[0]
+            # if review_text:
+            #     g.add((record_uri, SCHEMA.reviewText, Literal(review_text)))
+            # review_sign = data.get("review_sign", [None])[0]
+            # if review_sign and review_sign != "None":
+            #     g.add((record_uri, SCHEMA.reviewer, Literal(review_sign)))
+            # reviewer_id = data.get("reviewer_id", [None])[0]
+            # if reviewer_id and reviewer_id != "None":
+            #     g.add((record_uri, SCHEMA.reviewerID, Literal(reviewer_id)))
+            # review_type = data.get("review_type", [None])[0]
+            # if review_type:
+            #     g.add((record_uri, SCHEMA.reviewType, Literal(review_type)))
+
             # Review
             review_text = data.get("review_text", [None])[0]
-            if review_text:
+            if review_text and review_text != "None":
                 g.add((record_uri, SCHEMA.reviewText, Literal(review_text)))
+            
             review_sign = data.get("review_sign", [None])[0]
             if review_sign and review_sign != "None":
                 g.add((record_uri, SCHEMA.reviewer, Literal(review_sign)))
-            reviewer_id = data.get("reviewer_id", [None])[0]
+            
+            reviewer_id = data.get("reviewer", [None])[0]
             if reviewer_id and reviewer_id != "None":
                 g.add((record_uri, SCHEMA.reviewerID, Literal(reviewer_id)))
+            
             review_type = data.get("review_type", [None])[0]
-            if review_type:
+            if review_type and review_type != "None":
                 g.add((record_uri, SCHEMA.reviewType, Literal(review_type)))
+
+            # Software
+            software_names = data.get("software_name", [])
+            sw_ids = data.get("swmath_id", [])
+            
+            for name, sw_id in zip(software_names, sw_ids):
+                if sw_id and sw_id != "None":
+                    software_uri = URIRef(f"https://zbmath.org/software/{sw_id}")
+                    g.add((software_uri, RDF.type, SCHEMA.SoftwareApplication))
+                    if name and name != "None":
+                        g.add((software_uri, SCHEMA.name, Literal(name)))
+                    g.add((software_uri, SCHEMA.identifier, Literal(sw_id)))
+            
+                    # Link software to the article
+                    g.add((record_uri, SCHEMA.software, software_uri))
+
 
             # Serial / Publisher
             serial_title = data.get("serial_title", [None])[0]
@@ -162,9 +200,9 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     g.add((record_uri, DCTERMS.publisher, pub_uri))
                     g.add((pub_uri, RDF.type, FOAF.Organization))
                     g.add((pub_uri, FOAF.name, Literal(name)))
-
-            # Links (if present)
-            link_data = data.get("links", {}).get("link")
+            
+            # Links (flat list now)
+            link_data = data.get("link", [])
             if link_data:
                 if isinstance(link_data, str):
                     links = [link_data]
@@ -176,7 +214,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     g.add((record_uri, SCHEMA.url, safe_uri(l)))
 
         except Exception as e:
-            print(f"⚠️ Error processing record: {e}")
+            print(f"⚠️ Error processing record: {e}{line}")
             continue
 
 # ==== SAVE FINAL CLEAN RDF ====
