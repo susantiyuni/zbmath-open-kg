@@ -1,3 +1,4 @@
+#convert and clean the jsonl --> rdf ttl
 import json
 import re
 from tqdm import tqdm
@@ -7,12 +8,13 @@ import urllib.parse
 
 # ==== FILES ====
 INPUT_FILE = "out-200.jsonl"
-OUTPUT_FILE = "out-200.ttl"
+OUTPUT_FILE = "out-200-cite.ttl"
 
 # ==== NAMESPACES ====
 ZBMATH = Namespace("https://zbmath.org/")
 MSC = Namespace("http://msc2010.org/resources/MSC/2010/")
 SCHEMA = Namespace("https://schema.org/")
+CITO = Namespace("http://purl.org/spar/cito/")
 
 # ==== GRAPH ====
 g = Graph()
@@ -22,6 +24,7 @@ g.bind("skos", SKOS)
 g.bind("msc", MSC)
 g.bind("zbmath", ZBMATH)
 g.bind("schema", SCHEMA)
+g.bind("cito", CITO)
 
 # ==== HELPERS ====
 def make_id(text):
@@ -74,7 +77,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                         name = raw_names[0] if raw_names else aid
                     else:
                         name = aid
-                    author_uri = URIRef(f"https://zbmath.org/author/{aid}")
+                    author_uri = URIRef(f"https://zbmath.org/authors/{aid}")
                     g.add((record_uri, DCTERMS.creator, author_uri))
                     g.add((author_uri, RDF.type, FOAF.Person))
                     g.add((author_uri, FOAF.name, Literal(name)))
@@ -211,7 +214,14 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 for l in links:
                     if not l:
                         continue
-                    g.add((record_uri, SCHEMA.url, safe_uri(l)))
+                    # g.add((record_uri, SCHEMA.url, safe_uri(l)))
+                    g.add((record_uri, SCHEMA.url, Literal(safe_uri(l))))
+
+            # --- Citation Network ---
+            for cited_id in data.get("ref_id", []):
+                if cited_id:
+                    cited_uri = URIRef(ZBMATH + cited_id)
+                    g.add((record_uri, CITO.cites, cited_uri))
 
         except Exception as e:
             print(f"⚠️ Error processing record: {e}{line}")
@@ -220,3 +230,4 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
 # ==== SAVE FINAL CLEAN RDF ====
 g.serialize(destination=OUTPUT_FILE, format="turtle")
 print(f"✅ Cleaned RDF saved to {OUTPUT_FILE}")
+
