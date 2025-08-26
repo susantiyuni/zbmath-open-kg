@@ -16,5 +16,5 @@ for input_file in "$INPUT_DIR"/*.jsonl; do
 
     echo "Processing $input_file -> $output_prefix"
 
-    python create-rdf.py "$input_file" "$output_prefix"
+    python src/create-rdf.py "$input_file" "$output_prefix"
 done
