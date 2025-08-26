@@ -68,6 +68,21 @@ def safe_uri(uri_str):
     #     return URIRef(encoded)
     encoded = urllib.parse.quote(uri_str, safe=":/?&=%#")
     return URIRef(encoded)
+    
+def to_safe_rdf_value(value):
+    """Try to return a safe URIRef, fall back to Literal if not a valid URI."""
+    # Attempt to detect a scheme and validate
+    match = re.match(r'^([a-zA-Z][a-zA-Z0-9+.-]*):', value)
+    if match:
+        scheme = match.group(1)
+        # If scheme is valid, try to build a URIRef
+        try:
+            encoded = urllib.parse.quote(value, safe=":/?&=%#")
+            return URIRef(encoded)
+        except Exception:
+            pass
+    # Otherwise, treat it as a plain literal
+    return Literal(value)
 
 # ==== STEP: LOAD JSONL AND BUILD CLEAN RDF ====
 with open(INPUT_FILE, "r", encoding="utf-8") as f:
@@ -239,8 +254,9 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 for l in links:
                     if not l:
                         continue
-                    g.add((record_uri, SCHEMA.url, safe_uri(l)))
+                    # g.add((record_uri, SCHEMA.url, safe_uri(l)))
                     # g.add((record_uri, SCHEMA.url, Literal(safe_uri(l))))
+                    g.add((record_uri, SCHEMA.url, to_safe_rdf_value(l)))
                     
 
             # --- Citation Network ---
