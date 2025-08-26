@@ -270,8 +270,10 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
             continue
 
 # ==== SAVE FINAL CLEAN RDF ====
+print(f"Serializing (ttl)..")
 g.serialize(destination=OUTPUT_FILE, format="turtle")
 print(f"✅ RDF (ttl) saved to {OUTPUT_FILE}")
 
+print(f"Serializing (nt)..")
 g.serialize(destination=OUTPUT_FILE_2, format="nt")
 print(f"✅ RDF (nt) saved to {OUTPUT_FILE_2}")
