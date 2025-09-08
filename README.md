@@ -34,7 +34,7 @@ Ensure the following are installed:
 
 - Python 3.8+
 - Java 8+ (for RDF libraries Apache Jena)
-- [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) or another SPARQL endpoint
+- RDF triple store. Here we use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as example for its simplicity, but our implementation uses Virtuoso
 - `pip` for Python dependency management
 
 ### 🛠️ Installation
