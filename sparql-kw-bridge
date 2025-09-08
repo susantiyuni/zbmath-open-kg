@@ -1,0 +1,30 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX cito: <http://purl.org/spar/cito/>
+
+SELECT DISTINCT ?early ?earlyTitle ?earlyYear 
+                ?later ?laterTitle ?laterYear 
+                ?kw ?kwLabel
+FROM <https://zbmath.org>
+WHERE {
+  ?early a schema:ScholarlyArticle ;
+         dcterms:title ?earlyTitle ;
+         dcterms:issued ?earlyYear ;
+         dcterms:subject <http://msc2010.org/resources/MSC/2010/42A20> ;
+         schema:keywords ?kw .
+  FILTER(?earlyYear < "1970"^^xsd:gYear)
+
+  ?later a schema:ScholarlyArticle ;
+         dcterms:title ?laterTitle ;
+         dcterms:issued ?laterYear ;
+         dcterms:subject <http://msc2010.org/resources/MSC/2010/42A20> ;
+         schema:keywords ?kw .
+  FILTER(?laterYear >= "1990"^^xsd:gYear && ?laterYear < "2000"^^xsd:gYear)
+
+  # Ensure later does not cite early
+  FILTER NOT EXISTS { ?later cito:cites ?early }
+
+  OPTIONAL { ?kw skos:prefLabel ?kwLabel }
+}
+LIMIT 50
