@@ -1,0 +1,177 @@
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix msc: <http://msc2010.org/resources/MSC/2010/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zbmath: <https://zbmath.org/> .
+
+### === CLASSES ===
+
+schema:Organization a rdfs:Class ;
+    rdfs:label "Organization" .
+
+schema:Periodical a rdfs:Class ;
+    rdfs:label "Periodical" .
+
+schema:Person a rdfs:Class ;
+    rdfs:label "Person" .
+
+schema:Review a rdfs:Class ;
+    rdfs:label "Review" .
+
+schema:ScholarlyArticle a rdfs:Class ;
+    rdfs:label "Scholarly Article" .
+
+schema:SoftwareApplication a rdfs:Class ;
+    rdfs:label "Software Application" .
+
+zbmath:doctype/book-series a rdfs:Class ;
+    rdfs:label "Book Series" ;
+    skos:notation "b" .
+
+zbmath:doctype/collection-article a rdfs:Class ;
+    rdfs:label "Collection Article" ;
+    skos:notation "a" .
+
+zbmath:doctype/journal-article a rdfs:Class ;
+    rdfs:label "Journal Article" ;
+    skos:notation "j" .
+
+zbmath:doctype/preprints a rdfs:Class ;
+    rdfs:label "Preprints" ;
+    skos:notation "p" .
+
+zbmath:ontology/keyword-concept a rdfs:Class ;
+    rdfs:label "Keyword Concept" .
+
+zbmath:ontology/msc-concept a rdfs:Class ;
+    rdfs:label "MSC Concept" .
+
+zbmath:msc-scheme a skos:ConceptScheme ;
+    rdfs:label "MSC Classification" .
+
+zbmath:keyword-scheme a skos:ConceptScheme ;
+    rdfs:label "zbMATH Keywords" .
+
+### === PROPERTIES ===
+
+## DCTERMS
+dcterms:creator a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:Person .
+
+dcterms:isPartOf a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:Periodical .
+
+dcterms:issued a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:gYear .
+
+dcterms:language a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+dcterms:publisher a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:Organization .
+
+dcterms:subject a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range zbmath:ontology/msc-concept .
+
+dcterms:title a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+dcterms:type a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range rdfs:Class .
+
+## SCHEMA.ORG
+schema:author a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:Person .
+
+schema:datePublished a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:gYear .
+
+schema:identifier a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:PropertyValue .
+
+schema:PropertyValue a rdfs:Class ;
+    rdfs:label "Property Value" .
+
+schema:propertyID a rdf:Property ;
+    rdfs:domain schema:PropertyValue ;
+    rdfs:range xsd:string .
+
+schema:value a rdf:Property ;
+    rdfs:domain schema:PropertyValue ;
+    rdfs:range xsd:string .
+
+schema:keywords a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range zbmath:ontology/keyword-concept .
+
+schema:name a rdf:Property ;
+    rdfs:domain [ 
+        a owl:Class ;
+        owl:unionOf (schema:ScholarlyArticle schema:Person schema:Periodical schema:Organization)
+    ] ;
+    rdfs:range xsd:string .
+
+schema:pagination a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+schema:review a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:Review .
+
+schema:reviewBody a rdf:Property ;
+    rdfs:domain schema:Review ;
+    rdfs:range xsd:string .
+
+schema:reviewer a rdf:Property ;
+    rdfs:domain schema:Review ;
+    rdfs:range schema:Person .
+
+schema:reviewAspect a rdf:Property ;
+    rdfs:domain schema:Review ;
+    rdfs:range xsd:string .
+
+schema:inLanguage a rdf:Property ;
+    rdfs:domain schema:Review ;
+    rdfs:range xsd:string .
+
+## CITO
+cito:cites a rdf:Property ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range schema:ScholarlyArticle .
+
+## SKOS
+skos:notation a rdf:Property ;
+    rdfs:domain rdfs:Class ;
+    rdfs:range xsd:string .
+
+skos:prefLabel a rdf:Property ;
+    rdfs:domain skos:Concept ;
+    rdfs:range xsd:string .
+
+skos:inScheme a rdf:Property ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:ConceptScheme .
+
+rdfs:label a rdf:Property ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range xsd:string .
+
+rdfs:seeAlso a rdf:Property ;
+    rdfs:domain skos:Concept ;
+    rdfs:range rdfs:Resource .
+
