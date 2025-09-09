@@ -1,0 +1,93 @@
+digraph Ontology {
+    rankdir=LR;
+    node [shape=rectangle, style=filled, fillcolor=lightblue, fontsize=10];
+
+    // Classes
+    ScholarlyArticle [label="schema:ScholarlyArticle"];
+    Person [label="schema:Person"];
+    Organization [label="schema:Organization"];
+    Periodical [label="schema:Periodical"];
+    Review [label="schema:Review"];
+    SoftwareApplication [label="schema:SoftwareApplication"];
+    PropertyValue [label="schema:PropertyValue"];
+    MSCConcept [label="zbmath:ontology/msc-concept"];
+    KeywordConcept [label="zbmath:ontology/keyword-concept"];
+
+    // Datatypes
+    XSDString [label="xsd:string", shape=ellipse, fillcolor=lightgrey];
+    XSDgYear [label="xsd:gYear", shape=ellipse, fillcolor=lightgrey];
+    XSDAnyURI [label="xsd:anyURI", shape=ellipse, fillcolor=lightgrey];
+
+    // Properties (diamonds)
+    dcterms_creator [label="dcterms:creator", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_publisher [label="dcterms:publisher", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_isPartOf [label="dcterms:isPartOf", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_subject [label="dcterms:subject", shape=diamond, style=filled, fillcolor=orange];
+    schema_author [label="schema:author", shape=diamond, style=filled, fillcolor=orange];
+    schema_keywords [label="schema:keywords", shape=diamond, style=filled, fillcolor=orange];
+    schema_identifier [label="schema:identifier", shape=diamond, style=filled, fillcolor=orange];
+    schema_propertyID [label="schema:propertyID", shape=diamond, style=filled, fillcolor=orange];
+    schema_value [label="schema:value", shape=diamond, style=filled, fillcolor=orange];
+    schema_software [label="schema:software", shape=diamond, style=filled, fillcolor=orange];
+    schema_isPartOf_software [label="schema:isPartOf", shape=diamond, style=filled, fillcolor=orange];
+    schema_review [label="schema:review", shape=diamond, style=filled, fillcolor=orange];
+    cito_cites [label="cito:cites", shape=diamond, style=filled, fillcolor=orange];
+
+    schema_reviewBody [label="schema:reviewBody", shape=diamond, style=filled, fillcolor=orange];
+    schema_reviewer [label="schema:reviewer", shape=diamond, style=filled, fillcolor=orange];
+    schema_reviewAspect [label="schema:reviewAspect", shape=diamond, style=filled, fillcolor=orange];
+    schema_inLanguage [label="schema:inLanguage", shape=diamond, style=filled, fillcolor=orange];
+
+    // Connections (domain -> property -> range)
+
+    ScholarlyArticle -> dcterms_creator;
+    dcterms_creator -> Person;
+
+    ScholarlyArticle -> dcterms_publisher;
+    dcterms_publisher -> Organization;
+
+    ScholarlyArticle -> dcterms_isPartOf;
+    dcterms_isPartOf -> Periodical;
+
+    ScholarlyArticle -> dcterms_subject;
+    dcterms_subject -> MSCConcept;
+
+    ScholarlyArticle -> schema_author;
+    schema_author -> Person;
+
+    ScholarlyArticle -> schema_keywords;
+    schema_keywords -> KeywordConcept;
+
+    ScholarlyArticle -> schema_identifier;
+    schema_identifier -> PropertyValue;
+
+    PropertyValue -> schema_propertyID;
+    schema_propertyID -> XSDString;
+
+    PropertyValue -> schema_value;
+    schema_value -> XSDString;
+
+    ScholarlyArticle -> schema_software;
+    schema_software -> SoftwareApplication;
+
+    SoftwareApplication -> schema_isPartOf_software;
+    schema_isPartOf_software -> ScholarlyArticle;
+
+    ScholarlyArticle -> schema_review;
+    schema_review -> Review;
+
+    ScholarlyArticle -> cito_cites;
+    cito_cites -> ScholarlyArticle;
+
+    Review -> schema_reviewBody;
+    schema_reviewBody -> XSDString;
+
+    Review -> schema_reviewer;
+    schema_reviewer -> Person;
+
+    Review -> schema_reviewAspect;
+    schema_reviewAspect -> XSDString;
+
+    Review -> schema_inLanguage;
+    schema_inLanguage -> XSDString;
+}
