@@ -1,0 +1,73 @@
+digraph MSCMigration {
+    rankdir=LR;
+    node [shape=box, style=filled, fontname="Helvetica"];
+
+    // MSC Nodes
+    "57T10" [shape=ellipse, fillcolor=lightblue];
+    "57M05" [shape=ellipse, fillcolor=lightblue];
+    "55N30" [shape=ellipse, fillcolor=lightblue];
+    "55N10" [shape=ellipse, fillcolor=lightblue];
+    "55R10" [shape=ellipse, fillcolor=lightblue];
+    "35R30" [shape=ellipse, fillcolor=lightblue];
+
+    "18D40" [shape=ellipse, fillcolor=lightgreen];
+    "18G45" [shape=ellipse, fillcolor=lightgreen];
+    "16T30" [shape=ellipse, fillcolor=lightgreen];
+    "18G15" [shape=ellipse, fillcolor=lightgreen];
+    "18G40" [shape=ellipse, fillcolor=lightgreen];
+
+    // Group papers by year
+    subgraph cluster_old {
+        label = "< 1990";
+        style = dashed;
+        node [fillcolor=lightyellow];
+
+        "Cohomology of infinite\n dimensional Lie algebras (1984)";
+        "Cohomologie d'une limite\n inductive de complexes… (1983)";
+        "Homology and cohomology\n theories of general spaces (1989)";
+        "Topology (1986)";
+        "Rational homotopy theory\n and differential forms (1981)";
+        "Spectral sequences and the\n inverse problem of the calculus\n of variations (1980)";
+    }
+
+    subgraph cluster_new {
+        label = "> 2020";
+        style = dashed;
+        node [fillcolor=lightyellow];
+
+        "Cohomology and crossed module\n extensions of Hom-Leibniz-Rinehart\n algebras (2024)";
+        "On incidence algebras and their\n representations (2022)";
+        "Homology theories for complexes\n based on flats (2021)";
+        "Gabriel-Zisman cohomology and\n spectral sequences (2021)";
+    }
+
+    // Paper-to-MSC edges
+    "Cohomology of infinite\n dimensional Lie algebras (1984)" -> "57T10";
+    "Cohomologie d'une limite\n inductive de complexes… (1983)" -> "57M05";
+    "Homology and cohomology\n theories of general spaces (1989)" -> "55N30";
+    "Topology (1986)" -> "55N10";
+    "Rational homotopy theory\n and differential forms (1981)" -> "55R10";
+    "Spectral sequences and the\n inverse problem of the calculus\n of variations (1980)" -> "35R30";
+
+    "Cohomology and crossed module\n extensions of Hom-Leibniz-Rinehart\n algebras (2024)" -> "18D40";
+    "Cohomology and crossed module\n extensions of Hom-Leibniz-Rinehart\n algebras (2024)" -> "18G45";
+    "On incidence algebras and their\n representations (2022)" -> "16T30";
+    "Homology theories for complexes\n based on flats (2021)" -> "18G15";
+    "Gabriel-Zisman cohomology and\n spectral sequences (2021)" -> "18G40";
+
+    // Idea migration (paper to paper)
+    "Cohomology of infinite\n dimensional Lie algebras (1984)" -> "Cohomology and crossed module\n extensions of Hom-Leibniz-Rinehart\n algebras (2024)" [label="cohomology", color=blue];
+    "Cohomologie d'une limite\n inductive de complexes… (1983)" -> "Cohomology and crossed module\n extensions of Hom-Leibniz-Rinehart\n algebras (2024)" [label="cohomology", color=blue];
+    "Homology and cohomology\n theories of general spaces (1989)" -> "On incidence algebras and their\n representations (2022)" [label="cohomology", color=blue];
+    "Topology (1986)" -> "Homology theories for complexes\n based on flats (2021)" [label="cohomology", color=blue];
+    "Rational homotopy theory\n and differential forms (1981)" -> "Gabriel-Zisman cohomology and\n spectral sequences (2021)" [label="spectral_sequences", color=purple];
+    "Spectral sequences and the\n inverse problem of the calculus\n of variations (1980)" -> "Gabriel-Zisman cohomology and\n spectral sequences (2021)" [label="spectral_sequences", color=purple];
+
+    // MSC migration (dashed)
+    "57T10" -> "18D40" [style=dashed, label="cohomology"];
+    "57M05" -> "18G45" [style=dashed, label="cohomology"];
+    "55N30" -> "16T30" [style=dashed, label="cohomology"];
+    "55N10" -> "18G15" [style=dashed, label="cohomology"];
+    "55R10" -> "18G40" [style=dashed, label="spectral_sequences"];
+    "35R30" -> "18G40" [style=dashed, label="spectral_sequences"];
+}
