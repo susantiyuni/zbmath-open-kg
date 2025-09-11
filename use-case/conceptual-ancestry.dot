@@ -7,18 +7,18 @@ digraph MSCMigration {
 
     // Group MSC 55 under cluster
     subgraph cluster_MSC55 {
-        label = "MSC 55 — Algebraic Topology";
+        label = "Algebraic Topology\n55-xx";
         style = rounded;
         color = lightblue;
         fontname="Helvetica-Bold";
         fontsize=15;
 
-        "55Nxx" [shape=ellipse, fillcolor=lightblue, label="55Nxx\nHomology/Cohomology"];
+        "55Nxx" [shape=ellipse, fillcolor=lightblue, label="55Nxx\nHomology\n/Cohomology"];
         "55Rxx" [shape=ellipse, fillcolor=lightblue, label="55Rxx\nFiber Spaces"];
     }
 
     // MSC 18 nodes
-    "18Gxx" [shape=ellipse, fillcolor=lightgreen, label="18Gxx\nHomological Algebra"];
+    "18Gxx" [shape=ellipse, fillcolor=lightgreen, label="18Gxx\nHomological\n Algebra"];
 
     // Paper groups
     subgraph cluster_old {
@@ -29,7 +29,7 @@ digraph MSCMigration {
         fontsize=16;
         node [fillcolor=lightyellow, fontname="Helvetica"];
 
-        "Homology and cohomology\n theories of general spaces (1989)";
+        "Homology and cohomology\n theories of general spaces\n (1989)";
         "Topology (1986)";
         "Rational homotopy theory\n and differential forms (1981)";
     }
@@ -48,7 +48,7 @@ digraph MSCMigration {
     }
 
     // Paper-to-MSC links
-    "Homology and cohomology\n theories of general spaces (1989)" -> "55Nxx";
+    "Homology and cohomology\n theories of general spaces\n (1989)" -> "55Nxx";
     "Topology (1986)" -> "55Nxx";
     "Rational homotopy theory\n and differential forms (1981)" -> "55Rxx";
 
@@ -57,7 +57,7 @@ digraph MSCMigration {
     "Gabriel-Zisman cohomology and\n spectral sequences (2021)" -> "18Gxx";
 
     // Paper-to-paper idea migration
-    "Homology and cohomology\n theories of general spaces (1989)" -> 
+    "Homology and cohomology\n theories of general spaces\n (1989)" -> 
         "On incidence algebras and their\n representations (2022)" 
         [label="cohomology", color=blue, penwidth=2];
 
