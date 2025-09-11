@@ -1,0 +1,52 @@
+digraph MissingCitations {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=lightgray, fontname="Helvetica"];
+
+    // Years
+    // "1980" [shape=ellipse, fillcolor=lightblue];
+    "1983" [shape=ellipse, fillcolor=lightblue];
+    "1988" [shape=ellipse, fillcolor=lightblue];
+    "2022" [shape=ellipse, fillcolor=lightgreen];
+    "2023" [shape=ellipse, fillcolor=lightgreen];
+
+    // Papers (older)
+    "P1" [label="A type of finite \nproper BCI-algebras", fillcolor=lightyellow];
+    "P2" [label="Iséki's condition (C) \nand commutative BCK-algebras)", fillcolor=lightyellow];
+    "P3" [label="BCK and related algebras \nand their corresponding logics", fillcolor=lightyellow];
+
+    // Papers (newer)
+    "P4" [label="Connections between commutative \nrings and some algebras of logic", fillcolor=lightcyan];
+    "P5" [label="Modal operators on L-algebras", fillcolor=lightcyan];
+
+    // MSC and Keywords (shared nodes)
+    "MSC_03G25" [label="MSC:03G25", shape=ellipse, fillcolor=white];
+    "KW_BCKalgebra" [label="BCK-algebra", shape=ellipse, fillcolor=white];
+    
+        // Shared MSCs/Keywords
+    "P1" -> "MSC_03G25";
+    "P2" -> "MSC_03G25";
+    "P3" -> "MSC_03G25";
+    "P1" -> "KW_BCKalgebra";
+    "P2" -> "KW_BCKalgebra";
+    "P3" -> "KW_BCKalgebra";
+    "P4" -> "MSC_03G25";
+    "P5" -> "MSC_03G25";
+    "P4" -> "KW_BCKalgebra";
+    "P5" -> "KW_BCKalgebra";
+
+    // Year links
+    "1988" -> "P1";
+    "1983" -> "P2";
+    "1983" -> "P3";
+    "2022" -> "P4";
+    "2023" -> "P5";
+
+
+    // Suggested citation edges (should have cited)
+    edge [style=dashed, color=red];
+    "P1" -> "P4";
+    "P1" -> "P5";
+    "P2" -> "P5";
+    "P3" -> "P5";
+}
+
