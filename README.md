@@ -22,9 +22,9 @@ These **historically grounded retrieval** methods expose intellectual dynamics t
 
 ## 📁 Repository Structure
 
-- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF knowledge graph (subset), ontology files (`.ttl`), etc.
+- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
 - [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — production SPARQL endpoint runs on Virtuoso for scalability)
-- [`src/`](./src) – Source code for RDF knowledge graph construction
+- [`src/`](./src) – Source code for data harvest, RDF KG construction, statistics calculation, etc.
 - [`use-case/`](./use-case) – Use case-specific code, SPARQL queries, results, and visualizations
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
