@@ -2,20 +2,6 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 # --- CONFIGURATION ---
 endpoint_url = "http://localhost:8890/sparql"  # Virtuoso SPARQL endpoint
-keywords = [
-    "https://zbmath.org/keyword/MValgebra",
-    "https://zbmath.org/keyword/BCIalgebra",
-    "https://zbmath.org/keyword/BCKalgebra",
-    "https://zbmath.org/keyword/fuzzy_ideal"
-]
-
-msc_codes = ["03", "06"]
-
-keywords_values = "\n    ".join(f"<{k}>" for k in keywords)
-msc_filters = " ||\n    ".join(
-    f'STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/{code}")' 
-    for code in msc_codes
-)
 
 sparql = SPARQLWrapper(endpoint_url)
 sparql.setReturnFormat(JSON)
@@ -40,15 +26,12 @@ WHERE {{
   FILTER(xsd:integer(str(?earlyYear)) < 1990)
 
   VALUES ?kw {{
-    <https://zbmath.org/keyword/MValgebra>
-    <https://zbmath.org/keyword/BCIalgebra>
-    <https://zbmath.org/keyword/BCKalgebra>
-    <https://zbmath.org/keyword/fuzzy_ideal>
+    # <https://zbmath.org/keyword/cohomology>
+    <https://zbmath.org/keyword/spectral_sequences>
   }}
 
   FILTER(
-    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/03") ||
-    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/06")
+    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/55")
   )
 }}
 GROUP BY ?early ?earlyYear
@@ -82,15 +65,12 @@ WHERE {{
   FILTER(xsd:integer(str(?laterYear)) > 2020)
 
   VALUES ?kw {{
-    <https://zbmath.org/keyword/MValgebra>
-    <https://zbmath.org/keyword/BCIalgebra>
-    <https://zbmath.org/keyword/BCKalgebra>
-    <https://zbmath.org/keyword/fuzzy_ideal>
+    # <https://zbmath.org/keyword/cohomology>
+    <https://zbmath.org/keyword/spectral_sequences>
   }}
 
   FILTER(
-    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/03") ||
-    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/06")
+    STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/18G")
   )
 }}
 GROUP BY ?later ?laterYear
@@ -114,36 +94,38 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX cito: <http://purl.org/spar/cito/>
 PREFIX msc: <http://msc2010.org/resources/MSC/2010/>
 
-SELECT ?early ?earlyTitle ?earlyYear ?later ?laterTitle ?laterYear
-       (GROUP_CONCAT(DISTINCT ?msc; separator=",") AS ?sharedMSCs)
+SELECT ?early ?earlyTitle ?earlyYear ?earlyMSC 
+      ?later ?laterTitle ?laterYear ?laterMSC 
        (GROUP_CONCAT(DISTINCT ?kw; separator=",") AS ?sharedKeywords)
+
+# SELECT ?early ?earlyTitle ?earlyYear ?later ?laterTitle ?laterYear
+#        (GROUP_CONCAT(DISTINCT ?msc; separator=",") AS ?sharedMSCs)
+#        (GROUP_CONCAT(DISTINCT ?kw; separator=",") AS ?sharedKeywords)
 WHERE {{
   VALUES ?early {{ {early_values} }}
   VALUES ?later {{ {later_values} }}
 
-  ?early dct:subject ?msc ;
+  ?early dct:subject ?earlyMSC ;
          schema:keywords ?kw ;
          schema:name ?earlyTitle ;
          dct:issued ?earlyYear .
 
-  ?later dct:subject ?msc ;
+  ?later dct:subject ?laterMSC ;
          schema:keywords ?kw ;
          schema:name ?laterTitle ;
          dct:issued ?laterYear .
 
   FILTER NOT EXISTS {{ ?later cito:cites ?early }}
 }}
-GROUP BY ?early ?earlyTitle ?earlyYear ?later ?laterTitle ?laterYear
-HAVING(COUNT(DISTINCT ?msc) >= 1 || COUNT(DISTINCT ?kw) >= 1)
+GROUP BY ?early ?earlyTitle ?earlyYear ?later ?laterTitle ?laterYear ?earlyMSC ?laterMSC
 LIMIT 100
 """
 sparql.setQuery(join_query)
 join_results = sparql.query().convert()
 
-# --- STEP 4: Output the results ---
+# --- Print the results ---
 for row in join_results["results"]["bindings"]:
-    print(f"{row['early']['value']} {row['earlyTitle']['value']} ({row['earlyYear']['value']}) -> "
-          f"{row['later']['value']} {row['laterTitle']['value']} ({row['laterYear']['value']})")
-    print("Shared MSCs:", row.get("sharedMSCs", {}).get("value", ""))
-    print("Shared Keywords:", row.get("sharedKeywords", {}).get("value", ""))
+    print(f"{row['earlyTitle']['value']} ({row['earlyYear']['value']}) [{row['earlyMSC']['value']}] --> "
+          f"{row['laterTitle']['value']} ({row['laterYear']['value']}) [{row['laterMSC']['value']}]")
+    print("Shared keywords:", row.get("sharedKeywords", {}).get("value", ""))
     print("---")
