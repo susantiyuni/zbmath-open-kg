@@ -1,8 +1,16 @@
 # zbMATH Open Knowledge Graph
 
-A domain-specific knowledge graph derived from **zbMATH Open**, the world’s most comprehensive and historically rich mathematical database, covering scholarly work from 1868 to the present.
+We present a domain-specific knowledge graph (KG) derived from [**zbMATH Open**](https://zbmath.org/), the world’s most comprehensive and historically deep mathematical database, covering scholarly work from 1763 to the present. 
 
-Enriched with manually curated expert reviews, disambiguated author profiles, and a fine-grained Mathematics Subject Classification (MSC) system, zbMATH Open provides a uniquely structured foundation for tracing the evolution of mathematical thought over more than 150 years.
+Unlike general-purpose scholarly KGs that rely primarily on citation networks, our approach leverages the unique features of zbMATH: expert-curated reviews, high-quality author disambiguation, and expert-assigned keywords and *Mathematics Subject Classification* (MSC), a fine-grained and historically stable ontology of mathematical subjects. This combination provides a rich semantic foundation for capturing the long-term evolution of mathematical knowledge. The resulting zbMATH KG, fully compliant with RDF and Semantic Web standards, interconnects publications, reviews, classifications, and related entities, allowing advanced retrieval and reasoning beyond conventional bibliometric methods.
+
+We demonstrate through case studies how the graph:
+- *(i)* uncovers **overlooked precursors** beyond citation,
+- *(ii)* reveals **conceptual ancestry across fields**,
+- *(iii)* traces **concept revivals** in new contexts, and
+- *(iv)* maps **author–reviewer intellectual lineage**, showing how ideas propagate via scholarly interactions.
+
+These historically grounded retrieval methods expose intellectual dynamics that conventional citation- or keyword-based systems fail to capture.
 
 ## 📌 Key Features
 
