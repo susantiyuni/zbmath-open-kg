@@ -1,0 +1,84 @@
+digraph BodlaenderInfluence {
+    rankdir=LR;
+    node [fontname="Helvetica", fontsize=10];
+
+    // Cluster: Reviewed Papers (Graph Theory)
+    subgraph cluster_reviewed {
+        label="Reviewed Papers \n(Graph Theory, 05C*)";
+        style=dashed;
+        color=gray;
+        fontname="Helvetica-Bold";
+        fontsize=11;
+        rank=same;
+
+        "1998_Hypergraph" [label="(1998) Hypergraph traversal\nrevisited", shape=box, style=filled, fillcolor=lightblue];
+        "1998_Forests" [label="(1998) Degree-preserving\nforests", shape=box, style=filled, fillcolor=lightblue];
+        "1999_TotalColoring" [label="(1999) Linear algorithm for\ntotal colorings", shape=box, style=filled, fillcolor=lightblue];
+        "1999_TreewidthFillin" [label="(1999) Treewidth & minimum\nfill-in (weakly triangulated)", shape=box, style=filled, fillcolor=lightblue];
+        "2000_MinFillin" [label="(2000) Minimum fill-in for\ndistance-hereditary graphs", shape=box, style=filled, fillcolor=lightblue];
+        "2003_Treewidth" [label="(2003) Algorithmic aspects\nof treewidth", shape=box, style=filled, fillcolor=lightblue];
+    }
+
+    // Cluster: Authored Papers (Computer Science)
+    subgraph cluster_authored {
+        label="Authored Papers \n(Computer Science, 68Q*/68W*)";
+        style=dashed;
+        color=gray;
+        fontname="Helvetica-Bold";
+        fontsize=11;
+        rank=same;
+
+        "2002_ModularDecomp" [label="(2002) Computing treewidth\nwith modular decomposition", shape=box, style=filled, fillcolor=lightgreen];
+        "2007_ConvexRecolor" [label="(2007) Quadratic kernelization\nfor convex recoloring", shape=box, style=filled, fillcolor=lightgreen];
+        "2017_CutAndCount" [label="(2017) Cut and count on\nbranch decompositions", shape=box, style=filled, fillcolor=lightgreen];
+    }
+
+    // === Shared Keywords as Nodes ===
+    // Algorithms-related
+    "algorithms" [shape=ellipse, fontsize=9, color=gray];
+    "complexity" [shape=ellipse, fontsize=9, color=gray];
+
+    // Treewidth-related
+    "treewidth" [shape=ellipse, fontsize=9, color=gray];
+    "graph_algorithms" [shape=ellipse, fontsize=9, color=gray];
+    "dynamic_programming" [shape=ellipse, fontsize=9, color=gray];
+    "minimum_fillin" [shape=ellipse, fontsize=9, color=gray];
+    //  "minimum_fillin" [shape=ellipse, style=filled, fillcolor=lightyellow];
+
+    // === Connect Papers to Shared Keywords ===
+
+    // Hypergraph → ConvexRecolor (via complexity, algorithms)
+    "1998_Hypergraph" -> "complexity";
+    "1998_Hypergraph" -> "algorithms";
+    "complexity" -> "2007_ConvexRecolor";
+    "algorithms" -> "2007_ConvexRecolor";
+
+    // Forests → ConvexRecolor (via complexity, algorithms)
+    "1998_Forests" -> "complexity";
+    "1998_Forests" -> "algorithms";
+
+    // MinFillin → ConvexRecolor (via complexity, algorithms)
+    "2000_MinFillin" -> "complexity";
+    "2000_MinFillin" -> "algorithms";
+
+    // TotalColoring → CutAndCount (via graph_algorithms, treewidth)
+    "1999_TotalColoring" -> "graph_algorithms";
+    "1999_TotalColoring" -> "treewidth";
+    "graph_algorithms" -> "2017_CutAndCount";
+    "treewidth" -> "2017_CutAndCount";
+
+    // Treewidth2003 → CutAndCount (graph_algorithms, treewidth, dynamic_programming)
+    "2003_Treewidth" -> "graph_algorithms";
+    "2003_Treewidth" -> "treewidth";
+    "2003_Treewidth" -> "dynamic_programming";
+    "dynamic_programming" -> "2017_CutAndCount";
+
+    // TreewidthFillin → ModularDecomp (minimum_fillin, treewidth)
+    "1999_TreewidthFillin" -> "minimum_fillin";
+    "1999_TreewidthFillin" -> "treewidth";
+    "minimum_fillin" -> "2002_ModularDecomp";
+
+    // // Graph title
+    // labelloc="t";
+    // label="Shared Keyword Influence Graph:\nEarlier Reviewed Papers Linking to Authored Papers via Concepts";
+}
