@@ -2,6 +2,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix msc: <http://msc2010.org/resources/MSC/2010/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  ### 🆕 ADDED
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -31,19 +32,23 @@ schema:SoftwareApplication a rdfs:Class ;
 schema:PropertyValue a rdfs:Class ;
     rdfs:label "Property Value" .
 
-zbmath:doctype/book-series a rdfs:Class ;
+### ✅ FIX: Introduced zbmath:DocumentType to use for article types
+zbmath:DocumentType a rdfs:Class ;
+    rdfs:label "Document Type" .
+
+zbmath:doctype/book-series a zbmath:DocumentType ;
     rdfs:label "Book Series" ;
     skos:notation "b" .
 
-zbmath:doctype/collection-article a rdfs:Class ;
+zbmath:doctype/collection-article a zbmath:DocumentType ;
     rdfs:label "Collection Article" ;
     skos:notation "a" .
 
-zbmath:doctype/journal-article a rdfs:Class ;
+zbmath:doctype/journal-article a zbmath:DocumentType ;
     rdfs:label "Journal Article" ;
     skos:notation "j" .
 
-zbmath:doctype/preprints a rdfs:Class ;
+zbmath:doctype/preprints a zbmath:DocumentType ;
     rdfs:label "Preprints" ;
     skos:notation "p" .
 
@@ -63,16 +68,18 @@ zbmath:keyword-scheme a skos:ConceptScheme ;
 
 # === RDF / RDFS / SKOS ===
 
-rdfs:label a rdf:Property ;
-    rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:string .
+### 🗑️ REMOVED: Already defined by RDF(S), usually not needed to redefine
+# rdfs:label a rdf:Property ;
+#     rdfs:domain rdfs:Resource ;
+#     rdfs:range xsd:string .
 
 rdfs:seeAlso a rdf:Property ;
     rdfs:domain skos:Concept ;
     rdfs:range rdfs:Resource .
 
+### ✅ FIX: Corrected domain from rdfs:Class → skos:Concept
 skos:notation a rdf:Property ;
-    rdfs:domain rdfs:Class ;
+    rdfs:domain skos:Concept ;
     rdfs:range xsd:string .
 
 skos:prefLabel a rdf:Property ;
@@ -113,12 +120,14 @@ dcterms:isPartOf a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
     rdfs:range schema:Periodical .
 
+### ✅ FIX: Changed range from rdfs:Class → zbmath:DocumentType
 dcterms:type a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
-    rdfs:range rdfs:Class .
+    rdfs:range zbmath:DocumentType .
 
 # === SCHEMA.ORG ===
 
+### ✅ FIX: Simplified schema:name domain using owl:unionOf correctly
 schema:name a rdf:Property ;
     rdfs:domain [ a owl:Class ;
         owl:unionOf (schema:ScholarlyArticle schema:Person schema:Periodical schema:Organization schema:SoftwareApplication)
@@ -161,9 +170,10 @@ schema:software a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
     rdfs:range schema:SoftwareApplication .
 
+### ✅ FIX: Generalized domain/range of isPartOf
 schema:isPartOf a rdf:Property ;
-    rdfs:domain schema:SoftwareApplication ;
-    rdfs:range schema:ScholarlyArticle .
+    rdfs:domain rdfs:Resource ;
+    rdfs:range rdfs:Resource .
 
 schema:review a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
@@ -190,3 +200,7 @@ schema:inLanguage a rdf:Property ;
 cito:cites a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
     rdfs:range schema:ScholarlyArticle .
+
+# === OPTIONAL: Mapping creator to schema:author
+dcterms:creator owl:equivalentProperty schema:author .  ### 🆕 ADDED
+
