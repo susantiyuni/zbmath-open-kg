@@ -1,68 +1,90 @@
 # zbMATH Open Knowledge Graph
 
-We present a domain-specific knowledge graph (KG) derived from [**zbMATH Open**](https://zbmath.org/), the world’s most comprehensive and historically deep mathematical database, covering scholarly work from 1763 to the present. 
+We construct a large-scale, historically deep knowledge graph derived from [**zbMATH Open**](https://zbmath.org/), the world’s most comprehensive and historically rich mathematical database, covering scholarly work from 1763 to the present.
 
-Unlike general-purpose scholarly KGs that rely primarily on citation networks, our approach leverages the unique features of zbMATH: expert-curated reviews, high-quality author disambiguation, and expert-assigned keywords and *Mathematics Subject Classification* (MSC), a fine-grained and historically stable ontology of mathematical subjects. This combination provides a rich semantic foundation for capturing the long-term evolution of mathematical knowledge. The resulting zbMATH KG, fully compliant with RDF and Semantic Web standards, interconnects publications, reviews, classifications, and related entities, allowing advanced retrieval and reasoning beyond conventional bibliometric methods.
+The resulting **zbMATH Knowledge Graph (KG)**, fully compliant with RDF and Semantic Web standards, interconnects publication metadata while leveraging the unique features of zbMATH:
 
-We demonstrate through case studies how the graph:
-- *(i)* uncovers **overlooked precursors** beyond citation,
-- *(ii)* reveals **conceptual ancestry across fields**,
-- *(iii)* traces **concept revivals** in new contexts, and
-- *(iv)* maps **author–reviewer intellectual lineage**, showing how ideas propagate via scholarly interactions.
+- Expert-curated reviews
+- High-quality author disambiguation
+- Expert-assigned keywords and *Mathematics Subject Classification* (MSC), a fine-grained and historically stable ontology of mathematical subjects
 
-These **historically grounded retrieval** methods expose intellectual dynamics that conventional citation- or keyword-based systems fail to capture.
+This combination provides a rich semantic foundation for capturing the long-term evolution of mathematical knowledge, enabling advanced retrieval and reasoning beyond conventional citation-based bibliometric methods.
 
-## 📊 Statistics
+Through several **case studies**, we demonstrate the ability of the zbMATH KG to:
 
-- **Publications**: 4.5M+
-- **Authors**: 1.2M+
-- **Reviews**: 3.8M+
-- **Subject Classifications (MSC)**: 5,000+
-- **Triples**: 80M+
+- Uncover **overlooked precursors** beyond traditional citation analysis
+- Reveal **conceptual ancestry across fields**
+- Trace **concept revivals** in new contexts
+- Map **author–reviewer intellectual lineage**, illustrating how ideas propagate via scholarly interactions
+
+These **historically-grounded retrieval** methods expose intellectual dynamics that conventional citation-based systems in scholarly domains often fail to capture. 
+
+---
+
+## 📊 Key Statistics
+- **Triples**: 159M+
+- **Distinct Entities**: 36M+
+- **Publications**: 4M+
+- **Authors/Reviewers**: 1M+
+- **Reviews**: 3M+
+- **Subject Classifications (MSC)**: 6,500+
+- **Keywords**: 3M+
+- **Software**: 30k+
+- ...
+
+## 📌 Key Features
+
+- 🧠 **RDF-Based Semantic Knowledge Graph**  
+  Built entirely on RDF triples, the KG supports semantic interoperability and adheres to Linked Open Data standards, enabling rich, machine-readable knowledge representation.
+
+- 🔍 **SPARQL Query Interface**  
+  Provides a flexible SPARQL endpoint for executing complex queries that reveal deep, semantically enriched insights into mathematical scholarship.
+
+- 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
+  Integrates richly annotated publications, disambiguated authors, expert reviews, keywords, and *Mathematics Subject Classification* (MSC) — a historically stable, fine-grained ontology — enabling nuanced exploration beyond citations.
+
+- 🔄 **Robust Linked Data Integration**  
+  Cross-links with authoritative external URL and identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
+
+- 📈 **Historically-Grounded Intellectual Discovery**  
+  Enables historically-grounded retrieval and long-range intellectual analysis, e.g., for uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
 
 ## 📁 Repository Structure
 
 - [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
-- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — production SPARQL endpoint runs on Virtuoso for scalability)
+- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
 - [`src/`](./src) – Source code for data harvest, RDF KG construction, statistics calculation, etc.
 - [`use-case/`](./use-case) – Use case-specific code, SPARQL queries, results, and visualizations
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
-
-
-## 📌 Key Features
-
-- 🧠 **RDF-Based Knowledge Representation**  
-  All entities and relationships are modeled as RDF triples, supporting semantic interoperability and Linked Open Data standards.
-
-- 🔍 **SPARQL Endpoint**  
-  Query the knowledge graph using SPARQL to retrieve complex and semantically rich information.
-
-- 📚 **Curated Mathematical Metadata**  
-  Includes publications, authors, expert-curated reviews, keywords, MSC classifications, and citation networks.
-
-- 🔄 **Linked Data Integration**  
-  Cross-referenced with external datasets (e.g., ORCID, Wikidata) to enhance entity resolution and connectivity.
-
+  
 ## 🏗️ Knowledge Graph Construction
 
 ### 🔧 Prerequisites
-
-Ensure the following are installed:
 
 - Python 3.8+
 - Java 8+ (for RDF libraries Apache Jena)
 - RDF triple store. Here we use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as example for its simplicity, (example only — production SPARQL endpoint runs on Virtuoso for scalability)
 - `pip` for Python dependency management
 
-### 🛠️ Installation
-
-Clone the repository and install dependencies:
+### 🛠️ Data Harvesting
 
 ```bash
-git clone https://github.com/your-username/zbmath-open-knowledge-graph.git
-cd zbmath-open-knowledge-graph
-pip install -r requirements.txt
+python harvest-by-id.py 
+```
+
+### 🛠️ RDF Construction
+
+```bash
+run-convert.sh #or,
+python create_rdf.py 
+```
+
+
+### 🛠️ RDF Triple Store setup
+
+```bash
+to be added
 ```
 
 ### 📜 License
