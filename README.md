@@ -62,10 +62,12 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
 
 ### 🔧 Prerequisites
 
-- Python 3.8+
-- Java 8+ (for RDF libraries Apache Jena)
-- RDF triple store. Here we use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as example for its simplicity, (example only — production SPARQL endpoint runs on Virtuoso for scalability)
-- `pip` for Python dependency management
+- Python 3.12+  
+- Python libraries: `rdflib`, `SPARQLWrapper`, and others (see requirements.txt)  
+- Java 8 or higher (required only if you run Apache Jena libraries outside Docker)  
+- Docker (for running RDF triple stores like Apache Jena Fuseki without manual Java setup)  
+  - We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as an example for its simplicity  
+  - *Note:* Production SPARQL endpoints use Virtuoso for scalability  
 
 ### 🛠️ Data Harvesting
 
@@ -76,16 +78,23 @@ python harvest-by-id.py
 ### 🛠️ RDF Construction
 
 ```bash
-run-convert.sh #or,
-python create_rdf.py 
+# Option 1: Run the Python script
+python create-rdf.py data/subset-200.jsonl subset-200
+
+# Option 2: Run the shell script for batch processing
+run-convert.sh
+
 ```
 
+### 🛠️ RDF Triple Store Setup
 
-### 🛠️ RDF Triple Store setup
+We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as our RDF triple store example. Fuseki provides a lightweight SPARQL server to host and query your knowledge graph. The example setup is provided in [`front/`](./front). 
 
 ```bash
-to be added
+docker compose up -d
 ```
+
+This command runs Fuseki on port 3030 with the initial data uploaded via [`fuseki-entrypoint.sh`](front/fuseki-entrypoint.sh). )
 
 ### 📜 License
 
