@@ -34,7 +34,7 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
 ## 📌 Key Features
 
 - 🧠 **RDF-Based Semantic Knowledge Graph**  
-  Built entirely on RDF triples using widely-used ontologies and vocabularies, the KG supports semantic interoperability and adheres to Linked Open Data standards, enabling rich, machine-readable knowledge representation.
+  Built entirely on RDF triples using widely-used ontologies and vocabularies, the KG supports semantic interoperability and adheres to Linked Open Data standards, enabling rich, machine-readable knowledge representation. The RDF dumps is available at [**Zenodo**](http://zenodo). 
 
 - 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
   Integrates richly annotated publications, disambiguated authors, expert reviews, keywords, and *Mathematics Subject Classification* (MSC) — a historically stable, fine-grained ontology — enabling nuanced exploration beyond citations.
