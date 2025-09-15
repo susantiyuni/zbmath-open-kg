@@ -76,7 +76,8 @@ rdfs:seeAlso a rdf:Property ;
     rdfs:range rdfs:Resource .
 
 skos:notation a rdf:Property ;
-    rdfs:domain rdfs:Class ;
+    # rdfs:domain rdfs:Class ;
+    rdfs:domain skos:Concept ;
     rdfs:range xsd:string .
 
 skos:prefLabel a rdf:Property ;
@@ -194,3 +195,8 @@ schema:inLanguage a rdf:Property ;
 cito:cites a rdf:Property ;
     rdfs:domain schema:ScholarlyArticle ;
     rdfs:range schema:ScholarlyArticle .
+
+# === OPTIONAL: Mapping creator to schema:author
+dcterms:creator owl:equivalentProperty schema:author . 
+dcterms:issued owl:equivalentProperty schema:datePublished . 
+dcterms:title owl:equivalentProperty schema:name . 
