@@ -10,26 +10,20 @@ import argparse
 # import warnings
 # warnings.filterwarnings("ignore", category=UserWarning, module="rdflib.plugins.serializers.nt")
 
-parser = argparse.ArgumentParser(description="Convert JSONL to RDF Turtle and N-Triples")
+parser = argparse.ArgumentParser(description="Convert JSONL to RDF Turtle/N-Triples")
 parser.add_argument("input", help="Path to input JSONL file")
-parser.add_argument("output", help="Base path for output files (without extension)")
+parser.add_argument("output", help="Output files")
 args = parser.parse_args()
 
 INPUT_FILE = args.input
-OUTPUT_FILE = f"out-ttl-new/{args.output}.ttl"
-OUTPUT_FILE_2 = f"out-nt-new/{args.output}.nt"
-
-# # ==== FILES ====
-
-# INPUT_FILE = "out/out-4ab.jsonl"
-# OUTPUT_FILE = "out-nt/out4-ab.ttl"
-# OUTPUT_FILE_2 = "out-nt/out-4ab.nt"
+OUTPUT_FILE = args.output
 
 # ==== NAMESPACES ====
 ZBMATH = Namespace("https://zbmath.org/")
 MSC = Namespace("http://msc2010.org/resources/MSC/2010/")
 SCHEMA = Namespace("https://schema.org/")
 CITO = Namespace("http://purl.org/spar/cito/")
+
 
 # ==== GRAPH ====
 g = Graph()
@@ -42,26 +36,84 @@ g.bind("schema", SCHEMA)
 g.bind("cito", CITO)
 g.bind("rdfs", RDFS)
 
-# ==== CUSTOM TYPES ====
-MSC_CONCEPT = URIRef("https://zbmath.org/ontology/MSCConcept")
-KEYWORD_CONCEPT = URIRef("https://zbmath.org/ontology/KeywordConcept")
-
 # ==== HELPERS ====
-
 MSC_INFO_FILE = "msc_codes.jsonl"  # JSONL file path
-
 msc_lookup = {}
 with open(MSC_INFO_FILE, "r", encoding="utf-8") as f:
     for line in f:
         entry = json.loads(line)
         msc_lookup[entry["code"]] = entry
 
-# msc_clean = "34B27"
-# msc_info = msc_lookup.get(msc_clean)
-# label = msc_info.get("short_title") if msc_info and msc_info.get("short_title") else msc_clean
+DOC_TYPE_URI_MAP = {
+    "j": {
+        "uri": ZBMATH["doctype/journal-article"],
+        "label": "Journal Article"
+    },
+    "a": {
+        "uri": ZBMATH["doctype/collection-article"],
+        "label": "Collection Article"
+    },
+    "b": {
+        "uri": ZBMATH["doctype/book-series"],
+        "label": "Book Series"
+    },
+    "p": {
+        "uri": ZBMATH["doctype/preprints"],
+        "label": "Preprints"
+    },
+    # "t": { ... }
+}
 
-# print (label)
-# sys.exit
+# ==== CUSTOM TYPES ====
+MSC_CONCEPT = URIRef("https://zbmath.org/ontology/msc-concept")
+KEYWORD_CONCEPT = URIRef("https://zbmath.org/ontology/keyword-concept")
+
+# ==== CONCEPT SCHEMES ====
+MSC_SCHEME_URI = URIRef("https://zbmath.org/msc-scheme")
+KW_SCHEME_URI = URIRef("https://zbmath.org/keyword-scheme")
+
+# Define MSC ConceptScheme
+g.add((MSC_SCHEME_URI, RDF.type, SKOS.ConceptScheme))
+g.add((MSC_SCHEME_URI, DCTERMS.title, Literal("Mathematics Subject Classification (MSC)")))
+g.add((MSC_SCHEME_URI, RDFS.label, Literal("MSC Classification")))
+
+# Define Keyword ConceptScheme
+g.add((KW_SCHEME_URI, RDF.type, SKOS.ConceptScheme))
+g.add((KW_SCHEME_URI, DCTERMS.title, Literal("zbMATH Keyword Scheme")))
+g.add((KW_SCHEME_URI, RDFS.label, Literal("zbMATH Keywords")))
+
+# === Declare Classes ===
+# Custom document types
+for short_code, doc_type_info in DOC_TYPE_URI_MAP.items():
+    uri = doc_type_info["uri"]
+    label = doc_type_info["label"]
+    g.add((uri, RDF.type, RDFS.Class))
+    g.add((uri, RDFS.label, Literal(label)))
+    g.add((uri, SKOS.notation, Literal(short_code)))
+    g.add((uri, RDFS.subClassOf, SCHEMA.ScholarlyArticle))  # NEW LINE
+
+# Custom concept types
+g.add((MSC_CONCEPT, RDF.type, RDFS.Class))
+g.add((MSC_CONCEPT, RDFS.label, Literal("MSC Concept")))
+g.add((KEYWORD_CONCEPT, RDF.type, RDFS.Class))
+g.add((KEYWORD_CONCEPT, RDFS.label, Literal("Keyword Concept")))
+
+g.add((SCHEMA.PropertyValue, RDF.type, RDFS.Class))
+g.add((SCHEMA.PropertyValue, RDFS.label, Literal("PropertyValue")))
+
+# Common schema classes
+for class_uri, label in [
+    (SCHEMA.Person, "Person"),
+    (SCHEMA.Organization, "Organization"),
+    (SCHEMA.Periodical, "Periodical"),
+    (SCHEMA.SoftwareApplication, "Software Application"),
+    (SCHEMA.Review, "Review"),
+    (SCHEMA.ScholarlyArticle, "Scholarly Article")
+]:
+    g.add((class_uri, RDF.type, RDFS.Class))
+    g.add((class_uri, RDFS.label, Literal(label)))
+
+###
 
 def make_id(text):
     """Create URI-safe ID from text"""
@@ -77,11 +129,6 @@ def split_names(raw_string):
 
 def safe_uri(uri_str):
     """Return URIRef with percent-encoding if needed"""
-    # try:
-    #     return URIRef(uri_str)
-    # except Exception:
-    #     encoded = urllib.parse.quote(uri_str, safe=":/?&=%#")
-    #     return URIRef(encoded)
     encoded = urllib.parse.quote(uri_str, safe=":/?&=%#")
     return URIRef(encoded)
 
@@ -110,24 +157,28 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
             if not doc_id:
                 continue
             record_uri = URIRef(ZBMATH + doc_id)
+            
+            # Title
+            title = data.get("document_title", [None])[0]
+            if title and title != "None":
+                g.add((record_uri, DCTERMS.title, Literal(title)))
+                g.add((record_uri, SCHEMA.name, Literal(title)))
+                g.add((record_uri, RDFS.label, Literal(title))) #new9/9
 
             # for document
             g.add((record_uri, RDF.type, SCHEMA.ScholarlyArticle))
 
-            # Title
-            title = data.get("document_title", [None])[0]
-            if title:
-                g.add((record_uri, DCTERMS.title, Literal(title)))
-                g.add((record_uri, SCHEMA.name, Literal(title)))
-
             # Authors processing
             authors = data.get("author", [])
-            author_ids = data.get("author_id", [])
+            author_ids = data.get("author_id", []) 
+            valid_author_ids = [aid for aid in author_ids if aid and aid.lower() != "none"]
             
             # If author_ids exist, use them; otherwise, split author names
-            if author_ids and any(author_ids):
+            # if author_ids and any(author_ids):
+            if valid_author_ids:
                 for i, aid in enumerate(author_ids):
-                    if not aid:
+                    if not aid or aid.lower() == "none":
+                    # if not aid:
                         continue
                     # name = split_names(authors[i])[0] if i < len(authors) else aid
                     if i < len(authors):
@@ -138,11 +189,9 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     author_uri = URIRef(f"https://zbmath.org/authors/{aid}")
                     g.add((record_uri, DCTERMS.creator, author_uri))
                     g.add((record_uri, SCHEMA.author, author_uri)) #new
-                    # g.add((author_uri, RDF.type, FOAF.Person))
-                    # g.add((author_uri, FOAF.name, Literal(name)))
                     g.add((author_uri, RDF.type, SCHEMA.Person))
                     g.add((author_uri, SCHEMA.name, Literal(name)))
-                    
+                    g.add((author_uri, RDFS.label, Literal(name)))  #  Add label
 
             else:
                 # fallback: split names from author strings
@@ -152,15 +201,19 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                         author_uri = URIRef(f"https://zbmath.org/author/{id_name}")
                         g.add((record_uri, DCTERMS.creator, author_uri))
                         g.add((record_uri, SCHEMA.author, author_uri)) #new
-                        # g.add((author_uri, RDF.type, FOAF.Person))
-                        # g.add((author_uri, FOAF.name, Literal(name)))
                         g.add((author_uri, RDF.type, SCHEMA.Person))
                         g.add((author_uri, SCHEMA.name, Literal(name)))
+                        g.add((author_uri, RDFS.label, Literal(name)))  #  Add label
 
-            # Document type
-            doc_type = data.get("document_type", [None])[0]
-            if doc_type:
-                g.add((record_uri, DCTERMS.type, Literal(doc_type)))
+
+            doc_type_code = data.get("document_type", [None])[0]
+            if doc_type_code and doc_type_code != "None":
+                doc_type_info = DOC_TYPE_URI_MAP.get(doc_type_code.strip().lower())
+                if doc_type_info:
+                    doc_type_uri = doc_type_info["uri"]
+                    g.add((record_uri, DCTERMS.type, doc_type_uri))
+                else:
+                    g.add((record_uri, DCTERMS.type, Literal(doc_type_code)))
 
             # Classifications
             classifications = data.get("classification", [])
@@ -173,13 +226,15 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     msc_uri = MSC[msc_clean]
                     g.add((record_uri, DCTERMS.subject, msc_uri))
                     g.add((msc_uri, RDF.type, SKOS.Concept))
-                    g.add((msc_uri, RDF.type, MSC_CONCEPT))  # 🆕 Add specific type
+                    g.add((msc_uri, RDF.type, MSC_CONCEPT))
                     g.add((msc_uri, SKOS.notation, Literal(msc_clean)))
                     
                     # Use short title as prefLabel if available, otherwise fallback to code
                     msc_info = msc_lookup.get(msc_clean)
                     label = msc_info.get("short_title") if msc_info and msc_info.get("short_title") else msc_clean
                     g.add((msc_uri, SKOS.prefLabel, Literal(label)))
+                    g.add((msc_uri, SKOS.inScheme, MSC_SCHEME_URI))
+                    g.add((msc_uri, RDFS.label, Literal(label)))
                     
                     # Add zbMATH URL if available
                     if msc_info:
@@ -198,17 +253,20 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     kw_uri = URIRef(f"https://zbmath.org/keyword/{kw_id}")
                     g.add((record_uri, SCHEMA.keywords, kw_uri))
                     g.add((kw_uri, RDF.type, SKOS.Concept))
-                    g.add((kw_uri, RDF.type, KEYWORD_CONCEPT))  # 🆕
+                    g.add((kw_uri, RDF.type, KEYWORD_CONCEPT))  # 
                     g.add((kw_uri, SKOS.prefLabel, Literal(kw)))
+                    g.add((kw_uri, RDFS.label, Literal(kw)))  # 
+                    g.add((kw_uri, SKOS.inScheme, KW_SCHEME_URI))
+                    g.add((kw_uri, RDFS.label, Literal(kw)))
 
             # Language
             lang = data.get("language", [None])[0]
-            if lang:
+            if lang and lang != "None":
                 g.add((record_uri, DCTERMS.language, Literal(lang)))
 
             # Publication year
             pub_year = data.get("publication_year", [None])[0]
-            if pub_year:
+            if pub_year and pub_year != "None":
                 try:
                     g.add((record_uri, DCTERMS.issued, Literal(int(pub_year), datatype=XSD.gYear)))
                     g.add((record_uri, SCHEMA.datePublished, Literal(int(pub_year), datatype=XSD.gYear)))
@@ -218,14 +276,12 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
 
             # Pagination
             pagination = data.get("pagination", [None])[0]
-            if pagination:
+            if pagination and pagination != "None":
                 g.add((record_uri, SCHEMA.pagination, Literal(pagination)))
 
             # Zbl ID
             zbl_id = data.get("zbl_id", [None])[0]
-            # if zbl_id:
-            #     g.add((record_uri, SCHEMA.identifier, Literal(zbl_id)))
-            if zbl_id:
+            if zbl_id and zbl_id != "None":
                 zbl_bn = BNode()
                 g.add((record_uri, SCHEMA.identifier, zbl_bn))
                 g.add((zbl_bn, RDF.type, SCHEMA.PropertyValue))
@@ -242,22 +298,6 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 g.add((doi_bn, SCHEMA.value, Literal(doi)))
 
             # # Review
-            # review_text = data.get("review_text", [None])[0]
-            # if review_text and review_text != "None":
-            #     g.add((record_uri, SCHEMA.reviewText, Literal(review_text)))
-            
-            # review_sign = data.get("review_sign", [None])[0]
-            # if review_sign and review_sign != "None":
-            #     g.add((record_uri, SCHEMA.reviewer, Literal(review_sign)))
-            
-            # reviewer_id = data.get("reviewer", [None])[0]
-            # if reviewer_id and reviewer_id != "None":
-            #     g.add((record_uri, SCHEMA.reviewerID, Literal(reviewer_id)))
-            
-            # review_type = data.get("review_type", [None])[0]
-            # if review_type and review_type != "None":
-            #     g.add((record_uri, SCHEMA.reviewType, Literal(review_type)))
-
             # Review block (refactored as schema:Review entity)
             review_text = data.get("review_text", [None])[0]
             review_sign = data.get("review_sign", [None])[0]
@@ -284,18 +324,18 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
 
                 # Reviewer
                 if reviewer_id and reviewer_id != "None":
-                    reviewer_uri = URIRef(f"https://zbmath.org/reviewer/{make_id(reviewer_id)}")
-                    g.add((review_node, SCHEMA.author, reviewer_uri))
-                    # g.add((reviewer_uri, RDF.type, FOAF.Person)) #changed
+                    # reviewer_uri = URIRef(f"https://zbmath.org/reviewers/{make_id(reviewer_id)}")
+                    reviewer_uri = URIRef(f"https://zbmath.org/authors/{reviewer_id}")
+                    g.add((review_node, SCHEMA.reviewer, reviewer_uri))  # instead of SCHEMA.author
                     g.add((reviewer_uri, RDF.type, SCHEMA.Person))
                     
                     # Use review_sign as name if available
                     if review_sign and review_sign != "None":
-                        # g.add((reviewer_uri, FOAF.name, Literal(review_sign))) #changed
                         g.add((reviewer_uri, SCHEMA.name, Literal(review_sign)))
+                        g.add((reviewer_uri, RDFS.label, Literal(name)))  #  Add label
                     else:
-                        # g.add((reviewer_uri, FOAF.name, Literal(reviewer_id))) #changed
                         g.add((reviewer_uri, SCHEMA.name, Literal(reviewer_id)))
+                        g.add((reviewer_uri, RDFS.label, Literal(reviewer_id)))  #  Add label
 
             # Software
             software_names = data.get("software_name", [])
@@ -307,17 +347,15 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                     g.add((software_uri, RDF.type, SCHEMA.SoftwareApplication))
                     if name and name != "None":
                         g.add((software_uri, SCHEMA.name, Literal(name)))
+                        g.add((software_uri, RDFS.label, Literal(name)))  # 
                     g.add((software_uri, SCHEMA.identifier, Literal(sw_id)))
             
                     # Link software to the article
                     g.add((record_uri, SCHEMA.software, software_uri))
-                    # g.add((software_uri, SCHEMA.isPartOf, record_uri)) #reversible
+                    g.add((software_uri, SCHEMA.isPartOf, record_uri)) #reversible
 
 
             # Serial / Publisher
-            # serial_title = data.get("serial_title", [None])[0]
-            # if serial_title and serial_title != "None":
-            #     g.add((record_uri, DCTERMS.isPartOf, Literal(serial_title)))
             serial_title = data.get("serial_title", [None])[0]
             if serial_title and serial_title != "None":
                 journal_id = make_id(serial_title)
@@ -325,6 +363,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 g.add((record_uri, DCTERMS.isPartOf, journal_uri))
                 g.add((journal_uri, RDF.type, SCHEMA.Periodical))
                 g.add((journal_uri, SCHEMA.name, Literal(serial_title)))
+                g.add((journal_uri, RDFS.label, Literal(serial_title)))  # 
 
                 # Optional: if ISSN is known, add it here
                 # g.add((journal_uri, SCHEMA.issn, Literal("xxxx-xxxx")))
@@ -334,13 +373,10 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 for name in split_names(serial_publisher):
                     id_name = make_id(name)
                     pub_uri = URIRef(f"https://zbmath.org/publisher/{id_name}")
-                    # g.add((record_uri, DCTERMS.publisher, pub_uri))
-                    # g.add((pub_uri, RDF.type, FOAF.Organization))
-                    # g.add((pub_uri, FOAF.name, Literal(name)))
-                    # 🔍 Publisher as schema:Organization
                     g.add((record_uri, DCTERMS.publisher, pub_uri))
                     g.add((pub_uri, RDF.type, SCHEMA.Organization))
                     g.add((pub_uri, SCHEMA.name, Literal(name)))
+                    g.add((pub_uri, RDFS.label, Literal(name)))  # 
             
             # Links (flat list now)
             link_data = data.get("link", [])
@@ -352,26 +388,26 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
                 for l in links:
                     if not l:
                         continue
-                    # g.add((record_uri, SCHEMA.url, safe_uri(l)))
-                    # g.add((record_uri, SCHEMA.url, Literal(safe_uri(l))))
                     g.add((record_uri, SCHEMA.url, to_safe_rdf_value(l)))
                     
 
             # --- Citation Network ---
             for cited_id in data.get("ref_id", []):
-                if cited_id:
+                if cited_id and cited_id != "None":
                     cited_uri = URIRef(ZBMATH + cited_id)
                     g.add((record_uri, CITO.cites, cited_uri))
+                    # g.add((cited_uri, RDF.type, SCHEMA.ScholarlyArticle))
 
         except Exception as e:
             print(f"⚠️ Error processing record: {e}{line}")
             continue
 
 # ==== SAVE FINAL CLEAN RDF ====
+
+# print(f"Serializing (nt)..")
+# g.serialize(destination=OUTPUT_FILE_2, format="nt")
+# print(f"✅ RDF (nt) saved to {OUTPUT_FILE_2}")
+
 print(f"Serializing (ttl)..")
 g.serialize(destination=OUTPUT_FILE, format="turtle")
 print(f"✅ RDF (ttl) saved to {OUTPUT_FILE}")
-
-print(f"Serializing (nt)..")
-g.serialize(destination=OUTPUT_FILE_2, format="nt")
-print(f"✅ RDF (nt) saved to {OUTPUT_FILE_2}")
