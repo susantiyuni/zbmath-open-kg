@@ -2,6 +2,110 @@ digraph Ontology {
     rankdir=LR;
     node [shape=rectangle, style=filled, fillcolor=lightblue, fontsize=10];
 
+    // === CLASSES ===
+    ScholarlyArticle [label="schema:ScholarlyArticle"];
+    Person [label="schema:Person"];
+    Organization [label="schema:Organization"];
+    Periodical [label="schema:Periodical"];
+    Review [label="schema:Review"];
+    SoftwareApplication [label="schema:SoftwareApplication"];
+    PropertyValue [label="schema:PropertyValue"];
+    MSCConcept [label="zbmath:ontology/msc-concept"];
+    KeywordConcept [label="zbmath:ontology/keyword-concept"];
+    JournalArticle [label="zbmath:journal-article"];
+    CollectionArticle [label="zbmath:collection-article"];
+    Preprints [label="zbmath:preprints"];
+    BookSeries [label="zbmath:book-series"];
+
+    // === DATATYPES ===
+    XSDString [label="xsd:string", shape=ellipse, fillcolor=lightgrey];
+    XSDgYear [label="xsd:gYear", shape=ellipse, fillcolor=lightgrey];
+    XSDAnyURI [label="xsd:anyURI", shape=ellipse, fillcolor=lightgrey];
+
+    // === PROPERTIES ===
+    dcterms_publisher [label="dcterms:publisher", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_isPartOf [label="dcterms:isPartOf", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_subject [label="dcterms:subject", shape=diamond, style=filled, fillcolor=orange];
+    dcterms_issued [label="dcterms:issued", shape=diamond, style=filled, fillcolor=orange];
+    schema_author [label="schema:author", shape=diamond, style=filled, fillcolor=orange];
+    schema_keywords [label="schema:keywords", shape=diamond, style=filled, fillcolor=orange];
+    schema_identifier [label="schema:identifier", shape=diamond, style=filled, fillcolor=orange];
+    schema_software [label="schema:software", shape=diamond, style=filled, fillcolor=orange];
+    schema_review [label="schema:review", shape=diamond, style=filled, fillcolor=orange];
+    cito_cites [label="cito:cites", shape=diamond, style=filled, fillcolor=orange];
+    schema_url [label="schema:url", shape=diamond, fillcolor=orange];
+    schema_reviewBody [label="schema:reviewBody", shape=diamond, style=filled, fillcolor=orange];
+    schema_reviewer [label="schema:reviewer", shape=diamond, style=filled, fillcolor=orange];
+
+    // === CONNECTIONS ===
+
+    ScholarlyArticle -> schema_url;
+    schema_url -> XSDAnyURI;
+
+    ScholarlyArticle -> dcterms_issued;
+    dcterms_issued -> XSDgYear;
+
+    ScholarlyArticle -> dcterms_publisher;
+    dcterms_publisher -> Organization;
+
+    ScholarlyArticle -> dcterms_isPartOf;
+    dcterms_isPartOf -> Periodical;
+
+    ScholarlyArticle -> dcterms_subject;
+    dcterms_subject -> MSCConcept;
+
+    ScholarlyArticle -> schema_author;
+    schema_author -> Person;
+
+    ScholarlyArticle -> schema_keywords;
+    schema_keywords -> KeywordConcept;
+
+    ScholarlyArticle -> schema_identifier;
+    schema_identifier -> PropertyValue;
+
+    ScholarlyArticle -> schema_software;
+    schema_software -> SoftwareApplication;
+
+    ScholarlyArticle -> schema_review;
+    schema_review -> Review;
+
+    ScholarlyArticle -> cito_cites;
+    cito_cites -> ScholarlyArticle;
+
+    Review -> schema_reviewBody;
+    schema_reviewBody -> XSDString;
+
+    Review -> schema_reviewer;
+    schema_reviewer -> Person;
+
+    // === Subclass Relationships ===
+    JournalArticle -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+    CollectionArticle -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+    Preprints -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+    BookSeries -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+
+    // === Layout compacting: same ranks ===
+    // { rank=same; schema_author; schema_reviewer; Person }
+    { rank=same; schema_reviewBody; schema_keywords; schema_identifier; }
+    { rank=same; dcterms_publisher; dcterms_isPartOf; dcterms_subject; schema_software; schema_review; cito_cites }
+    { rank=same; Organization; Periodical; MSCConcept; KeywordConcept; SoftwareApplication; Review; ScholarlyArticle }
+
+    // === Optional grouping ===
+    subgraph cluster_documents {
+        label="zbMATH Document Types";
+        style=dashed;
+        JournalArticle;
+        CollectionArticle;
+        Preprints;
+        BookSeries;
+    }
+}
+
+##### v1
+digraph Ontology {
+    rankdir=LR;
+    node [shape=rectangle, style=filled, fillcolor=lightblue, fontsize=10];
+
     // Classes
     ScholarlyArticle [label="schema:ScholarlyArticle"];
     Person [label="schema:Person"];
