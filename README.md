@@ -29,25 +29,24 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
 - **Reviews**: 3M+
 - **Subject Classifications (MSC)**: 6,500+
 - **Keywords**: 3M+
-- **Software**: 30k+
-- ...
+- **Software**: 30k+ ... (and more)
 
 ## 📌 Key Features
 
 - 🧠 **RDF-Based Semantic Knowledge Graph**  
-  Built entirely on RDF triples, the KG supports semantic interoperability and adheres to Linked Open Data standards, enabling rich, machine-readable knowledge representation.
-
-- 🔍 **SPARQL Query Interface**  
-  Provides a flexible SPARQL endpoint for executing complex queries that reveal deep, semantically enriched insights into mathematical scholarship.
+  Built entirely on RDF triples using widely-used ontologies and vocabularies, the KG supports semantic interoperability and adheres to Linked Open Data standards, enabling rich, machine-readable knowledge representation.
 
 - 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
   Integrates richly annotated publications, disambiguated authors, expert reviews, keywords, and *Mathematics Subject Classification* (MSC) — a historically stable, fine-grained ontology — enabling nuanced exploration beyond citations.
 
-- 🔄 **Robust Linked Data Integration**  
-  Cross-links with authoritative external URL and identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
-
 - 📈 **Historically-Grounded Intellectual Discovery**  
   Enables historically-grounded retrieval and long-range intellectual analysis, e.g., for uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
+
+- 🔍 **SPARQL Query Interface**  
+  A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing complex queries.
+  
+- 🔄 **Linked Data Integration**  
+Cross-links with authoritative external URL and identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
 
 ## 📁 Repository Structure
 
@@ -58,9 +57,9 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
   
-## 🏗️ Knowledge Graph Construction
+## 🛠️ Knowledge Graph Construction and Setup
 
-### 🔧 Prerequisites
+### Prerequisites
 
 - Python 3.12+  
 - Python libraries: `rdflib`, `SPARQLWrapper`, and others (see requirements.txt)  
@@ -69,13 +68,13 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
   - We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as an example for its simplicity  
   - *Note:* Production SPARQL endpoints use Virtuoso for scalability  
 
-### 🛠️ Data Harvesting
+### Data Harvesting
 
 ```bash
 python harvest-by-id.py 
 ```
 
-### 🛠️ RDF Construction
+### RDF Construction
 
 ```bash
 # Option 1: Run the Python script
@@ -86,7 +85,7 @@ run-convert.sh
 
 ```
 
-### 🛠️ RDF Triple Store Setup
+### RDF Triple Store Setup
 
 We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as our RDF triple store example. Fuseki provides a lightweight SPARQL server to host and query your knowledge graph. The example setup is provided in [`front/`](./front). 
 
