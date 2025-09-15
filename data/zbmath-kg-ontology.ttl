@@ -33,18 +33,22 @@ schema:PropertyValue a rdfs:Class ;
 
 zbmath:doctype/book-series a rdfs:Class ;
     rdfs:label "Book Series" ;
+    rdfs:subClassOf schema:ScholarlyArticle ; 
     skos:notation "b" .
 
 zbmath:doctype/collection-article a rdfs:Class ;
     rdfs:label "Collection Article" ;
+    rdfs:subClassOf schema:ScholarlyArticle ; 
     skos:notation "a" .
 
 zbmath:doctype/journal-article a rdfs:Class ;
     rdfs:label "Journal Article" ;
+    rdfs:subClassOf schema:ScholarlyArticle ; 
     skos:notation "j" .
 
 zbmath:doctype/preprints a rdfs:Class ;
     rdfs:label "Preprints" ;
+    rdfs:subClassOf schema:ScholarlyArticle ; 
     skos:notation "p" .
 
 zbmath:ontology/msc-concept a rdfs:Class ;
