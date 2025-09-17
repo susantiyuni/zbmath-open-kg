@@ -1,4 +1,154 @@
 digraph Ontology {
+    // === Graph Layout ===
+    rankdir=LR;
+    // ranksep=1.2;  // vertical spacing between ranks
+    nodesep=0.09;  // horizontal spacing between nodes
+    fontname="Helvetica";
+    fontsize=12;
+
+    // === Default Node Style ===
+    node [shape=rectangle, style="filled,rounded", fillcolor="lightcyan", fontname="Helvetica", fixedsize=true, width=1.6, height=0.4, fontsize=10, color="#636363"];
+    edge [fontname="Helvetica", fontsize=9, color="#636363", arrowhead=vee]; 
+    // edge [color="#999999", arrowhead=vee, penwidth=1.1];
+
+    // === Default Edge Style ===
+    // edge [
+    //     color=gray30,
+    //     style=solid,
+    //     arrowhead=vee,
+    //     fontsize=10,
+    //     fontcolor=gray20,
+    //     penwidth=1.2
+    // ];
+
+    // === CLASSES ===
+    ScholarlyArticle [label="schema:\nScholarlyArticle"];
+    Person [label="schema:Person"];
+    Organization [label="schema:Organization"];
+    Periodical [label="schema:Periodical"];
+    Review [label="schema:Review"];
+    SoftwareApplication [label="schema:Software"];
+    PropertyValue [label="schema:PropertyValue"];
+    MSCConcept [label="zbmath:MSC"];
+    KeywordConcept [label="zbmath:Keyword"];
+    JournalArticle [label="zbmath:JournalArticle"];
+    CollectionArticle [label="zbmath:CollectionArticle"];
+    Preprints [label="zbmath:Preprints"];
+    BookSeries [label="zbmath:BookSeries"];
+
+    // === DATATYPES ===
+    node [shape=ellipse, fillcolor="lightgray"]
+    XSDString [label="xsd:string"];
+    XSDgYear [label="xsd:gYear"];
+    XSDAnyURI [label="xsd:anyURI"];
+
+    // === PROPERTIES ===
+    // node [shape=diamond, fillcolor=orange, style=filled];
+    node [
+    shape=polygon,
+    sides=4,
+    skew=.0,
+    // distortion=0.2,
+    orientation=45,
+    style=filled,
+    fillcolor="#FFBE65",
+    // color="#FFD28A",
+    fixedsize=true,
+    width=1.8,
+    height=0.4,
+    fontname="Helvetica",
+    fontsize=9
+];
+    dcterms_publisher [label="dcterms:publisher"];
+    dcterms_isPartOf [label="dcterms:isPartOf"];
+    dcterms_subject [label="dcterms:subject"];
+    dcterms_issued [label="dcterms:issued"];
+    schema_author [label="schema:author"];
+    schema_keywords [label="schema:keywords"];
+    schema_identifier [label="schema:identifier"];
+    schema_software [label="schema:software"];
+    schema_review [label="schema:review"];
+    cito_cites [label="cito:cites"];
+    schema_url [label="schema:url"];
+    schema_reviewBody [label="schema:reviewBody"];
+    schema_reviewer [label="schema:reviewer"];
+
+    // === Restore class node style ===
+    // node [shape=rectangle, fillcolor=lightblue, style=filled];
+    node [shape=rectangle, style="filled,rounded", fillcolor="lightcyan", color="#CCCCCC", fontname="Helvetica", fixedsize=true, width=1.6, height=0.4, fontsize=10];
+
+
+    // === CONNECTIONS ===
+
+    ScholarlyArticle -> schema_url;
+    schema_url -> XSDAnyURI;
+
+    ScholarlyArticle -> dcterms_issued;
+    dcterms_issued -> XSDgYear;
+
+    ScholarlyArticle -> dcterms_publisher;
+    dcterms_publisher -> Organization;
+
+    ScholarlyArticle -> dcterms_isPartOf;
+    dcterms_isPartOf -> Periodical;
+
+    ScholarlyArticle -> dcterms_subject;
+    dcterms_subject -> MSCConcept;
+
+    ScholarlyArticle -> schema_author;
+    schema_author -> Person;
+
+    ScholarlyArticle -> schema_keywords;
+    schema_keywords -> KeywordConcept;
+
+    ScholarlyArticle -> schema_identifier;
+    schema_identifier -> PropertyValue;
+
+    ScholarlyArticle -> schema_software;
+    schema_software -> SoftwareApplication;
+
+    ScholarlyArticle -> schema_review;
+    schema_review -> Review;
+
+    ScholarlyArticle -> cito_cites;
+    cito_cites -> ScholarlyArticle;
+
+    Review -> schema_reviewBody;
+    schema_reviewBody -> XSDString;
+
+    Review -> schema_reviewer;
+    schema_reviewer -> Person;
+
+    // === Subclass Relationships ===
+    JournalArticle -> ScholarlyArticle [label="subClassOf", style=dashed, color="gray"];
+    CollectionArticle -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+    Preprints -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+    BookSeries -> ScholarlyArticle [label="subClassOf", style=dashed, color=gray];
+
+    // === OPTIONAL: Remove most same-rank constraints for horizontal layout ===
+    // Only apply if needed to control overlaps
+    // { rank=same; schema_reviewBody;}
+    // { rank=same; schema_reviewBody; schema_keywords; schema_identifier; }
+    // { rank=same; dcterms_publisher; dcterms_isPartOf; dcterms_subject; schema_software; schema_review; cito_cites }
+    { rank=same; Review; ScholarlyArticle }
+    { rank=same; PropertyValue; MSCConcept; KeywordConcept; SoftwareApplication; Person }
+
+    // === Clusters for Clarity ===
+    subgraph cluster_documents {
+        label="Document Types";
+        style="dashed,rounded";
+        color="#636363";
+        JournalArticle;
+        CollectionArticle;
+        Preprints;
+        BookSeries;
+    }
+
+}
+
+######
+
+digraph Ontology {
     rankdir=LR;
     node [shape=rectangle, style=filled, fillcolor=lightblue, fontsize=10];
 
