@@ -1,4 +1,5 @@
-# zbMATH Open Knowledge Graph
+# Historically-Grounded Retrieval of Scholarly Research Beyond Citation
+## with zbMATH Open Knowledge Graph
 
 We construct a large-scale, historically deep knowledge graph derived from [**zbMATH Open**](https://zbmath.org/), the world’s most comprehensive and historically rich mathematical database, covering scholarly work from 1763 to the present.
 
@@ -8,9 +9,8 @@ The resulting **zbMATH Knowledge Graph (KG)**, fully compliant with RDF and Sema
 - High-quality author disambiguation
 - Expert-assigned keywords and *Mathematics Subject Classification* (MSC), a fine-grained and historically stable ontology of mathematical subjects
 
-This combination provides a rich semantic foundation for capturing the long-term evolution of mathematical knowledge, enabling advanced retrieval and reasoning beyond conventional citation-based bibliometric methods.
-
-Through several **case studies**, we demonstrate the ability of the zbMATH KG to:
+This explicit modeling of temporal, conceptual, and semantic dimensions of scholarly knowledge enables **historically-grounded retrieval** that reveals intellectual dynamics and long-term knowledge evolution beyond conventional citation-based scholarly IR systems.
+Through several case studies, we demonstrate **historically-grounded retrieval** with zbMATH KG to:
 
 - Uncover **overlooked precursors** beyond traditional citation analysis
 - Reveal **conceptual ancestry across fields**
