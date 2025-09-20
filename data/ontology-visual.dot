@@ -1,6 +1,90 @@
 digraph Ontology {
     // === Graph Layout ===
     rankdir=LR;
+    nodesep=0.09;
+    fontname="Helvetica";
+    fontsize=12;
+
+    // === Default Node Style ===
+    node [shape=rectangle, style="filled", fillcolor="lightcyan", fontname="Helvetica", fixedsize=true, width=1.6, height=0.35, fontsize=10, color="#636363"];
+    edge [fontname="Helvetica", fontsize=9, arrowhead=vee]; 
+    // color="#636363"
+
+    // === CLASSES ===
+    InvisibleHelper1 [style=invis, width=0, height=0, label=""];
+    ScholarlyArticle [label="schema:\nScholarlyArticle"];
+    
+    
+    node [shape=rectangle, style="filled", fillcolor="lightcyan", fontname="Helvetica", fixedsize=true, width=1.6, height=0.25, fontsize=10, color="#636363"];
+    Person [label="schema:Person"];
+    Organization [label="schema:Organization"];
+    Periodical [label="schema:Periodical"];
+    Review [label="schema:Review"];
+    SoftwareApplication [label="schema:Software"];
+    PropertyValue [label="schema:PropertyValue"];
+    MSCConcept [label="zbmath:MSC"];
+    KeywordConcept [label="zbmath:Keyword"];
+    JournalArticle [label="zbmath:JournalArticle"];
+    CollectionArticle [label="zbmath:CollectionArticle"];
+    Preprints [label="zbmath:Preprints"];
+    BookSeries [label="zbmath:BookSeries"];
+
+    // === DATATYPES ===
+    node [shape=diamond, fillcolor="lightgreen"]
+    XSDString [label="xsd:string"];
+    XSDgYear [label="xsd:gYear"];
+    XSDAnyURI [label="xsd:anyURI"];
+
+    // === Restore class node style ===
+    // node [shape=rectangle, style="filled,rounded", fillcolor="lightcyan", color="#CCCCCC", fontname="Helvetica", fixedsize=true, width=1.6, height=0.4, fontsize=10];
+
+    // === CONNECTIONS with EDGE LABELS ===
+    InvisibleHelper1 -> ScholarlyArticle [style=invis];
+    InvisibleHelper1 -> ScholarlyArticle [style=invis];
+    InvisibleHelper1 -> ScholarlyArticle [style=invis];
+    // InvisibleHelper1 -> ScholarlyArticle [style=invis];
+    ScholarlyArticle -> XSDAnyURI [label="schema:url", fontcolor="blue"];
+    ScholarlyArticle -> XSDgYear [label="dcterms:issued", fontcolor="blue"];
+    ScholarlyArticle -> Organization [label="dcterms:publisher", fontcolor="blue"];
+    ScholarlyArticle -> Periodical [label="dcterms:isPartOf", fontcolor="blue"];
+    ScholarlyArticle -> MSCConcept [label="dcterms:subject", fontcolor="blue"];
+    ScholarlyArticle -> Person [label="schema:author", fontcolor="blue"];
+    ScholarlyArticle -> KeywordConcept [label="schema:keywords", fontcolor="blue"];
+    ScholarlyArticle -> PropertyValue [label="schema:identifier", fontcolor="blue"];
+    ScholarlyArticle -> SoftwareApplication [label="schema:software", fontcolor="blue"];
+    ScholarlyArticle -> Review [label="schema:review", fontcolor="blue"];
+    ScholarlyArticle -> ScholarlyArticle [label="cito:cites", fontcolor="blue"];
+
+    Review -> XSDString [label="schema:reviewBody", fontcolor="blue"];
+    Review -> Person [label="schema:reviewer", fontcolor="blue"];
+
+    // === Subclass Relationships ===
+    JournalArticle -> ScholarlyArticle [label="subClassOf", fontcolor="blue"]; //color="gray", 
+    CollectionArticle -> ScholarlyArticle [label="subClassOf", fontcolor="blue"];
+    Preprints -> ScholarlyArticle [label="subClassOf", fontcolor="blue"];
+    BookSeries -> ScholarlyArticle [label="subClassOf", fontcolor="blue"];
+
+    // === OPTIONAL: Same Rank Constraints ===
+    { rank=same; Person; ScholarlyArticle; Review; }
+    // { rank=same; MSCConcept; KeywordConcept; SoftwareApplication }
+
+    // === Clusters for Clarity ===
+    subgraph cluster_documents {
+        label="Document Types";
+        style="dashed,rounded";
+        color="#636363";
+        JournalArticle;
+        CollectionArticle;
+        Preprints;
+        BookSeries;
+    }
+}
+
+####
+
+digraph Ontology {
+    // === Graph Layout ===
+    rankdir=LR;
     // ranksep=1.2;  // vertical spacing between ranks
     nodesep=0.09;  // horizontal spacing between nodes
     fontname="Helvetica";
