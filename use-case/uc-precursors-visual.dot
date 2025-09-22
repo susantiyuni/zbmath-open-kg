@@ -3,6 +3,74 @@ digraph MissingCitations {
     node [shape=box, style=filled, fillcolor=lightgray, fontname="Helvetica"];
 
     // Years
+    "1980" [shape=ellipse, fillcolor=lightblue];
+    // "1987" [shape=ellipse, fillcolor=lightblue];
+    "1988" [shape=ellipse, fillcolor=lightblue];
+    "2017" [shape=ellipse, fillcolor=lightgreen];
+    "2020" [shape=ellipse, fillcolor=lightgreen];
+
+    // Older papers
+    "P1" [label="Corrections to some results\nfor BCK logics and algebras (1988)", fillcolor=lightyellow];
+    "P3" [label="Rings and implicative\nBCK-algebras (1980)", fillcolor=lightyellow];
+    // "P4" [label="On ideal and congruence lattices\nof BCK-semilattices (1987)", fillcolor=lightyellow];
+
+    // Newer papers
+    "P2" [label="Blocks and compatibility\nin d0-algebras (2017)", fillcolor=lightcyan];
+    "P5" [label="Modular d0-algebras (2020)", fillcolor=lightcyan];
+
+    // Shared MSC and Keywords nodes
+    "MSC_03G25" [label="MSC:03G25\nAlgebraic Logic", shape=box, style=rounded, fillcolor=white];
+    "MSC_06F35" [label="MSC:06F35\nOrdered Structures", shape=box, style=rounded,  fillcolor=white];
+    "MSC_06A12" [label="MSC:06A12\nLattices and Orders", shape=box, style=rounded, fillcolor=white];
+    "KW_BCKalgebra" [label="BCK-algebra", shape=ellipse, fillcolor=white];
+
+    // Year to paper edges
+    "1988" -> "P1";
+    "1980" -> "P3";
+    // "1987" -> "P4";
+    "2017" -> "P2";
+    "2020" -> "P5";
+
+    // Papers to MSC/Keyword nodes
+    // P1 (1988)
+    "P1" -> "MSC_03G25";
+    "P1" -> "MSC_06F35";
+    "P1" -> "KW_BCKalgebra";
+
+    // P3 (1980)
+    "P3" -> "MSC_03G25";
+    "P3" -> "MSC_06A12";
+    "P3" -> "KW_BCKalgebra";
+
+    // // P4 (1987)
+    // "P4" -> "MSC_03G25";
+    // "P4" -> "MSC_06A12";
+    // "P4" -> "KW_BCKalgebra";
+
+    // P2 (2017)
+    "P2" -> "MSC_03G25";
+    "P2" -> "MSC_06F35";
+    "P2" -> "KW_BCKalgebra";
+
+    // P5 (2020)
+    "P5" -> "MSC_03G25";
+    "P5" -> "MSC_06A12";
+    "P5" -> "KW_BCKalgebra";
+
+    // // Suggested missing citation edges (dashed red)
+    // edge [style=dashed, color=red];
+    // "P1" -> "P2";
+    // "P3" -> "P2";
+    // "P4" -> "P5";
+}
+
+###
+
+digraph MissingCitations {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=lightgray, fontname="Helvetica"];
+
+    // Years
     // "1980" [shape=ellipse, fillcolor=lightblue];
     "1983" [shape=ellipse, fillcolor=lightblue];
     "1988" [shape=ellipse, fillcolor=lightblue];
