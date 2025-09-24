@@ -1,5 +1,88 @@
 digraph MissingCitations {
     rankdir=LR;
+    node [shape=box, style=filled, fontname="Helvetica"];
+    
+    graph [
+    nodesep=0.35,     // More horizontal space between nodes
+    ranksep=0.5      // More vertical space between ranks
+    ];
+
+
+    // Older papers
+    "P1" [label="Corrections to some results\nfor BCK logics and algebras (1988)", fillcolor=lightyellow];
+    "P4" [label="On ideal and congruence lattices\nof BCK-semilattices (1987)", fillcolor=lightyellow];
+
+    // Newer papers
+    "P2" [label="Blocks and compatibility\nin d0-algebras (2017)", fillcolor=lightcyan];
+    "P5" [label="Modular d0-algebras (2020)", fillcolor=lightcyan];
+
+    // Shared MSC and keyword nodes
+    "MSC_03G25" [label="MSC:03G25\nAlgebraic Logic", shape=box, style=rounded, fillcolor=white];
+    "MSC_06F35" [label="MSC:06F35\nOrdered Structures", shape=box, style=rounded, fillcolor=white];
+    "MSC_06A12" [label="MSC:06A12\nLattices and Orders", shape=box, style=rounded, fillcolor=white];
+    "KW_BCKalgebra" [label="BCK-algebra", shape=ellipse, fillcolor=white];
+
+    // Force vertical alignment within groups
+    { rank = same; "P1"; "P4"; }
+    { rank = same; "MSC_03G25"; "MSC_06F35"; "MSC_06A12"; "KW_BCKalgebra"; }
+    { rank = same; "P2"; "P5"; }
+    
+        // Years
+    "1987" [shape=ellipse, fillcolor=lightblue];
+    "1988" [shape=ellipse, fillcolor=lightblue];
+    "2017" [shape=ellipse, fillcolor=lightgreen];
+    "2020" [shape=ellipse, fillcolor=lightgreen];
+
+    // Year to paper edges
+    edge [style=solid, color=black, arrowhead=none];
+    "1988" -> "P1";
+    "1987" -> "P4";
+    "2017" -> "P2";
+    "2020" -> "P5";
+
+    // Invisible edges to force horizontal order
+    edge [style=invis, arrowhead=normal];
+    "P1" -> "MSC_03G25";
+    "MSC_03G25" -> "P2";
+
+    // Actual visible connections
+    edge [style=solid, color=black];
+    "P1" -> "MSC_03G25";
+    "P1" -> "MSC_06F35";
+    "P1" -> "KW_BCKalgebra";
+
+    "P4" -> "MSC_03G25";
+    "P4" -> "MSC_06A12";
+    "P4" -> "KW_BCKalgebra";
+
+    "P2" -> "MSC_03G25";
+    "P2" -> "MSC_06F35";
+    "P2" -> "KW_BCKalgebra";
+
+    "P5" -> "MSC_03G25";
+    "P5" -> "MSC_06A12";
+    "P5" -> "KW_BCKalgebra";
+
+    // // Suggested citation edges
+    // Dummy node to help force a straight citation line
+    "DUMMY_P2_P1" [style=invis, width=0, height=0, label=""];
+    
+    // Suggested citation edges
+    edge [style=invis, constraint=false];
+    "P2" -> "DUMMY_P2_P1";
+    "DUMMY_P2_P1" -> "P1";
+    
+    // Keep dummy node aligned horizontally
+    { rank = same; "P2"; "DUMMY_P2_P1"; "P1"; }
+
+    edge [style=dashed, color=red];
+    "P5" -> "P4";
+    "P2" -> "P1" [constraint=false];
+}
+
+###
+digraph MissingCitations {
+    rankdir=LR;
     node [shape=box, style=filled, fillcolor=lightgray, fontname="Helvetica"];
 
     // Years
