@@ -2,6 +2,82 @@ digraph BodlaenderInfluence {
     rankdir=LR;
     node [fontname="Helvetica", fontsize=10];
 
+    // Reviewed Papers cluster
+    subgraph cluster_reviewed {
+        label="Reviewed Papers \n(Graph Theory, 05C*)";
+        style=dashed; color=gray;
+        fontname="Helvetica-Bold"; fontsize=11;
+        rank=same;
+
+        "1998_Hypergraph" [label="(1998) Hypergraph traversal\nrevisited", shape=box, style=filled, fillcolor=lightblue];
+        "1999_TreewidthFillin" [label="(1999) Treewidth & minimum\nfill-in (weakly triangulated)", shape=box, style=filled, fillcolor=lightblue];
+        "2000_MinFillin" [label="(2000) Minimum fill-in for\ndistance-hereditary graphs", shape=box, style=filled, fillcolor=lightblue];
+        "2003_Treewidth" [label="(2003) Algorithmic aspects\nof treewidth", shape=box, style=filled, fillcolor=lightblue];
+    }
+
+    // Authored Papers cluster
+    subgraph cluster_authored {
+        label="Authored Papers \n(Computer Science, 68Q*/68W*)";
+        style=dashed; color=gray;
+        fontname="Helvetica-Bold"; fontsize=11;
+        rank=same;
+
+        "2002_ModularDecomp" [label="(2002) Computing treewidth\nwith modular decomposition", shape=box, style=filled, fillcolor=lightgreen];
+        "2007_ConvexRecolor" [label="(2007) Quadratic kernelization\nfor convex recoloring", shape=box, style=filled, fillcolor=lightgreen];
+        "2017_CutAndCount" [label="(2017) Cut and count on\nbranch decompositions", shape=box, style=filled, fillcolor=lightgreen];
+    }
+
+    // Keywords - smaller ellipses, less vertical gap
+    // Use rank=same to keep them horizontally aligned
+    // And invisible edges for tighter vertical spacing
+
+    "treewidth" [shape=ellipse, fontsize=8, width=1.0, height=0.3, color=black];
+    "minimum_fillin" [shape=ellipse, fontsize=8, width=1.0, height=0.3, color=black];
+    "complexity" [shape=ellipse, fontsize=8, width=1.0, height=0.3, color=black];
+    "dynamic_programming" [shape=ellipse, fontsize=8, width=1.0, height=0.3, color=black];
+    "algorithms" [shape=ellipse, fontsize=8, width=0.8, height=0.3, color=black];
+    "graph_algorithms" [shape=ellipse, fontsize=8, width=0.8, height=0.3, color=black];
+
+    // Rank keywords at same vertical level for horizontal layout
+    { rank=same; "treewidth"; "minimum_fillin"; "complexity"; "dynamic_programming"; "algorithms"; "graph_algorithms"; }
+
+    // Add invisible edges to keep keywords evenly spaced horizontally
+    edge [style=invis];
+    "treewidth" -> "minimum_fillin" -> "complexity" -> "dynamic_programming" -> "algorithms" -> "graph_algorithms";
+
+    // Connect Reviewed Papers to Keywords
+    edge [style=solid, color=black];
+    "1998_Hypergraph" -> "complexity";
+    "1998_Hypergraph" -> "algorithms";
+
+    "2000_MinFillin" -> "complexity";
+    "2000_MinFillin" -> "algorithms";
+
+    "1999_TreewidthFillin" -> "minimum_fillin";
+    "1999_TreewidthFillin" -> "treewidth";
+
+    "2003_Treewidth" -> "treewidth";
+    "2003_Treewidth" -> "dynamic_programming";
+    "2003_Treewidth" -> "graph_algorithms";
+
+    // Connect Keywords to Authored Papers
+    "complexity" -> "2007_ConvexRecolor";
+    "algorithms" -> "2007_ConvexRecolor";
+
+    "minimum_fillin" -> "2002_ModularDecomp";
+    "treewidth" -> "2002_ModularDecomp";
+
+    "treewidth" -> "2017_CutAndCount";
+    "dynamic_programming" -> "2017_CutAndCount";
+    "graph_algorithms" -> "2017_CutAndCount";
+}
+
+####
+
+digraph BodlaenderInfluence {
+    rankdir=LR;
+    node [fontname="Helvetica", fontsize=10];
+
     // Cluster: Reviewed Papers (Graph Theory)
     subgraph cluster_reviewed {
         label="Reviewed Papers \n(Graph Theory, 05C*)";
