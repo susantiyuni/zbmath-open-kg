@@ -11,6 +11,17 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 
 ---
 
+## 📁 Repository Structure
+
+- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
+- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
+- [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
+- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
+- [`use-case/`](./use-case) – Use case-specific results and visualizations
+- [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
+- [`README.md`](./README.md) – Project documentation
+
+
 ## 📊 zbMATH Knowledge Graph: Key Statistics
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
@@ -37,16 +48,6 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
   
 - 🔄 **Linked Data Integration**  
 Cross-links with authoritative external URL and identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
-
-## 📁 Repository Structure
-
-- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
-- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
-- [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
-- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
-- [`use-case/`](./use-case) – Use case-specific results and visualizations
-- [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
-- [`README.md`](./README.md) – Project documentation
   
 ## 🛠️ zbMATH Knowledge Graph: Construction and Setup
 
