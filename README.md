@@ -87,27 +87,28 @@ This command runs Fuseki on port 3030 with the initial data uploaded via [`fusek
 
 ## 🛠️ Historically-Grounded Retrieval Implementation
 
-### (1) Precursor Retrieval
+Run the following scripts to perform the respective retrieval tasks:
 
-```bash
-python precursor-retrieval.py 
-```
-
-### (2) Conceptual Ancestry Retrieval
-```bash
-python ancestry-retrieval.py 
-```
-
-### (3) Conceptual Revival Retrieval
-```bash
-python revival-retrieval.py 
-```
-
-### (4) Lineage Retrieval
-```bash
-python lineage-retrieval.py 
-```
-
+- **(1) Precursor Retrieval**  
+  Identify overlooked foundational works beyond citation metrics.  
+  ```bash
+  python precursor-retrieval.py
+  ```
+- **(2) Conceptual Ancestry**  
+ Trace the migration of concepts across disciplines and subfields.  
+  ```bash
+  python ancestry-retrieval.py
+  ```
+- **(3) Revival Detection**  
+  Detect ideas that are re-emerging in new contexts or domains.  
+  ```bash
+  python revival-retrieval.py
+  ```
+- **(4) Reviewer–Author Lineage**  
+  Map intellectual transmission through scholarly interactions (author-reviewer relationship) 
+  ```bash
+  python lineage-retrieval.py
+  ```
 
 ### 📜 License
 
