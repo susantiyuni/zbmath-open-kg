@@ -1,14 +1,7 @@
 import json
 import sys
 
-file1 = "out-1.jsonl" #512700 sci-kg-llm-ws/ydata/out-1.jsonl
-file2 = "out-2.jsonl" #216599 sci-kg-llm-ws/ydata/out-2.jsonl
-file3 = "out-3.jsonl" #240700 sci-kg-llm-ws/ydata/out-3.jsonl
-file4 = "out-4.jsonl" #1809500 sci-kg-llm-ws/ydata/out-4.jsonl
-file5 = "out-5.jsonl" ##63598 sci-kg-llm-ws/ydata/out-5.jsonl
-file6 = "out-6.jsonl" #616200 out-6.jsonl
-file7 = "out-7.jsonl" #373997 out-7_cleaned.jsonl
-file8 = "out/out-8.jsonl" #373997 out-7_cleaned.jsonl
+file1 = "subset-200.jsonl"
 fileclean = "out-8_cleaned.jsonl"
 
 def check_for_error(file_path):
@@ -26,12 +19,6 @@ def check_for_error(file_path):
         print (f"# P.S. Delete the original file and rename the cleaned file to original name after fixing!")
 
 # check_for_error(file1)
-# check_for_error(file2)
-# check_for_error(file3)
-# check_for_error(file4)
-# check_for_error(file5)
-# check_for_error(file6)
-# check_for_error(file8)
 check_for_error(fileclean)
 
 def check_and_resave(input_file):
