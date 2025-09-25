@@ -1,27 +1,17 @@
 # Historically-Grounded Retrieval of Scholarly Research Beyond Citation
-## with zbMATH Open Knowledge Graph
 
-We construct a large-scale, historically deep knowledge graph derived from [**zbMATH Open**](https://zbmath.org/), the world’s most comprehensive and historically rich mathematical database, covering scholarly work from 1763 to the present.
+We propose **historically-grounded retrieval**, a new paradigm for scholarly IR that shifts focus from popularity-based citation metrics to the historical and conceptual development of knowledge. To enable this, we built a large-scale, historically comprehensive knowledge graph from **zbMATH Open**, covering 250 years of mathematical research. 
 
-The resulting **zbMATH Knowledge Graph (KG)**, fully compliant with RDF and Semantic Web standards, interconnects publication metadata while leveraging the unique features of zbMATH:
+Built on the proposed paradigm and infrastructure, we formalize and implement four new IR tasks:  
 
-- Expert-curated reviews
-- High-quality author disambiguation
-- Expert-assigned keywords and *Mathematics Subject Classification* (MSC), a fine-grained and historically stable ontology of mathematical subjects
-
-This explicit modeling of temporal, conceptual, and semantic dimensions of scholarly knowledge enables **historically-grounded retrieval** that reveals intellectual dynamics and long-term knowledge evolution beyond conventional citation-based scholarly IR systems.
-Through several case studies, we demonstrate **historically-grounded retrieval** with zbMATH KG to:
-
-- Uncover **overlooked precursors** beyond traditional citation analysis
-- Reveal **conceptual ancestry across fields**
-- Trace **concept revivals** in new contexts
-- Map **author–reviewer intellectual lineage**, illustrating how ideas propagate via scholarly interactions
-
-These **historically-grounded retrieval** methods expose intellectual dynamics that conventional citation-based systems in scholarly domains often fail to capture. 
+- **Precursor Retrieval** — identifying overlooked works beyond citations  
+- **Conceptual Ancestry** — tracing concept migration across (sub)fields  
+- **Revival Detection** — spotting re-emerging ideas in new contexts  
+- **Reviewer–Author Lineage** — mapping intellectual transmission via scholarly interactions  
 
 ---
 
-## 📊 Key Statistics
+## 📊 zbMATH Knowledge Graph: Key Statistics
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
 - **Publications**: 4M+
@@ -31,7 +21,7 @@ These **historically-grounded retrieval** methods expose intellectual dynamics t
 - **Keywords**: 3M+
 - **Software**: 30k+ ... (and more)
 
-## 📌 Key Features
+## 📌 zbMATH Knowledge Graph: Key Features
 
 - 🧠 **RDF-Based Semantic Knowledge Graph**  
   Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies. It supports semantic interoperability and adheres to Linked Open Data principles, enabling rich, machine-readable knowledge representation. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
@@ -57,7 +47,7 @@ Cross-links with authoritative external URL and identifiers (e.g., DOI), enhanci
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
   
-## 🛠️ Knowledge Graph Construction and Setup
+## 🛠️ zbMATH Knowledge Graph: Construction and Setup
 
 ### Prerequisites
 
@@ -94,6 +84,30 @@ docker compose up -d
 ```
 
 This command runs Fuseki on port 3030 with the initial data uploaded via [`fuseki-entrypoint.sh`](front/fuseki-entrypoint.sh). )
+
+## 🛠️ Historically-Grounded Retrieval Implementation
+
+### (1) Precursor Retrieval
+
+```bash
+python precursor-retrieval.py 
+```
+
+### (2) Conceptual Ancestry Retrieval
+```bash
+python ancestry-retrieval.py 
+```
+
+### (3) Conceptual Revival Retrieval
+```bash
+python revival-retrieval.py 
+```
+
+### (4) Lineage Retrieval
+```bash
+python lineage-retrieval.py 
+```
+
 
 ### 📜 License
 
