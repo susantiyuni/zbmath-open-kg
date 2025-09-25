@@ -1,82 +1,122 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-# --- CONFIGURATION ---
-endpoint_url = "http://localhost:8890/sparql"  # Virtuoso SPARQL endpoint
-
-sparql = SPARQLWrapper(endpoint_url)
+# --- Configuration ---
+endpoint = "http://localhost:8890/sparql"
+sparql = SPARQLWrapper(endpoint)
 sparql.setReturnFormat(JSON)
 
-# --- STEP 1: Sample early papers with MSC + keyword filter ---
-# Construct the SPARQL query
-reviewed_query = f"""
-PREFIX schema: <https://schema.org/>
+# --- Step 1: Authored Papers ---
+authored_query = """
 PREFIX dcterms: <http://purl.org/dc/terms/>
-
-SELECT ?paper ?title ?year ?authorName
-FROM <https://zbmath.org>
-WHERE {{
-  ?paper a schema:ScholarlyArticle ;
-         schema:review ?rev ;
-         dcterms:title ?title ;
-         schema:datePublished ?year ;
-         dcterms:creator ?author .
-  ?rev schema:author ?reviewer .
-  ?reviewer schema:name "Serre, Jean-Pierre" .
-  ?author schema:name ?authorName
-}}
-ORDER BY ?year
-ORDER BY RAND()
-LIMIT 100
-"""
-
-sparql.setQuery(reviewed_query)
-early_results = sparql.query().convert()
-early_ids = [res["early"]["value"] for res in early_results["results"]["bindings"]]
-print (early_ids)
-# import sys
-# sys.exit()
-
-# --- STEP 2: Sample later papers with MSC + keyword filter ---
-authored_query = f"""
 PREFIX schema: <https://schema.org/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX zbmath: <https://zbmath.org/>
 
-SELECT ?paper ?title ?year ?msc
-WHERE {{
-  ?paper a schema:ScholarlyArticle ;
-         schema:author ?serre ;
-         dcterms:title ?title ;
-         schema:datePublished ?year ;
-         dcterms:subject ?msc .
-  ?serre schema:name "Serre, Jean-Pierre" .
-}}
-ORDER BY ?year
-ORDER BY RAND()
-LIMIT 100
+SELECT DISTINCT ?authored ?aTitle ?aYear ?aMSC ?kw ?kwLabel
+WHERE {
+  ?authored a schema:ScholarlyArticle ;
+            schema:author <https://zbmath.org/authors/bodlaender.hans-l> ;
+            dcterms:title ?aTitle ;
+            dcterms:issued ?aYear ;
+            dcterms:subject ?aMSC ;
+            schema:keywords ?kw .
+    
+  OPTIONAL { ?kw skos:prefLabel ?kwLabel }
+  
+  FILTER(STRSTARTS(STR(?aMSC), "http://msc2010.org/resources/MSC/2010/68"))
+  FILTER(xsd:integer(STR(?aYear)) > 2000 && xsd:integer(STR(?aYear)) <= 2025)
+
+}
+# ORDER BY RAND()
+ORDER BY DESC(?rYear)
+LIMIT 1000
 """
 sparql.setQuery(authored_query)
-later_results = sparql.query().convert()
-later_ids = [res["later"]["value"] for res in later_results["results"]["bindings"]]
-print (later_ids)
-# import sys
+authored_results = sparql.query().convert()
+
+authored_papers = {}
+for res in authored_results["results"]["bindings"]:
+    pid = res["authored"]["value"]
+    title = res["aTitle"]["value"]
+    year = int(res["aYear"]["value"])
+    msc = res.get("aMSC", {}).get("value", "")
+    kw = res.get("kw", {}).get("value", "")
+    kwLabel = res.get("kwLabel", {}).get("value", "")
+    if pid not in authored_papers:
+        authored_papers[pid] = {"title": title, "year": year, "msc": msc, "keywords": set(), "kwlabels": set()}
+    authored_papers[pid]["keywords"].add(kw)
+    if kwLabel:
+        authored_papers[pid]["kwlabels"].add(kwLabel)
+
+# print (authored_papers)
 # sys.exit()
 
-# --- STEP 3: Join early/later papers on shared MSC and keywords ---
-early_values = " ".join(f"<{eid}>" for eid in early_ids)
-later_values = " ".join(f"<{lid}>" for lid in later_ids)
-
-join_query = f"""
-PREFIX schema: <https://schema.org/>
+# --- Step 2: Reviewed Papers ---
+reviewed_query = """
 PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX zbmath: <https://zbmath.org/>
 
-LIMIT 100
+SELECT DISTINCT ?reviewed ?rTitle ?rYear ?rMSC ?kw ?kwLabel
+WHERE {
+  ?reviewed a schema:ScholarlyArticle ;
+            schema:review ?rev ;
+            dcterms:title ?rTitle ;
+            dcterms:issued ?rYear ;
+            dcterms:subject ?rMSC ;
+            schema:keywords ?kw .
+  
+  ?rev schema:reviewer<https://zbmath.org/authors/bodlaender.hans-l> .
+  
+  OPTIONAL { ?kw skos:prefLabel ?kwLabel }
+
+  FILTER(STRSTARTS(STR(?rMSC), "http://msc2010.org/resources/MSC/2010/05"))
+  # FILTER(xsd:integer(STR(?rYear)) >= 1980 && xsd:integer(STR(?rYear)) <= 2000)
+  FILTER(xsd:integer(STR(?rYear)) <= 2000)
+
+}
+# ORDER BY ASC(?rYear)
+ORDER BY RAND()
+LIMIT 1000
+
 """
-sparql.setQuery(join_query)
-join_results = sparql.query().convert()
+sparql.setQuery(reviewed_query)
+reviewed_results = sparql.query().convert()
 
-# --- Print the results ---
-for row in join_results["results"]["bindings"]:
-    print(f"{row['earlyTitle']['value']} ({row['earlyYear']['value']}) [{row['earlyMSC']['value']}] --> "
-          f"{row['laterTitle']['value']} ({row['laterYear']['value']}) [{row['laterMSC']['value']}]")
-    print("Shared keywords:", row.get("sharedKeywords", {}).get("value", ""))
-    print("---")
+reviewed_papers = {}
+for res in reviewed_results["results"]["bindings"]:
+    pid = res["reviewed"]["value"]
+    title = res["rTitle"]["value"]
+    year = int(res["rYear"]["value"])
+    msc = res.get("rMSC", {}).get("value", "")
+    kw = res.get("kw", {}).get("value", "")
+    kwLabel = res.get("kwLabel", {}).get("value", "")
+    if pid not in reviewed_papers:
+        reviewed_papers[pid] = {"title": title, "year": year, "msc": msc, "keywords": set(), "kwlabels": set()}
+    reviewed_papers[pid]["keywords"].add(kw)
+    if kwLabel:
+        reviewed_papers[pid]["kwlabels"].add(kwLabel)
+
+# --- Step 3: Link Authored + Reviewed via Shared Keywords ---
+print("Counting linked papers (reviewed → authored with shared keywords):\n")
+
+linked_count = 0
+
+for r_id, r_data in reviewed_papers.items():
+    for a_id, a_data in authored_papers.items():
+        if r_id == a_id:
+            continue
+        if a_data["year"] <= r_data["year"]:
+            continue
+        shared = r_data["keywords"].intersection(a_data["keywords"])
+        if len(shared) > 1:
+            linked_count += 1
+            # If you want, you can still print details here, or comment it out:
+            print(f"[{r_data['year']}] {r_data['title']} {r_data['msc']}\n  ↳ [{a_data['year']}] {a_data['title']} {a_data['msc']}")
+            print(f"  Shared keywords ({len(shared)}): {', '.join(shared)}")
+            print("-" * 60)
+
+print(f"Total linked paper pairs: {linked_count}")
