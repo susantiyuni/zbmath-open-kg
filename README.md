@@ -78,6 +78,12 @@ This command runs Fuseki on port 3030 with the initial data uploaded via [`fusek
 
 ## 🛠️ Historically-Grounded Retrieval Implementation
 
+First, install the prerequisite libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
 Run the following scripts to perform the respective retrieval tasks:
 
 - **(1) Precursor Retrieval**  
