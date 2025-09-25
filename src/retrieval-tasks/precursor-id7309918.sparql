@@ -1,0 +1,43 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX msc: <http://msc2010.org/resources/MSC/2010/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX zbmath: <https://zbmath.org/>
+
+# SELECT (COUNT(*) AS ?overlookedCount)
+SELECT ?precursor ?precursorTitle
+FROM <https://zbmath.org>
+WHERE {
+  {
+    SELECT ?precursor
+    WHERE {
+      ?precursor dcterms:issued ?precursorYear ;
+                 schema:keywords ?kw ;
+                 dcterms:subject ?msc .
+
+      FILTER(xsd:integer(str(?precursorYear)) < 2020)
+
+      VALUES ?kw {
+
+       <https://zbmath.org/keyword/BCKalgebra>
+      <https://zbmath.org/keyword/measure>
+
+      }
+
+      FILTER(
+        STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/03G25") ||
+        STRSTARTS(STR(?msc), "http://msc2010.org/resources/MSC/2010/06F35")
+      )
+
+      FILTER NOT EXISTS {
+        zbmath:7309918 cito:cites ?precursor
+      }
+    }
+    GROUP BY ?precursor
+    HAVING (
+      COUNT(DISTINCT ?kw) >= 3 || COUNT(DISTINCT ?msc) >=3
+    )
+  }
+  ?precursor dcterms:title ?precursorTitle .
+}
