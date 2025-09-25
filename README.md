@@ -11,17 +11,6 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 
 ---
 
-## 📁 Repository Structure
-
-- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
-- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
-- [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
-- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
-- [`use-case/`](./use-case) – Use case-specific results and visualizations
-- [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
-- [`README.md`](./README.md) – Project documentation
-
-
 ## 📊 zbMATH Knowledge Graph: Key Statistics
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
@@ -111,6 +100,18 @@ Run the following scripts to perform the respective retrieval tasks:
   ```bash
   python lineage-retrieval.py
   ```
+
+
+## 📁 Repository Structure
+
+- [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
+- [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
+- [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
+- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
+- [`use-case/`](./use-case) – Use case-specific results and visualizations
+- [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
+- [`README.md`](./README.md) – Project documentation
+
 
 ### 📜 License
 
