@@ -42,8 +42,9 @@ Cross-links with authoritative external URL and identifiers (e.g., DOI), enhanci
 
 - [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
 - [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
-- [`src/`](./src) – Source code for data harvest, RDF KG construction, statistics calculation, etc.
-- [`use-case/`](./use-case) – Use case-specific code, SPARQL queries, results, and visualizations
+- [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
+- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
+- [`use-case/`](./use-case) – Use case-specific results and visualizations
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
   
