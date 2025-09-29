@@ -34,10 +34,10 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
   Enables long-range intellectual analysis vital for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
 
 - 🔍 **SPARQL Query Interface**  
-  A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing complex queries.
+  A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing queries over the zbMATH Open KG.
   
 - 🔄 **Linked Data Integration**  
-Cross-links with external URL and persistent identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
+Cross-links with external URL and persistent identifiers (e.g., DOI).
   
 ## 🛠️ zbMATH Knowledge Graph: Construction and Setup
 
@@ -97,6 +97,13 @@ First, install the prerequisite libraries:
 
 ```bash
 pip install -r requirements.txt
+```
+
+Next, configure the SPARQL endpoint url in the script to match your KG's SPARQL endpoint.
+
+```
+# --- CONFIGURATION ---
+endpoint_url = "http://localhost:8890/sparql"  # change into your SPARQL endpoint
 ```
 
 Run the following scripts ([`src/retrieval-tasks/`](./src/retrieval-tasks/)) to perform the respective retrieval tasks:
