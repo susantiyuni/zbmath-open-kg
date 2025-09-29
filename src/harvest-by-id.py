@@ -6,7 +6,7 @@ from tqdm import tqdm
 import os
 
 ID_LIST_FILE = "documents_in_oa_serials.csv"  # Input file with IDs
-OUTPUT_FILE = "records-oa-100--.jsonl"        # Output JSONL file
+OUTPUT_FILE = "records-oa-jsonl"        # Output JSONL file
 ERROR_IDS_FILE = "error_ids.txt"              # File to store IDs that failed
 MAX_RECORDS = 100                             # Limit to first N IDs (None for all)
 SLEEP_TIME = 1                                # Seconds between requests
