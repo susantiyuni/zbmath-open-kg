@@ -52,9 +52,13 @@ Cross-links with external URL and persistent identifiers (e.g., DOI), enhancing 
 
 ### Data Harvesting
 
+To harvest data by zbMATH ID, run:
+
 ```bash
 python harvest-by-id.py 
 ```
+
+For bulk download (via _sickle_), refers to: [zbMATHOpen Harvester](https://github.com/zbMATHOpen/mscHarvester)
 
 ### RDF Construction
 
