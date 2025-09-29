@@ -52,7 +52,7 @@ Cross-links with external URL and persistent identifiers (e.g., DOI), enhancing 
 
 ### Data Harvesting
 
-To harvest data by zbMATH ID, run:
+To harvest data by zbMATH ID (e.g., ID list of zbMATH open access subset: [zbMATH OA subset](https://zenodo.org/records/8021789)), run:
 
 ```bash
 python harvest-by-id.py 
