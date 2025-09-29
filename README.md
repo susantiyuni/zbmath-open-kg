@@ -1,6 +1,6 @@
 # Historically-Grounded Retrieval of Scholarly Research Beyond Citation
 
-We propose **historically-grounded retrieval**, a new paradigm for scholarly IR that shifts focus from popularity-based citation metrics to the historical and conceptual development of knowledge. To enable this, we built a large-scale, historically comprehensive knowledge graph from **zbMATH Open**, covering 250 years of mathematical research. 
+We propose **historically-grounded retrieval**, a new paradigm for scholarly IR that shifts focus from popularity-based citation metrics to the historical and conceptual development of knowledge. To enable this, we built a large-scale, historically comprehensive knowledge graph from **zbMATH Open**, covering centuries of mathematical research. 
 
 Built on the proposed paradigm and infrastructure, we formalize and implement four new IR tasks:  
 
