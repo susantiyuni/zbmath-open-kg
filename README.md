@@ -11,8 +11,8 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 
 ---
 
-## 📊 zbMATH Knowledge Graph: Key Statistics
-- **Temporal Span**: 1763 to the present (as of August 2025). See ([`src/retrieval-tasks/year-count.tsv`](./src/retrieval-tasks/year-count.tsv)) for the per-year distribution.  
+## 📊 zbMATH Knowledge Graph: Key Statistics (as of August 2025)
+- **Temporal Span**: 1763~2025. See ([`src/retrieval-tasks/year-count.tsv`](./src/retrieval-tasks/year-count.tsv)) for the per-year distribution.  
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
 - **Publications**: 4M+
