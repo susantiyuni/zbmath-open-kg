@@ -12,10 +12,11 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 ---
 
 ## 📊 zbMATH Knowledge Graph: Key Statistics
+- **Temporal Span**: 1763~present (2025) 
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
 - **Publications**: 4M+
-- **Authors/Reviewers**: 1M+
+- **Disambiguated Authors/Reviewers**: 1M+
 - **Reviews**: 3M+
 - **Subject Classifications (MSC)**: 6,500+
 - **Keywords**: 3M+
@@ -24,19 +25,19 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 ## 📌 zbMATH Knowledge Graph: Key Features
 
 - 🧠 **RDF-Based Semantic Knowledge Graph**  
-  Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies. It supports semantic interoperability and adheres to Linked Open Data principles, enabling rich, machine-readable knowledge representation. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
+  Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
 
 - 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
   Integrates richly annotated publications, disambiguated authors, expert reviews, keywords, and *Mathematics Subject Classification* (MSC) — a historically stable, fine-grained ontology — enabling nuanced exploration beyond citations.
 
 - 📈 **Historically-Grounded Intellectual Discovery**  
-  Enables historically-grounded retrieval and long-range intellectual analysis, e.g., for uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
+  Enables long-range intellectual analysis vital for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
 
 - 🔍 **SPARQL Query Interface**  
   A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing complex queries.
   
 - 🔄 **Linked Data Integration**  
-Cross-links with authoritative external URL and identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
+Cross-links with external URL and persistent identifiers (e.g., DOI), enhancing entity resolution and connecting the KG within the broader scholarly data ecosystem.
   
 ## 🛠️ zbMATH Knowledge Graph: Construction and Setup
 
@@ -84,7 +85,7 @@ First, install the prerequisite libraries:
 pip install -r requirements.txt
 ```
 
-Run the following scripts to perform the respective retrieval tasks:
+Run the following scripts ([`src/retrieval-tasks/`](./src/retrieval-tasks/)) to perform the respective retrieval tasks:
 
 - **(1) Precursor Retrieval**  
   Identify overlooked foundational works beyond citation metrics.  
