@@ -69,13 +69,23 @@ run-convert.sh
 
 ### RDF Triple Store Setup
 
-We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as our RDF triple store example. Fuseki provides a lightweight SPARQL server to host and query your knowledge graph. The example setup is provided in [`front/`](./front). 
+We provide example using [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as the RDF triple store for the KG. Fuseki provides a lightweight SPARQL server to host and query your knowledge graph. The example setup is provided in [`front/`](./front). 
 
+We provide a sample subset of the zbMATH Open KG data you can use here: [`data/subset-200.ttl`](./data/subset-200.ttl). Before running the example, ensure this initial data file is located in the same folder as the `docker-compose.yml` file. If not, update the volume mapping in [`front/docker-compose.yml`](./front/docker-compose.yml) accordingly:
+
+```yaml
+- ./subset-200.ttl:/data.ttl
+```
+
+Then, start the service by running:
 ```bash
 docker compose up -d
 ```
 
-This command runs Fuseki on port 3030 with the initial data uploaded via [`fuseki-entrypoint.sh`](front/fuseki-entrypoint.sh). )
+This will launch Fuseki on port 3030 and load the initial data via [`fuseki-entrypoint.sh`](front/fuseki-entrypoint.sh).
+
+Your SPARQL endpoint URL will be available at: `http://localhost:3030/dataset/sparql`
+
 
 ## 🛠️ Historically-Grounded Retrieval Implementation
 
