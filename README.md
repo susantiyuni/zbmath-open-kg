@@ -109,9 +109,15 @@ endpoint_url = "http://localhost:8890/sparql"  # change into your SPARQL endpoin
 Run the following scripts ([`src/retrieval-tasks/`](./src/retrieval-tasks/)) to perform the respective retrieval tasks:
 
 - **(1) Precursor Retrieval**  
-  Identify overlooked foundational works beyond citation metrics.  
+  Identify overlooked foundational works beyond citation metrics.
+  
+  To get potential precursor–successor pairs based on shared concepts, run:
   ```bash
   python precursor-retrieval.py
+  ```
+  To list all potential precursors of a specific article (e.g., id=7309918), run the following query on your SPARQL endpoint.
+  ```
+  precursor-id7309918.sparql
   ```
 - **(2) Conceptual Ancestry**  
  Trace the migration of concepts across disciplines and subfields.  
