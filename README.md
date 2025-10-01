@@ -62,6 +62,8 @@ For bulk download (via _sickle_), refers to: [zbMATHOpen Harvester](https://gith
 
 ### RDF Construction
 
+Using raw `.jsonl` zbMATH data obtained from the API (see example: [`data/subset-200.jsonl`](./data/subset-200.jsonl)), run the following commands to automatically generate the RDF KG:
+
 ```bash
 # Option 1: Run the Python script
 python create-rdf.py data/subset-200.jsonl subset-200
