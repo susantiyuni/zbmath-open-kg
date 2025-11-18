@@ -28,16 +28,16 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
   Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
 
 - 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
-  Integrates richly annotated publications, disambiguated authors, expert reviews, keywords, and *Mathematics Subject Classification* (MSC) — a historically stable, fine-grained ontology — enabling nuanced exploration beyond citations.
+  On top of common bibliographic metadata, it integrates richly annotated mathematical publications with disambiguated authors, expert-curated reviews and keywords, and *Mathematics Subject Classification* (MSC) — a stable, fine-grained ontology of subject classification.
 
 - 📈 **Historically-Grounded Intellectual Discovery**  
-  Enables long-range intellectual analysis vital for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
+  Its comprehensive, long-term coverage and rich annotations enable long-range intellectual analysis essential for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
 
 - 🔍 **SPARQL Query Interface**  
   A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing queries over the zbMATH Open KG.
   
 - 🔄 **Linked Data Integration**  
-Cross-links with external URL and persistent identifiers (e.g., DOI).
+Cross-links with external URLs and persistent identifiers (e.g., DOI).
   
 ## 🛠️ zbMATH Knowledge Graph: Construction and Setup
 
