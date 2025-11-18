@@ -28,7 +28,7 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
   Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
 
 - 📚 **Expert-Curated, High-Quality Mathematical Metadata**  
-  On top of common bibliographic metadata, it integrates richly annotated mathematical publications with disambiguated authors, expert-curated reviews and keywords, and *Mathematics Subject Classification* (MSC) — a stable, fine-grained ontology of subject classification.
+  In addition to standard bibliographic metadata, it incorporates richly annotated mathematical publications with disambiguated authors, expert-curated reviews and keywords, and *Mathematics Subject Classification* (MSC) — a stable, fine-grained ontology for subject classification.
 
 - 📈 **Historically-Grounded Intellectual Discovery**  
   Its comprehensive, long-term coverage and rich annotations enable long-range intellectual analysis essential for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
