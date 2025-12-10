@@ -19,3 +19,27 @@ services:
 
 volumes:
   virtuoso_data:
+
+
+### Restarting the service without re-uploading the data
+# services:
+#   virtuoso:
+#     image: openlink/virtuoso-opensource-7
+#     container_name: virtuoso
+#     ports:
+#       - "8890:8890"        # Web UI and SPARQL endpoint
+#       - "1111:1111"        # SQL access
+#     environment:
+#       - DBA_PASSWORD=dba
+#       - SPARQL_UPDATE=true
+#       - VIRT_Parameters_DirsAllowed=.,/data,/opt/virtuoso-opensource/database/toLoad
+#     volumes:
+#       # TTL input folder — optional, only needed for loading new data
+#       - /home/yunisusan/zbmath/mscHarvester/out-nt:/opt/virtuoso-opensource/database/toLoad
+      
+#       # Important — mount your *existing* DB volume to the correct path
+#       - zb-virtuoso_virtuoso_data:/opt/virtuoso-opensource/database
+
+# volumes: 
+#   zb-virtuoso_virtuoso_data: #default name of volume created by docker: "folder-name_volume-name"
+#     external: true   # tells Docker not to recreate the volume
