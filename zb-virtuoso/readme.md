@@ -71,3 +71,20 @@ ls -lh /opt/virtuoso-opensource/database/virtuoso.db
 Run this command a few times; if the file size increases, data is still being loaded.
 
 You can also verify by running queries directly against the SPARQL endpoint: `http://localhost:3030/dataset/sparql`
+
+### Other Settings
+
+Additional configuration options for Virtuoso can be adjusted in the: ```virtuoso.ini```
+
+This file allows you to modify settings such as
+
+- Default SPARQL query shown in the endpoint UI
+```
+  DefaultQuery = SELECT (COUNT(*) AS ?count) FROM <https://zbmath.org> WHERE { ?s ?p ?o }
+  ```
+- Maximum SPARQL query execution time
+```
+MaxQueryExecutionTime = 10000	; in seconds
+```
+and other logging and performance options e.g., memory limits and buffer sizes, directory paths for database and RDF loading.
+Edit the file as needed before starting the container, or rebuild/restart the service after making changes.
