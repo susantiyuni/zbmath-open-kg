@@ -25,13 +25,13 @@ Built on the proposed paradigm and infrastructure, we formalize and implement fo
 ## zbMATH Knowledge Graph: Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
-  Fully compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
+  Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
 
 - **Expert-Curated, High-Quality Mathematical Metadata**  
-  In addition to standard bibliographic metadata, it incorporates richly annotated mathematical publications with disambiguated authors, expert-curated reviews and keywords, and *Mathematics Subject Classification* (MSC) — a stable, fine-grained ontology for subject classification.
+  In addition to standard bibliographic metadata, it incorporates annotated mathematical publications with expert-curated reviews and keywords, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes — a fine-grained ontology for math subject classification.
 
 - **Historically-Grounded Intellectual Discovery**  
-  Its comprehensive, long-term coverage and rich annotations enable long-range intellectual analysis essential for historically-grounded retrieval tasks, e.g., uncovering overlooked precursors, tracing conceptual lineages and revivals, and mapping intellectual influence across disciplines.
+  Its comprehensive and long-term coverage enable long-range intellectual analysis such as historically-grounded retrieval tasks e.g., identifying overlooked precursors and tracing conceptual lineages across (_sub_)disciplines.
 
 - **SPARQL Query Interface**  
   A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing queries over the KG.
@@ -48,7 +48,7 @@ Cross-links with external URLs and persistent identifiers (e.g., DOI).
 - Java 8 or higher (required only if you run Apache Jena libraries outside Docker)  
 - Docker (for running RDF triple stores like Apache Jena Fuseki without manual Java setup)  
   - We use [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as an example for its simplicity  
-  - *Note:* Production SPARQL endpoints use Virtuoso for scalability  
+  - *Note:* Production SPARQL endpoints use Virtuoso (See the [`zb-virtuoso`](./zb-virtuoso) directory for the complete Virtuoso setup.)
 
 ### Data Harvesting
 
@@ -92,6 +92,7 @@ This will launch Fuseki on port 3030 and load the initial data via [`fuseki-entr
 
 Your SPARQL endpoint URL will be available at: `http://localhost:3030/dataset/sparql`
 
+For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
 
 ## Historically-Grounded Retrieval Implementation
 
