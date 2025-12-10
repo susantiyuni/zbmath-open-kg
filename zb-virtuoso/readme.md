@@ -1,0 +1,73 @@
+## zbMATH Open KG: RDF Triple Store Setup (Virtuoso)
+
+This example demonstrates how to set up the zbMATH Open KG using [Virtuoso](https://virtuoso.openlinksw.com/) as the RDF triple store. 
+
+### Requirements
+
+- [Docker](https://www.docker.com/get-started) (includes Docker Compose)
+
+### Running virtuoso
+
+Make sure your RDF data is placed in the correct local directory. In the example below, files must be located in ```/local/toLoad```, 
+
+and mounted inside the container as:
+
+```yaml
+- /local/toLoad:/opt/virtuoso-opensource/database/toLoad
+```
+
+Then, start Virtuoso by running:
+```bash
+docker compose up -d
+```
+
+Once the service is running, the SPARQL endpoint will be available at: `http://localhost:3030/dataset/sparql`
+
+### Uploading Data
+We provide a sample subset of the zbMATH Open KG data you can use here: [`data/subset-200.ttl`](./data/subset-200.ttl).
+
+First, enter the Virtuoso ISQL Shell
+
+```
+docker exec -it virtuoso isql 1111 dba dba
+```
+
+Then load a single RDF file:
+
+```
+ld_dir('/opt/virtuoso-opensource/database/toLoad', 'out-1.ttl', 'https://zbmath.org');
+rdf_loader_run();
+checkpoint;
+```
+
+Or load multiple files (all .ttl):
+
+```
+ld_dir('/opt/virtuoso-opensource/database/toLoad', '%.ttl', 'https://zbmath.org');
+rdf_loader_run();
+checkpoint;
+```
+
+Depending on file size, loading may take several minutes.
+
+This would take some time until finishes.
+
+### Checking Upload Progress
+
+You can monitor whether RDF loading is working by observing changes in the database file size.
+
+Open a shell inside the container:
+
+```
+docker exec -it virtuoso bash 
+```
+
+Check the size of the Virtuoso database:
+
+```
+ls -lh /opt/virtuoso-opensource/database/virtuoso.db
+```
+
+Run this command a few times; if the file size increases, data is still being loaded.
+
+You can also verify by running queries directly against the SPARQL endpoint: `http://localhost:3030/dataset/sparql`
