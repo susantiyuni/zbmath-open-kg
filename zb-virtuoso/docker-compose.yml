@@ -1,0 +1,21 @@
+
+services:
+  virtuoso:
+    image: openlink/virtuoso-opensource-7
+    container_name: virtuoso
+    ports:
+      - "8890:8890"        # Virtuoso SPARQL endpoint and UI
+      - "1111:1111"        # SQL/ODBC (optional)
+    environment:
+      - DBA_PASSWORD=dba   # db password
+      - SPARQL_UPDATE=true
+      - VIRT_Parameters_DirsAllowed=.,/data,/opt/virtuoso-opensource/database/toLoad
+    volumes:
+      - ./virtuoso.ini:/opt/virtuoso-opensource/database/virtuoso.ini
+      # Mount TTL files (read-only import directory)
+      - /local/toLoad:/opt/virtuoso-opensource/database/toLoad
+      # Persistent DB storage 
+      - virtuoso_data:/opt/virtuoso-opensource/database
+
+volumes:
+  virtuoso_data:
