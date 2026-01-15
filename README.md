@@ -161,4 +161,4 @@ In several cases, third-party information, such as abstracts, cannot be made ava
 In those cases, we replaced the data with the string "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
 ```
 
-📧 Contact: author@anonymous.org
+📧 Contact: yuni.susanyi@fiz-karlsruhe.de
