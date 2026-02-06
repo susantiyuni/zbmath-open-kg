@@ -1,6 +1,6 @@
-# zbMATH Open KG
+# zbMATH Open Knowledge Graph
 
-We construct a large-scale, historically comprehensive knowledge graph (KG) derived from the **zbMATH Open** platform, specifically designed to capture historical and conceptual connections in mathematics. covering centuries of mathematical research. 
+A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded retrieval use cases.
 
 ---
 
