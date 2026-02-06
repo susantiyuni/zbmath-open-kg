@@ -1,13 +1,6 @@
-# Historically-Grounded Retrieval of Scholarly Research Beyond Citation
+# zbMATH Open KG
 
-We propose **historically-grounded retrieval**, a new paradigm for scholarly IR that shifts focus from popularity-based citation metrics to the historical and conceptual development of knowledge. To enable this, we built a large-scale, historically comprehensive knowledge graph from **zbMATH Open**, covering centuries of mathematical research. 
-
-Built on the proposed paradigm and infrastructure, we formalize and implement four new IR tasks:  
-
-- **Precursor Retrieval** — identifying overlooked works beyond citations  
-- **Conceptual Ancestry** — tracing concept migration across (sub)fields  
-- **Revival Detection** — spotting re-emerging ideas in new contexts  
-- **Reviewer–Author Lineage** — mapping intellectual transmission via scholarly interactions  
+We construct a large-scale, historically comprehensive knowledge graph (KG) derived from the **zbMATH Open** platform, specifically designed to capture historical and conceptual connections in mathematics. covering centuries of mathematical research. 
 
 ---
 
@@ -93,51 +86,6 @@ This will launch Fuseki on port 3030 and load the initial data via [`fuseki-entr
 Your SPARQL endpoint URL will be available at: `http://localhost:3030/dataset/sparql`
 
 For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
-
-## Historically-Grounded Retrieval Implementation
-
-First, install the prerequisite libraries:
-
-```bash
-pip install -r requirements.txt
-```
-
-Next, configure the SPARQL endpoint url in the script to match your KG's SPARQL endpoint.
-
-```
-# --- CONFIGURATION ---
-endpoint_url = "http://localhost:8890/sparql"  # change into your SPARQL endpoint
-```
-
-Run the following scripts ([`src/retrieval-tasks/`](./src/retrieval-tasks/)) to perform the respective retrieval tasks:
-
-- **(1) Precursor Retrieval**  
-  Identify overlooked foundational works beyond citation metrics.
-  
-  To get potential precursor–successor pairs based on shared concepts, run:
-  ```bash
-  python precursor-retrieval.py
-  ```
-  To list all potential precursors of a specific article (e.g., id=7309918), run the following query on your SPARQL endpoint.
-  ```
-  precursor-id7309918.sparql
-  ```
-- **(2) Conceptual Ancestry**  
- Trace the migration of concepts across disciplines and subfields.  
-  ```bash
-  python ancestry-retrieval.py
-  ```
-- **(3) Revival Detection**  
-  Detect ideas that are re-emerging in new contexts or domains.  
-  ```bash
-  python revival-retrieval.py
-  ```
-- **(4) Reviewer–Author Lineage**  
-  Map intellectual transmission through scholarly interactions (author-reviewer relationship) 
-  ```bash
-  python lineage-retrieval.py
-  ```
-
 
 ## Repository Structure
 
