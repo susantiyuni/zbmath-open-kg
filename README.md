@@ -1,6 +1,6 @@
 # zbMATH Open Knowledge Graph
 
-A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded retrieval use cases.
+A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded scholarly exploration and discovery use cases.
 
 ---
 
@@ -23,7 +23,7 @@ A large-scale, historically comprehensive knowledge graph (KG) constructed from 
 - **Expert-Curated, High-Quality Mathematical Metadata**  
   In addition to standard bibliographic metadata, it incorporates annotated mathematical publications with expert-curated reviews and keywords, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes — a fine-grained ontology for math subject classification.
 
-- **Historically-Grounded Intellectual Discovery**  
+- **Historically-Grounded Scholarly Discovery and Exploration**  
   Its comprehensive and long-term coverage enable long-range intellectual analysis such as historically-grounded retrieval tasks e.g., identifying overlooked precursors and tracing conceptual lineages across (_sub_)disciplines.
 
 - **SPARQL Query Interface**  
