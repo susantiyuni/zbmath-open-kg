@@ -92,7 +92,7 @@ For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
 - [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
 - [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
 - [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
-- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded retrieval tasks.
+- [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded scholarly exploration and discovery.
 - [`use-case/`](./use-case) – Use case-specific results and visualizations
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
