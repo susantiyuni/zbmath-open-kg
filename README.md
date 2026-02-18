@@ -4,7 +4,7 @@ A large-scale, historically comprehensive knowledge graph (KG) constructed from 
 
 ---
 
-## zbMATH Knowledge Graph: Key Statistics (as of August 2025)
+## Key Statistics (as of September 2025)
 - **Temporal Span**: 1763~2025. See ([`src/retrieval-tasks/year-count.tsv`](./src/retrieval-tasks/year-count.tsv)) for the per-year distribution.  
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
@@ -15,7 +15,7 @@ A large-scale, historically comprehensive knowledge graph (KG) constructed from 
 - **Keywords**: 3M+
 - **Software**: 30k+ ... (and more)
 
-## zbMATH Knowledge Graph: Key Features
+## Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
   Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
@@ -32,7 +32,7 @@ A large-scale, historically comprehensive knowledge graph (KG) constructed from 
 - **Linked Data Integration**  
 Cross-links with external URLs and persistent identifiers (e.g., DOI).
   
-## zbMATH Knowledge Graph: Construction and Setup
+## Construction and Setup
 
 ### Prerequisites
 
