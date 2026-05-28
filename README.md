@@ -1,10 +1,30 @@
 # zbMATH Open Knowledge Graph
+## Overview
 
 A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded scholarly exploration and discovery use cases.
 
 ---
+## Contents
 
-## Key Statistics (as of September 2025)
+- [Ontology and Metadata Descriptions](#ontology-and-metadata-descriptions)
+- [Key Statistics](#key-statistics)
+- [Key Features](#key-features)
+- [Construction and Setup](#construction-and-setup)
+  - [Prerequisites](#prerequisites)
+  - [Data Harvesting](#data-harvesting)
+  - [RDF Construction](#rdf-construction)
+  - [RDF Triple Store Setup](#rdf-triple-store-setup)
+- [Repository Structure](#repository-structure)
+- [License](#license)
+
+## Ontology and Metadata Descriptions
+
+Following Linked Open Data and FAIR best practices, we provides machine-readable ontology and dataset metadata descriptions for zbMATH Open KG:
+
+- [Ontology (OWL)](./data/zbmath-kg-ontology.ttl)
+- [DCAT + VoID + PROV-O Description](./data/zbmath-kg-metadata-fair.ttl) — dataset metadata description
+
+## Key Statistics
 - **Temporal Span**: 1763~2025. See ([`src/retrieval-tasks/year-count.tsv`](./src/retrieval-tasks/year-count.tsv)) for the per-year distribution.  
 - **Triples**: 159M+
 - **Distinct Entities**: 36M+
@@ -15,6 +35,8 @@ A large-scale, historically comprehensive knowledge graph (KG) constructed from 
 - **Keywords**: 3M+
 - **Software**: 30k+ ... (and more)
 
+ *as of December 2025
+ 
 ## Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
@@ -109,4 +131,4 @@ In several cases, third-party information, such as abstracts, cannot be made ava
 In those cases, we replaced the data with the string "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
 ```
 
-📧 Contact: yuni.susanti@fiz-karlsruhe.de
+📧 Contact and Maintenance: yuni.susanti@fiz-karlsruhe.de
