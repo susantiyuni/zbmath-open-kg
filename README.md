@@ -71,7 +71,7 @@ Cross-links with external URLs and persistent identifiers (e.g., DOI).
 To harvest data by zbMATH ID (e.g., ID list of zbMATH open access subset: [zbMATH OA subset](https://zenodo.org/records/8021789)), run:
 
 ```bash
-python harvest-by-id.py 
+python src/harvest-by-id.py 
 ```
 
 For bulk download (via _sickle_), refers to: [zbMATHOpen Harvester](https://github.com/zbMATHOpen/mscHarvester)
@@ -82,7 +82,7 @@ Using raw `.jsonl` zbMATH data obtained from the API (see example: [`data/subset
 
 ```bash
 # Option 1: Run the Python script
-python create-rdf.py data/subset-200.jsonl subset-200
+python src/create-rdf-v2.py data/subset-200.jsonl subset-200
 
 # Option 2: Run the shell script for batch processing
 run-convert.sh
@@ -96,7 +96,7 @@ We provide example using [Apache Jena Fuseki](https://jena.apache.org/documentat
 We provide a sample subset of the zbMATH Open KG data you can use here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). Before running the example, ensure this initial data file is located in the same folder as the `docker-compose.yml` file. If not, update the volume mapping in [`front/docker-compose.yml`](./front/docker-compose.yml) accordingly:
 
 ```yaml
-- ./subset-200.ttl:/data.ttl
+- ./subset-200-v2.ttl:/data.ttl
 ```
 
 Then, start the service by running:
