@@ -82,7 +82,7 @@ Using raw `.jsonl` zbMATH data obtained from the API (see example: [`data/subset
 
 ```bash
 # Option 1: Run the Python script
-python src/create-rdf-v2.py data/subset-200.jsonl subset-200
+python src/create-rdf-v2.py --inp data/subset-200.jsonl --out data/subset-200.ttl --nt 0
 
 # Option 2: Run the shell script for batch processing
 run-convert.sh
