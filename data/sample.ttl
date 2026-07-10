@@ -1,0 +1,279 @@
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix msc: <http://msc2020.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zbmath: <https://zbmath.org/> .
+
+<https://zbmath.org/doctype/book-series> a rdfs:Class ;
+    rdfs:label "Book Series" ;
+    rdfs:subClassOf schema:ScholarlyArticle ;
+    skos:notation "b" .
+
+<https://zbmath.org/doctype/collection-article> a rdfs:Class ;
+    rdfs:label "Collection Article" ;
+    rdfs:subClassOf schema:ScholarlyArticle ;
+    skos:notation "a" .
+
+<https://zbmath.org/doctype/journal-article> a rdfs:Class ;
+    rdfs:label "Journal Article" ;
+    rdfs:subClassOf schema:ScholarlyArticle ;
+    skos:notation "j" .
+
+<https://zbmath.org/doctype/preprints> a rdfs:Class ;
+    rdfs:label "Preprints" ;
+    rdfs:subClassOf schema:ScholarlyArticle ;
+    skos:notation "p" .
+
+<https://zbmath.org/ontology/keyword-concept> a rdfs:Class ;
+    rdfs:label "Keyword Concept" .
+
+<https://zbmath.org/ontology/msc-concept> a rdfs:Class ;
+    rdfs:label "MSC Concept" .
+
+zbmath:ontology a owl:Ontology ;
+    dcterms:title "zbMATH Open Knowledge Graph Ontology" ;
+    owl:versionInfo "1.0" .
+
+msc:03Bxx skos:narrower msc:03B52 .
+
+msc:06Dxx skos:narrower msc:06D35 .
+
+msc:06Fxx skos:narrower msc:06F35 .
+
+msc:14F05 a skos:Concept,
+        <https://zbmath.org/ontology/msc-concept> ;
+    rdfs:label "14F05" ;
+    skos:inScheme zbmath:msc-scheme ;
+    skos:notation "14F05" ;
+    skos:prefLabel "14F05" .
+
+zbmath:622411 a schema:ScholarlyArticle ;
+    rdfs:label "The flat holomorphic conformal structure on the Horrocks-Mumford orbifold" ;
+    dcterms:creator <https://zbmath.org/authors/sato.takeshi> ;
+    dcterms:subject msc:14F05 ;
+    dcterms:title "The flat holomorphic conformal structure on the Horrocks-Mumford orbifold" ;
+    dcterms:type <https://zbmath.org/doctype/journal-article> ;
+    schema:author <https://zbmath.org/authors/sato.takeshi> ;
+    schema:name "The flat holomorphic conformal structure on the Horrocks-Mumford orbifold" .
+
+<https://zbmath.org/keyword/BCIalgebra> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "BCI-algebra" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "BCI-algebra" .
+
+<https://zbmath.org/keyword/BCKalgebra> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "BCK-algebra" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "BCK-algebra" .
+
+<https://zbmath.org/keyword/Herbrand_theorem> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "Herbrand theorem" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "Herbrand theorem" .
+
+<https://zbmath.org/keyword/MValgebra> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "MV-algebra" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "MV-algebra" .
+
+<https://zbmath.org/keyword/completeness> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "completeness" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "completeness" .
+
+<https://zbmath.org/keyword/fuzzy_congruences> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "fuzzy congruences" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "fuzzy congruences" .
+
+<https://zbmath.org/keyword/fuzzy_ideal> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "fuzzy ideal" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "fuzzy ideal" .
+
+<https://zbmath.org/keyword/resolution> a skos:Concept,
+        <https://zbmath.org/ontology/keyword-concept> ;
+    rdfs:label "resolution" ;
+    skos:inScheme zbmath:keyword-scheme ;
+    skos:prefLabel "resolution" .
+
+<https://zbmath.org/review/1383556> a schema:Review ;
+    dcterms:creator <https://zbmath.org/authors/sessa.salvatore> ;
+    schema:inLanguage "English" ;
+    schema:itemReviewed zbmath:1383556 ;
+    schema:reviewAspect "review" ;
+    schema:reviewBody "The author systematizes some concepts and results of his previous works [Fuzzy Sets Syst. 62, No. 1, 111-114 (1994; Zbl 0826.06011); ibid. 66, No. 3, 315-327 (1994; Zbl 0844.06007); ibid. 72, No. 2, 197-204 (1995; Zbl 0844.06008)] in the context of BCI-algebras. In particular, if \\(Z\\) is an MV-algebra, then he shows that a fuzzy ideal \\(\\nu\\) of \\(Z\\) is fuzzy implicative, prime, essential, weakly essential and maximal iff the MV-ideal \\(Z_{\\nu} = \\{x \\in Z : \\nu(x) = \\nu(0)\\}\\) has the respective non-fuzzy property. Moreover, if \\(X\\) is a quasi-commutative BCI-algebra, the author proves a one-to-one correspondence between the set of the fuzzy closed ideals of \\(X\\) and the set of the fuzzy congruences of \\(X\\)." ;
+    schema:reviewer <https://zbmath.org/authors/sessa.salvatore> .
+
+<https://zbmath.org/review/1383557> a schema:Review ;
+    dcterms:creator <https://zbmath.org/authors/boricic.branislav-r> ;
+    schema:inLanguage "English" ;
+    schema:itemReviewed zbmath:1383557 ;
+    schema:reviewAspect "review" ;
+    schema:reviewBody "In order to set the background for the resolution method development and application in fuzzy logic, the author considers a generalization of Łukasiewicz first-order logic having many important properties. Namely, it is shown that for this logic the corresponding generalizations of the deduction and completeness theorem hold. In this way a syntactical reasoning on truth values is provided, establishing a formal tool for the modeling of the vagueness phenomenon. As the crucial step approaching resolution, an analogue to the Herbrand theorem is proved as well, providing a good formal basis for resolution in the context of fuzzy logic." ;
+    schema:reviewer <https://zbmath.org/authors/boricic.branislav-r> .
+
+msc:03B52 a skos:Concept,
+        <https://zbmath.org/ontology/msc-concept> ;
+    rdfs:label "Fuzzy logic; logic of vagueness" ;
+    rdfs:seeAlso <https://zbmath.org/classification/?q=cc:03B52> ;
+    skos:broader msc:03Bxx ;
+    skos:inScheme zbmath:msc-scheme ;
+    skos:notation "03B52" ;
+    skos:prefLabel "Fuzzy logic; logic of vagueness" .
+
+msc:06D35 a skos:Concept,
+        <https://zbmath.org/ontology/msc-concept> ;
+    rdfs:label "MV-algebras" ;
+    rdfs:seeAlso <https://zbmath.org/classification/?q=cc:06D35> ;
+    skos:broader msc:06Dxx ;
+    skos:inScheme zbmath:msc-scheme ;
+    skos:notation "06D35" ;
+    skos:prefLabel "MV-algebras" .
+
+msc:06F35 a skos:Concept,
+        <https://zbmath.org/ontology/msc-concept> ;
+    rdfs:label "BCK-algebras, BCI-algebras" ;
+    rdfs:seeAlso <https://zbmath.org/classification/?q=cc:06F35> ;
+    skos:broader msc:06Fxx ;
+    skos:inScheme zbmath:msc-scheme ;
+    skos:notation "06F35" ;
+    skos:prefLabel "BCK-algebras, BCI-algebras" .
+
+zbmath:1383556 a schema:ScholarlyArticle ;
+    rdfs:label "Some fuzzy concepts of BCI, BCK and MV-algebras" ;
+    dcterms:creator <https://zbmath.org/authors/hoo.cheong-seng> ;
+    dcterms:identifier "0935.06018" ;
+    dcterms:isPartOf <https://zbmath.org/journal/International_Journal_of_Approximate_Reasoning> ;
+    dcterms:issued "1998"^^xsd:gYear ;
+    dcterms:language "English" ;
+    dcterms:publisher <https://zbmath.org/publisher/Elsevier_NorthHolland_New_York_NY> ;
+    dcterms:subject msc:06D35,
+        msc:06F35 ;
+    dcterms:title "Some fuzzy concepts of BCI, BCK and MV-algebras" ;
+    dcterms:type <https://zbmath.org/doctype/journal-article> ;
+    cito:cites zbmath:1071751,
+        zbmath:1140211,
+        zbmath:1146195,
+        zbmath:3137355,
+        zbmath:3151572,
+        zbmath:3308443,
+        zbmath:33163,
+        zbmath:3552506,
+        zbmath:3598466,
+        zbmath:37901,
+        zbmath:3962507,
+        zbmath:4014679,
+        zbmath:4029565,
+        zbmath:4039902,
+        zbmath:4041917,
+        zbmath:4041918,
+        zbmath:4041919,
+        zbmath:4093453,
+        zbmath:4108756,
+        zbmath:572005,
+        zbmath:694934,
+        zbmath:727660,
+        zbmath:764333,
+        zbmath:788365,
+        zbmath:890923,
+        zbmath:891019,
+        zbmath:951670,
+        zbmath:954774 ;
+    schema:author <https://zbmath.org/authors/hoo.cheong-seng> ;
+    schema:datePublished "1998"^^xsd:gYear ;
+    schema:identifier [ a schema:PropertyValue ;
+            schema:propertyID "zbl_id" ;
+            schema:value "0935.06018" ],
+        <https://doi.org/10.1016/S0888-613X(98)00004-8> ;
+    schema:keywords <https://zbmath.org/keyword/BCIalgebra>,
+        <https://zbmath.org/keyword/BCKalgebra>,
+        <https://zbmath.org/keyword/MValgebra>,
+        <https://zbmath.org/keyword/fuzzy_congruences>,
+        <https://zbmath.org/keyword/fuzzy_ideal> ;
+    schema:name "Some fuzzy concepts of BCI, BCK and MV-algebras" ;
+    schema:pagination "177-189" ;
+    schema:review <https://zbmath.org/review/1383556> ;
+    schema:sameAs <https://doi.org/10.1016/S0888-613X(98)00004-8> .
+
+zbmath:1383557 a schema:ScholarlyArticle ;
+    rdfs:label "Open theories, consistency and related results in fuzzy logic" ;
+    dcterms:creator <https://zbmath.org/authors/novak.vilem> ;
+    dcterms:identifier "0944.03019" ;
+    dcterms:isPartOf <https://zbmath.org/journal/International_Journal_of_Approximate_Reasoning> ;
+    dcterms:issued "1998"^^xsd:gYear ;
+    dcterms:language "English" ;
+    dcterms:publisher <https://zbmath.org/publisher/Elsevier_NorthHolland_New_York_NY> ;
+    dcterms:subject msc:03B52 ;
+    dcterms:title "Open theories, consistency and related results in fuzzy logic" ;
+    dcterms:type <https://zbmath.org/doctype/journal-article> ;
+    cito:cites zbmath:1053091,
+        zbmath:3248792,
+        zbmath:41101,
+        zbmath:4156412,
+        zbmath:933310,
+        zbmath:956587 ;
+    schema:author <https://zbmath.org/authors/novak.vilem> ;
+    schema:datePublished "1998"^^xsd:gYear ;
+    schema:identifier [ a schema:PropertyValue ;
+            schema:propertyID "zbl_id" ;
+            schema:value "0944.03019" ],
+        <https://doi.org/10.1016/S0888-613X(98)00005-X> ;
+    schema:keywords <https://zbmath.org/keyword/Herbrand_theorem>,
+        <https://zbmath.org/keyword/completeness>,
+        <https://zbmath.org/keyword/resolution> ;
+    schema:name "Open theories, consistency and related results in fuzzy logic" ;
+    schema:pagination "191-200" ;
+    schema:review <https://zbmath.org/review/1383557> ;
+    schema:sameAs <https://doi.org/10.1016/S0888-613X(98)00005-X> .
+
+<https://zbmath.org/authors/boricic.branislav-r> a schema:Person ;
+    rdfs:label "B.Boričić (Beograd)" ;
+    schema:name "B.Boričić (Beograd)" .
+
+<https://zbmath.org/authors/hoo.cheong-seng> a schema:Person ;
+    rdfs:label "Hoo, C. S." ;
+    schema:authorOf zbmath:1383556 ;
+    schema:name "Hoo, C. S." .
+
+<https://zbmath.org/authors/novak.vilem> a schema:Person ;
+    rdfs:label "Novák, Vilém" ;
+    schema:authorOf zbmath:1383557 ;
+    schema:name "Novák, Vilém" .
+
+<https://zbmath.org/authors/sato.takeshi> a schema:Person ;
+    rdfs:label "Sato, Takeshi" ;
+    schema:authorOf zbmath:622411 ;
+    schema:name "Sato, Takeshi" .
+
+<https://zbmath.org/authors/sessa.salvatore> a schema:Person ;
+    rdfs:label "S.Sessa (Napoli)" ;
+    schema:name "S.Sessa (Napoli)" .
+
+<https://zbmath.org/journal/International_Journal_of_Approximate_Reasoning> a schema:Periodical ;
+    rdfs:label "International Journal of Approximate Reasoning" ;
+    schema:name "International Journal of Approximate Reasoning" .
+
+<https://zbmath.org/publisher/Elsevier_NorthHolland_New_York_NY> a schema:Organization ;
+    rdfs:label "Elsevier (North-Holland), New York, NY" ;
+    schema:name "Elsevier (North-Holland), New York, NY" .
+
+zbmath:msc-scheme a skos:ConceptScheme ;
+    rdfs:label "MSC Classification" ;
+    dcterms:title "Mathematics Subject Classification (MSC)" .
+
+zbmath:keyword-scheme a skos:ConceptScheme ;
+    rdfs:label "zbMATH Keywords" ;
+    dcterms:title "zbMATH Keyword Scheme" .
+
