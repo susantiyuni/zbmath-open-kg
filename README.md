@@ -41,7 +41,7 @@ We provides machine-readable ontology and dataset metadata descriptions for zbMA
 ## Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
-  Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200.ttl). 
+  Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). 
 
 - **Expert-Curated, High-Quality Mathematical Metadata**  
   In addition to standard bibliographic metadata, it incorporates annotated mathematical publications with expert-curated reviews and keywords, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes — a fine-grained ontology for math subject classification.
@@ -93,7 +93,7 @@ run-convert.sh
 
 We provide example using [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) as the RDF triple store for the KG. Fuseki provides a lightweight SPARQL server to host and query your knowledge graph. The example setup is provided in [`front/`](./front). 
 
-We provide a sample subset of the zbMATH Open KG data you can use here: [`data/subset-200.ttl`](./data/subset-200.ttl). Before running the example, ensure this initial data file is located in the same folder as the `docker-compose.yml` file. If not, update the volume mapping in [`front/docker-compose.yml`](./front/docker-compose.yml) accordingly:
+We provide a sample subset of the zbMATH Open KG data you can use here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). Before running the example, ensure this initial data file is located in the same folder as the `docker-compose.yml` file. If not, update the volume mapping in [`front/docker-compose.yml`](./front/docker-compose.yml) accordingly:
 
 ```yaml
 - ./subset-200.ttl:/data.ttl
