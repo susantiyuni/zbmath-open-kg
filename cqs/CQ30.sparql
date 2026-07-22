@@ -1,0 +1,33 @@
+PREFIX schema:<https://schema.org/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
+
+SELECT
+
+?journal
+
+(YEAR(?date) AS ?year)
+
+(COUNT(?paper) AS ?papers)
+
+
+WHERE {
+
+
+?paper dcterms:subject <http://msc2020.org/03B52> ;
+
+       dcterms:isPartOf ?journal ;
+
+       dcterms:issued ?date .
+
+
+}
+
+GROUP BY
+
+?journal
+YEAR(?date)
+
+ORDER BY
+
+?journal
+?year
