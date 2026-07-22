@@ -1,0 +1,26 @@
+PREFIX dcterms:<http://purl.org/dc/terms/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX schema:<https://schema.org/>
+
+SELECT
+    ?msc
+    ?mscLabel
+    (MIN(?year) AS ?firstAppearance)
+
+WHERE {
+
+    ?paper a schema:ScholarlyArticle ;
+           dcterms:subject ?msc ;
+           dcterms:issued ?date .
+
+    ?msc skos:prefLabel ?mscLabel .
+
+    BIND(YEAR(?date) AS ?year)
+
+}
+
+GROUP BY ?msc ?mscLabel
+
+HAVING(MIN(?year) > 2000)
+
+ORDER BY ?firstAppearance
