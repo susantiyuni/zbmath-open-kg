@@ -1,0 +1,40 @@
+PREFIX schema:<https://schema.org/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
+
+SELECT
+
+?author
+
+(MIN(?year) AS ?firstPublication)
+
+(MAX(?year) AS ?latestPublication)
+
+(COUNT(?paper) AS ?papers)
+
+
+WHERE {
+
+
+?paper schema:author ?author ;
+       dcterms:issued ?date .
+
+
+BIND(YEAR(?date) AS ?year)
+
+
+}
+
+GROUP BY ?author
+
+
+HAVING(
+
+MIN(?year)<=2000
+
+&&
+
+MAX(?year)>=2020
+
+)
+
+ORDER BY DESC(?papers)
