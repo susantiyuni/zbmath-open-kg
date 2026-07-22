@@ -1,0 +1,34 @@
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX schema: <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT
+
+    ?newPaperTitle
+    ?newYear
+    ?newAuthor
+
+    ?oldPaperTitle
+    ?oldYear
+    ?oldAuthor
+
+WHERE {
+
+
+    ?newPaper a schema:ScholarlyArticle ;
+              dcterms:title ?newPaperTitle ;
+              dcterms:issued ?newYear ;
+              schema:author ?newAuthor ;
+              cito:cites ?oldPaper .
+
+
+    ?oldPaper dcterms:title ?oldPaperTitle ;
+              dcterms:issued ?oldYear ;
+              schema:author ?oldAuthor .
+
+
+    FILTER(?newYear > ?oldYear)
+
+}
+
+ORDER BY ?oldYear ?newYear
