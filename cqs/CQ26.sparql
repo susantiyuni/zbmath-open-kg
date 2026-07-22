@@ -1,0 +1,34 @@
+PREFIX schema:<https://schema.org/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+
+SELECT
+
+    ?keyword
+    ?keywordLabel
+
+    (MIN(?year) AS ?firstYear)
+    (MAX(?year) AS ?lastYear)
+    (COUNT(DISTINCT ?year) AS ?activeYears)
+
+
+WHERE {
+
+    ?paper schema:keywords ?keyword ;
+           dcterms:issued ?date .
+
+    ?keyword skos:prefLabel ?keywordLabel .
+
+    BIND(YEAR(?date) AS ?year)
+
+}
+
+GROUP BY ?keyword ?keywordLabel
+
+HAVING(
+    MIN(?year) <= 1970
+    &&
+    MAX(?year) >= 2020
+)
+
+ORDER BY DESC(?activeYears)
