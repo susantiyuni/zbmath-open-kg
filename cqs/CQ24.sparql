@@ -1,0 +1,22 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?year
+    (COUNT(?paper) AS ?publicationCount)
+
+WHERE {
+
+    ?paper a schema:ScholarlyArticle ;
+           dcterms:issued ?date ;
+           dcterms:subject <http://msc2020.org/03B52> .
+
+    BIND(YEAR(?date) AS ?year)
+
+    FILTER(?year >= 1980 && ?year <= 2020)
+
+}
+
+GROUP BY ?year
+
+ORDER BY ?year
