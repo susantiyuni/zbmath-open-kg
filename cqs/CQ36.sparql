@@ -1,0 +1,24 @@
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+
+SELECT
+    ?parent
+    ?parentLabel
+    ?child
+    ?childLabel
+
+WHERE {
+
+    ?child skos:broader+ ?parent .
+
+    ?parent skos:prefLabel ?parentLabel .
+
+    ?child skos:prefLabel ?childLabel .
+
+    FILTER(
+       CONTAINS(
+          LCASE(?parentLabel),
+          "logic"
+       )
+    )
+
+}
