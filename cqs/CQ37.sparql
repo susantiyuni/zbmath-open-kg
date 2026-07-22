@@ -1,0 +1,19 @@
+PREFIX cito:<http://purl.org/spar/cito/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
+
+SELECT
+
+(YEAR(?date)/10*10 AS ?decade)
+
+(COUNT(?citation) AS ?citationLinks)
+
+WHERE {
+
+?paper dcterms:issued ?date ;
+       cito:cites ?citation .
+
+}
+
+GROUP BY (YEAR(?date)/10*10)
+
+ORDER BY ?decade
