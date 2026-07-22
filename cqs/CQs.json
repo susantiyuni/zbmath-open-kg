@@ -1,11 +1,10 @@
 {
   "id": "CQ24",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Evolution of research interest in a mathematical topic over time",
-  "naturalLanguageQuestion": "How has interest in a mathematical topic evolved over time?",
+  "title": "Temporal evolution of research activity in a mathematical topic",
+  "naturalLanguageQuestion": "How has research activity in a mathematical topic changed over time?",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
     "focusConcept": "MSC 03B52"
   },
 
@@ -29,11 +28,10 @@
 {
   "id": "CQ25",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Identification of emerging mathematical topics after a given period",
-  "naturalLanguageQuestion": "Which mathematical topics emerged after a particular decade?",
+  "title": "Identification of newly appearing mathematical topics",
+  "naturalLanguageQuestion": "Which mathematical topics first appeared after a given time period?",
 
   "exampleUseCase": {
-    "discipline": "Mathematics",
     "focusConcept": "Emerging MSC topics after 2000"
   },
 
@@ -58,11 +56,10 @@
 {
   "id": "CQ26",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Identification of persistent mathematical concepts over time",
-  "naturalLanguageQuestion": "Which mathematical concepts have persisted over long periods?",
+  "title": "Identification of long-lived mathematical concepts",
+  "naturalLanguageQuestion": "Which mathematical concepts have remained active across multiple periods?",
 
   "exampleUseCase": {
-    "discipline": "Mathematics",
     "focusConcept": "Keywords active from the 1970s to the present"
   },
 
@@ -77,7 +74,10 @@
     "long-lived mathematical concepts",
     "first and last appearance",
     "concept lifespan",
-    "active years"
+    "active years",
+    "publication continuity",
+    "number of active decades",
+    "time-span"
   ],
 
   "queryFile": "CQ26.sparql",
@@ -91,8 +91,7 @@
   "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
 
   "exampleUseCase": {
-    "discipline": "Mathematics",
-    "focusConcept": "MSC areas with decreasing publication activity"
+    "focusConcept": "MSC areas with decreasing publication activity (highly active before 1990 but have received substantially fewer publications since 2000) "
   },
 
   "requires": [
@@ -113,14 +112,14 @@
   "status": "validated"
 }
 
+
 {
   "id": "CQ28",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Evolution of citation patterns within mathematical disciplines",
-  "naturalLanguageQuestion": "How have citation patterns evolved within a mathematical discipline?",
+  "title": "Cross-disciplinary citation evolution between mathematical subject areas",
+  "naturalLanguageQuestion": "How have citation patterns evolved within mathematical areas?",
 
   "exampleUseCase": {
-    "discipline": "Mathematics",
     "focusConcept": "Cross-field citations between MSC areas"
   },
 
@@ -145,11 +144,10 @@
 {
   "id": "CQ29",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Identification of authors contributing across multiple generations of mathematical research",
-  "naturalLanguageQuestion": "Which authors have contributed to multiple generations of mathematical research?",
+  "title": "Identification of long-term contributing mathematical authors",
+  "naturalLanguageQuestion": "Which authors have published across multiple decades of mathematical research?",
 
   "exampleUseCase": {
-    "discipline": "Mathematics",
     "focusConcept": "Authors publishing from 1980 to 2020"
   },
 
@@ -173,11 +171,10 @@
 {
   "id": "CQ30",
   "category": "Mathematical Knowledge Evolution",
-  "title": "Historical publication venues for a mathematical discipline",
+  "title": "Historical distribution of mathematical research across journals",
   "naturalLanguageQuestion": "Which journals have historically published research in a mathematical area?",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
     "focusConcept": "Journals publishing MSC 03B52"
   },
 
@@ -201,12 +198,11 @@
 
 {
   "id": "CQ31",
-  "title": "Evolution of intellectual structure of a mathematical discipline over time",
-  "naturalLanguageQuestion": "How has the intellectual structure of a mathematical discipline evolved over time?",
+  "title": "Evolution of the conceptual structure of a mathematical discipline",
+  "naturalLanguageQuestion": "How have MSC categories, keywords, and citation relationships of a mathematical discipline changed over time?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
     "focusConcept": "MSC 03Bxx"
   },
 
@@ -235,8 +231,7 @@
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
-    "focusConcept": "MSC 03B52"
+    "focusConcept": "MSC 03B52 (influence = citation relationship)"
   },
 
   "requires": [
@@ -250,7 +245,9 @@
     "influential MSC areas",
     "source mathematical fields",
     "citation influence count",
-    "ranked influencing areas"
+    "ranked influencing areas",
+    "citation count",
+    "publication age difference"
   ],
 
   "queryFile": "CQ32.sparql",
@@ -264,8 +261,7 @@
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
-    "focusConcept": "Foundational publications"
+    "focusConcept": "Foundational publications (early publication + high citation count)"
   },
 
   "requires": [
@@ -289,12 +285,11 @@
 {
   "id": "CQ34",
   "title": "Propagation of mathematical ideas across journals, authors, and time",
-  "naturalLanguageQuestion": "How did mathematical ideas propagate across journals, authors, and time?",
+  "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, authors, and journals over time?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
-    "focusConcept": "Idea diffusion through citation networks"
+    "focusConcept": "Propagation of mathematical knowledge through citation networks"
   },
 
   "requires": [
@@ -318,12 +313,11 @@
 
 {
   "id": "CQ35",
-  "title": "Reconstruction of mathematical knowledge evolution from publications, classifications, citations, and reviews",
-  "naturalLanguageQuestion": "Can the evolution of mathematical knowledge be reconstructed from publications, classifications, citations, and reviews?",
+  "title": "Reconstruction of mathematical knowledge evolution",
+  "naturalLanguageQuestion": "How can mathematical knowledge evolution be reconstructed from publications, classifications, citations, keywords, and reviews?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
     "focusConcept": "Knowledge evolution profile"
   },
 
@@ -351,27 +345,26 @@
 
 {
   "id": "CQ36",
-  "title": "Evolution of mathematical fields into subfields",
-  "naturalLanguageQuestion": "How did one mathematical field split into subfields?",
   "category": "Mathematical Knowledge Evolution",
+  "title": "Structural organization of mathematical fields and subfields",
+  "naturalLanguageQuestion": "How are mathematical fields organized into hierarchical subfields?",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
-    "focusConcept": "Descendant mathematical subfields"
+    "focusConcept": "MSC hierarchy and descendant mathematical areas"
   },
 
   "requires": [
     "MSC concepts",
-    "concept hierarchy",
+    "MSC hierarchy",
     "broader/narrower relationships",
     "concept labels"
   ],
 
   "expectedOutput": [
-    "parent mathematical field",
-    "descendant subfields",
-    "concept hierarchy evolution",
-    "field specialization structure"
+    "parent mathematical areas",
+    "subfield relationships",
+    "MSC specialization structure",
+    "mathematical field hierarchy"
   ],
 
   "queryFile": "CQ36.sparql",
@@ -380,13 +373,12 @@
 
 {
   "id": "CQ37",
-  "title": "Evolution of citation networks by decade",
-  "naturalLanguageQuestion": "How has the citation network evolved over time by decade?",
+  "title": "Temporal evolution of mathematical citation networks"",
+  "naturalLanguageQuestion": "How have citation relationships among mathematical publications changed across decades?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "discipline": "Fuzzy Logic",
-    "focusConcept": "Citation network growth"
+    "focusConcept": "Citation network growth, number of citations, network density, cross-field links"
   },
 
   "requires": [
