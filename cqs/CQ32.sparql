@@ -1,0 +1,31 @@
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?sourceMSC
+    ?sourceMSCLabel
+    (COUNT(?citedPaper) AS ?influenceCount)
+
+WHERE {
+
+    # fuzzy logic papers
+
+    ?paper dcterms:subject <http://msc2020.org/03B52> ;
+           cito:cites ?citedPaper .
+
+
+    # Earlier cited mathematical works
+
+    ?citedPaper dcterms:subject ?sourceMSC ;
+                dcterms:issued ?year .
+
+
+    ?sourceMSC skos:prefLabel ?sourceMSCLabel .
+
+}
+
+GROUP BY ?sourceMSC ?sourceMSCLabel
+
+ORDER BY DESC(?influenceCount)
