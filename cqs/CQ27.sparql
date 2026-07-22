@@ -1,0 +1,30 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT
+    ?msc
+    ?mscLabel
+    (SUM(IF(?year < 1990, 1, 0)) AS ?before1990)
+    (SUM(IF(?year >= 2000, 1, 0)) AS ?after2000)
+
+WHERE {
+
+    ?paper a schema:ScholarlyArticle ;
+           dcterms:subject ?msc ;
+           dcterms:issued ?date .
+
+    ?msc skos:prefLabel ?mscLabel .
+
+    BIND(YEAR(?date) AS ?year)
+
+}
+
+GROUP BY ?msc ?mscLabel
+
+HAVING(
+    SUM(IF(?year < 1990, 1, 0)) >
+    SUM(IF(?year >= 2000, 1, 0))
+)
+
+ORDER BY DESC(?before1990)
