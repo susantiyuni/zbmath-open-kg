@@ -1,0 +1,35 @@
+PREFIX cito:<http://purl.org/spar/cito/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+
+
+SELECT
+
+    ?sourceMSCLabel
+    ?targetMSCLabel
+
+    (COUNT(?citation) AS ?citationCount)
+
+
+WHERE {
+
+
+    ?paper dcterms:subject ?sourceMSC ;
+           cito:cites ?citation .
+
+
+    ?citation dcterms:subject ?targetMSC .
+
+
+    ?sourceMSC skos:prefLabel ?sourceMSCLabel .
+
+    ?targetMSC skos:prefLabel ?targetMSCLabel .
+
+
+}
+
+GROUP BY
+?sourceMSCLabel
+?targetMSCLabel
+
+ORDER BY DESC(?citationCount)
