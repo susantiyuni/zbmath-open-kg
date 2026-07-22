@@ -1,0 +1,32 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT 
+    ?year
+    ?msc
+    ?mscLabel
+    (COUNT(?paper) AS ?publicationCount)
+    (GROUP_CONCAT(DISTINCT ?keywordLabel; separator=", ") AS ?keywords)
+
+WHERE {
+
+    ?paper a schema:ScholarlyArticle ;
+           dcterms:issued ?date ;
+           dcterms:subject ?msc ;
+           schema:keywords ?keyword .
+
+    BIND(YEAR(?date) AS ?year)
+
+    ?msc skos:prefLabel ?mscLabel .
+
+    ?keyword skos:prefLabel ?keywordLabel .
+
+    # Focus on fuzzy logic branch
+    ?msc skos:broader* <http://msc2020.org/03Bxx> .
+
+}
+
+GROUP BY ?year ?msc ?mscLabel
+
+ORDER BY ?year
