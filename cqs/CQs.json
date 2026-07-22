@@ -1,0 +1,205 @@
+{
+  "id": "CQ31",
+  "title": "Evolution of intellectual structure of a mathematical discipline over time",
+  "naturalLanguageQuestion": "How has the intellectual structure of a mathematical discipline evolved over time?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "MSC 03Bxx"
+  },
+
+   "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "keywords"
+  ],
+
+   "expectedOutput": [
+    "yearly publication trends",
+    "MSC concept evolution",
+    "publication count",
+    "keyword evolution"
+  ],
+
+  "queryFile": "CQ31.sparql"
+  "status": "validated"
+}
+
+{
+  "id": "CQ32",
+  "title": "Influence of earlier mathematical areas on the emergence of another area",
+  "naturalLanguageQuestion": "Which mathematical areas influenced the emergence of another area?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "MSC 03B52"
+  },
+
+  "requires": [
+    "publications",
+    "citation relationships",
+    "MSC concepts",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "influential MSC areas",
+    "source mathematical fields",
+    "citation influence count",
+    "ranked influencing areas"
+  ],
+
+  "queryFile": "CQ32.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ33",
+  "title": "Identification of foundational publications shaping a mathematical discipline",
+  "naturalLanguageQuestion": "Which foundational publications shaped a mathematical discipline?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Foundational publications"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "citation relationships",
+    "publication title"
+  ],
+
+  "expectedOutput": [
+    "early publications",
+    "highly cited works",
+    "citation count",
+    "potential foundational papers"
+  ],
+
+  "queryFile": "CQ33.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ34",
+  "title": "Propagation of mathematical ideas across journals, authors, and time",
+  "naturalLanguageQuestion": "How did mathematical ideas propagate across journals, authors, and time?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Idea diffusion through citation networks"
+  },
+
+  "requires": [
+    "publications",
+    "authors",
+    "journals",
+    "citation relationships",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "citation-based knowledge flow",
+    "historical paper relationships",
+    "author influence paths",
+    "idea propagation timeline"
+  ],
+
+  "queryFile": "CQ34.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ35",
+  "title": "Reconstruction of mathematical knowledge evolution from publications, classifications, citations, and reviews",
+  "naturalLanguageQuestion": "Can the evolution of mathematical knowledge be reconstructed from publications, classifications, citations, and reviews?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Knowledge evolution profile"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "citation relationships",
+    "reviews",
+    "keywords"
+  ],
+
+  "expectedOutput": [
+    "knowledge evolution timeline",
+    "publication history",
+    "MSC concept development",
+    "citation impact",
+    "review activity",
+    "keyword evolution profile"
+  ],
+
+  "queryFile": "CQ35.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ36",
+  "title": "Evolution of mathematical fields into subfields",
+  "naturalLanguageQuestion": "How did one mathematical field split into subfields?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Descendant mathematical subfields"
+  },
+
+  "requires": [
+    "MSC concepts",
+    "concept hierarchy",
+    "broader/narrower relationships",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "parent mathematical field",
+    "descendant subfields",
+    "concept hierarchy evolution",
+    "field specialization structure"
+  ],
+
+  "queryFile": "CQ36.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ37",
+  "title": "Evolution of citation networks by decade",
+  "naturalLanguageQuestion": "How has the citation network evolved over time by decade?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Citation network growth"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "citation relationships"
+  ],
+
+  "expectedOutput": [
+    "decade-based citation trends",
+    "citation link growth",
+    "historical citation network evolution"
+  ],
+
+  "queryFile": "CQ37.sparql",
+  "status": "validated"
+}
