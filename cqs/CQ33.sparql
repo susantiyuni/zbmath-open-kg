@@ -1,0 +1,26 @@
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?paper
+    ?title
+    ?year
+    (COUNT(?citation) AS ?citationCount)
+
+WHERE {
+
+    ?paper a schema:ScholarlyArticle ;
+           dcterms:title ?title ;
+           dcterms:issued ?year .
+
+
+    ?citation cito:cites ?paper .
+
+}
+
+GROUP BY ?paper ?title ?year
+
+HAVING(?year < "2000"^^xsd:gYear)
+
+ORDER BY DESC(?citationCount)
