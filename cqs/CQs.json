@@ -1,4 +1,205 @@
 {
+  "id": "CQ24",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Evolution of research interest in a mathematical topic over time",
+  "naturalLanguageQuestion": "How has interest in a mathematical topic evolved over time?",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "MSC 03B52"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts"
+  ],
+
+  "expectedOutput": [
+    "yearly publication trends",
+    "research growth curve",
+    "topic development over time",
+    "publication count"
+  ],
+
+  "queryFile": "CQ24.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ25",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of emerging mathematical topics after a given period",
+  "naturalLanguageQuestion": "Which mathematical topics emerged after a particular decade?",
+
+  "exampleUseCase": {
+    "discipline": "Mathematics",
+    "focusConcept": "Emerging MSC topics after 2000"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "emerging mathematical topics",
+    "first appearance year of concepts",
+    "new field identification",
+    "topic emergence timeline"
+  ],
+
+  "queryFile": "CQ25.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ26",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of persistent mathematical concepts over time",
+  "naturalLanguageQuestion": "Which mathematical concepts have persisted over long periods?",
+
+  "exampleUseCase": {
+    "discipline": "Mathematics",
+    "focusConcept": "Keywords active from the 1970s to the present"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "keywords",
+    "keyword labels"
+  ],
+
+  "expectedOutput": [
+    "long-lived mathematical concepts",
+    "first and last appearance",
+    "concept lifespan",
+    "active years"
+  ],
+
+  "queryFile": "CQ26.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ27",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of declining mathematical topics",
+  "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
+
+  "exampleUseCase": {
+    "discipline": "Mathematics",
+    "focusConcept": "MSC areas with decreasing publication activity"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "declining mathematical topics",
+    "historical publication comparison",
+    "research activity trends",
+    "publication counts by period"
+  ],
+
+  "queryFile": "CQ27.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ28",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Evolution of citation patterns within mathematical disciplines",
+  "naturalLanguageQuestion": "How have citation patterns evolved within a mathematical discipline?",
+
+  "exampleUseCase": {
+    "discipline": "Mathematics",
+    "focusConcept": "Cross-field citations between MSC areas"
+  },
+
+  "requires": [
+    "publications",
+    "citation relationships",
+    "MSC concepts",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "cross-field citation patterns",
+    "source and target mathematical fields",
+    "citation counts",
+    "interdisciplinary knowledge flow"
+  ],
+
+  "queryFile": "CQ28.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ29",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of authors contributing across multiple generations of mathematical research",
+  "naturalLanguageQuestion": "Which authors have contributed to multiple generations of mathematical research?",
+
+  "exampleUseCase": {
+    "discipline": "Mathematics",
+    "focusConcept": "Authors publishing from 1980 to 2020"
+  },
+
+  "requires": [
+    "publications",
+    "authors",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "long-term contributing authors",
+    "first publication year",
+    "latest publication year",
+    "publication count"
+  ],
+
+  "queryFile": "CQ29.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ30",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Historical publication venues for a mathematical discipline",
+  "naturalLanguageQuestion": "Which journals have historically published research in a mathematical area?",
+
+  "exampleUseCase": {
+    "discipline": "Fuzzy Logic",
+    "focusConcept": "Journals publishing MSC 03B52"
+  },
+
+  "requires": [
+    "publications",
+    "journals",
+    "publication year",
+    "MSC concepts"
+  ],
+
+  "expectedOutput": [
+    "journals publishing the discipline",
+    "yearly publication counts",
+    "historical publication trends",
+    "journal evolution"
+  ],
+
+  "queryFile": "CQ30.sparql",
+  "status": "validated"
+}
+
+{
   "id": "CQ31",
   "title": "Evolution of intellectual structure of a mathematical discipline over time",
   "naturalLanguageQuestion": "How has the intellectual structure of a mathematical discipline evolved over time?",
