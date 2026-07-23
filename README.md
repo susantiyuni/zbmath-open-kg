@@ -27,9 +27,13 @@ We provides machine-readable ontology and dataset metadata descriptions for zbMA
 - [zbMATH Open Ontology (OWL)](./data/zbmath-kg-ontology.ttl)
 - [DCAT + VoID + PROV-O Description](./data/zbmath-kg-metadata-fair.ttl) — A DCAT + VoID dataset metadata file enriched with PROV-O provenance and full ETL pipeline documentation
 
-## Key Statistics (as of July 2026)
+## Key Statistics
+
+The following statistics are reported as of July 2026. The current KG was constructed using the January 2026 [zbMATH API](https://oai.zbmath.org/) data dump.
+
 - **Temporal Span**: 1763~2025.
-  - See [`decade aggregation count`](./src/retrieval-tasks/decade-aggregation-count) for the per-year distribution.  
+  - See [`decade aggregation count`](./src/retrieval-tasks/decade-aggregation-count.tsv) for the per-year distribution.
+  - Although the dataset includes some records from earlier years, its coverage is only complete from 1868 to the present day, according to [zbmath.org](https://zbmath.org/about/). 
 - **Triples**: 168M+
 - **Distinct Entities**: 34M+
 - **Publications**: 4M+
@@ -40,7 +44,7 @@ We provides machine-readable ontology and dataset metadata descriptions for zbMA
 - **Software**: 30k+
 - **Organization**: 3,500k+
 - **Periodical**: 7,000+ ... (and more)
- 
+
 ## Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
