@@ -32,7 +32,7 @@ We provides machine-readable ontology and dataset metadata descriptions for zbMA
 The following statistics are reported as of July 2026. The current KG was constructed using the January 2026 [zbMATH API](https://oai.zbmath.org/) data dump.
 
 - **Temporal Span**: 1763~2025.
-  - See [`decade aggregation count`](./src/retrieval-tasks/decade-aggregation-count.tsv) for the per-year distribution.
+  - See [`decade aggregation count`](./src/retrieval-tasks/decade-aggregation-count.csv) for the per-year distribution.
   - Although the dataset includes some records from earlier years, its coverage is only complete from 1868 to the present day, according to [zbmath.org](https://zbmath.org/about/). 
 - **Triples**: 168M+
 - **Distinct Entities**: 34M+
