@@ -1,4 +1,30 @@
 {
+  "id": "CQ23",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Temporal coverage of the knowledge graph",
+  "naturalLanguageQuestion": "What is the temporal coverage of the knowledge graph?",
+
+  "exampleUseCase": {
+    "focusConcept": "Overall publication timeline of the knowledge graph"
+  },
+
+  "requires": [
+    "publications",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "earliest publication year",
+    "latest publication year",
+    "temporal publication span",
+    "publication count by year"
+  ],
+
+  "queryFile": "CQ23.sparql",
+  "status": "validated"
+}
+
+{
   "id": "CQ24",
   "category": "Mathematical Knowledge Evolution",
   "title": "Temporal evolution of research activity in a mathematical topic",
@@ -11,8 +37,8 @@
   "requires": [
     "publications",
     "publication year",
-    "MSC concepts"
-  ],
+    "MSC classification"
+],
 
   "expectedOutput": [
     "yearly publication trends",
@@ -32,7 +58,7 @@
   "naturalLanguageQuestion": "Which mathematical topics first appeared after a given time period?",
 
   "exampleUseCase": {
-    "focusConcept": "Emerging MSC topics after 2000"
+    "focusConcept": "MSC topics whose earliest associated publication is after 2000"
   },
 
   "requires": [
@@ -71,13 +97,11 @@
   ],
 
   "expectedOutput": [
-    "long-lived mathematical concepts",
-    "first and last appearance",
-    "concept lifespan",
-    "active years",
-    "publication continuity",
+    "first publication year",
+    "latest publication year",
+    "active publication years",
     "number of active decades",
-    "time-span"
+    "concept lifespan"
   ],
 
   "queryFile": "CQ26.sparql",
@@ -91,7 +115,7 @@
   "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
 
   "exampleUseCase": {
-    "focusConcept": "MSC areas with decreasing publication activity (highly active before 1990 but have received substantially fewer publications since 2000) "
+    "focusConcept": "MSC areas with decreasing publication activity (highly active before 1990 but have received substantially fewer publications since 2000), e.g., publication count in 1970–1999 compared with 2000–2025"
   },
 
   "requires": [
@@ -126,8 +150,7 @@
   "requires": [
     "publications",
     "citation relationships",
-    "MSC concepts",
-    "concept labels"
+    "MSC labels"
   ],
 
   "expectedOutput": [
@@ -153,7 +176,7 @@
 
   "requires": [
     "publications",
-    "authors",
+    "author identifiers",
     "publication year"
   ],
 
@@ -198,7 +221,7 @@
 
 {
   "id": "CQ31",
-  "title": "Evolution of the conceptual structure of a mathematical discipline",
+  "title": "Evolution of the conceptual organization of a mathematical discipline",
   "naturalLanguageQuestion": "How have MSC categories, keywords, and citation relationships of a mathematical discipline changed over time?",
   "category": "Mathematical Knowledge Evolution",
 
@@ -214,10 +237,10 @@
   ],
 
    "expectedOutput": [
-    "yearly publication trends",
-    "MSC concept evolution",
-    "publication count",
-    "keyword evolution"
+    "MSC distribution over time",
+    "keyword evolution",
+    "citation relationships",
+    "publication trends"
   ],
 
   "queryFile": "CQ31.sparql"
@@ -246,8 +269,7 @@
     "source mathematical fields",
     "citation influence count",
     "ranked influencing areas",
-    "citation count",
-    "publication age difference"
+    "citation count"
   ],
 
   "queryFile": "CQ32.sparql",
@@ -268,7 +290,8 @@
     "publications",
     "publication year",
     "citation relationships",
-    "publication title"
+    "publication title",
+    "publication identifier"
   ],
 
   "expectedOutput": [
@@ -284,8 +307,8 @@
 
 {
   "id": "CQ34",
-  "title": "Propagation of mathematical ideas across journals, authors, and time",
-  "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, authors, and journals over time?",
+  "title": "Propagation of mathematical knowledge across journals, authors, citation, or time",
+  "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, citation, authors, or journals over time?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
@@ -301,10 +324,8 @@
   ],
 
   "expectedOutput": [
-    "citation-based knowledge flow",
-    "historical paper relationships",
-    "author influence paths",
-    "idea propagation timeline"
+    "citation paths",
+    "publication propagation paths",
   ],
 
   "queryFile": "CQ34.sparql",
@@ -314,7 +335,7 @@
 {
   "id": "CQ35",
   "title": "Reconstruction of mathematical knowledge evolution",
-  "naturalLanguageQuestion": "How can mathematical knowledge evolution be reconstructed from publications, classifications, citations, keywords, and reviews?",
+  "naturalLanguageQuestion": "What publication, classification, citation, keyword, and review evidence reconstructs the evolution of mathematical knowledge?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
@@ -373,12 +394,12 @@
 
 {
   "id": "CQ37",
-  "title": "Temporal evolution of mathematical citation networks"",
+  "title": "Temporal evolution of mathematical citation networks",
   "naturalLanguageQuestion": "How have citation relationships among mathematical publications changed across decades?",
   "category": "Mathematical Knowledge Evolution",
 
   "exampleUseCase": {
-    "focusConcept": "Citation network growth, number of citations, network density, cross-field links"
+    "focusConcept": "Citation network growth, number of citations, cross-field links"
   },
 
   "requires": [
