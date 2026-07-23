@@ -1,0 +1,175 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix zbmath: <https://zbmath.org/> .
+@prefix msc: <http://msc2010.org/resources/MSC/2010/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+
+#################################################################
+# DATASET IDENTIFICATION (F1, F3)
+#################################################################
+
+<https://zbmath.org/dataset/zbmath-kg>
+    a dcat:Dataset , void:Dataset , prov:Entity ;
+
+    dcterms:identifier "zbmath-kg-2026" ;
+    dcterms:title "zbMATH Open Knowledge Graph"@en ;
+    dcterms:description "A large-scale RDF knowledge graph derived from zbMATH Open JSONL records. It models mathematical scholarly articles, authors, reviewers, MSC concepts, keywords, periodicals, publishers, software, identifiers, reviews, and citation relations."@en ;
+
+    dcterms:publisher <https://zbmath.org/organization/zbmath> ;
+    dcterms:creator <https://zbmath.org/organization/zbmath> ;
+    dcterms:issued "2026-07-22"^^xsd:date ;
+    dcterms:modified "2026-07-22"^^xsd:date ;
+    dcat:version "2.0.0" ;
+
+#################################################################
+# ACCESSIBILITY (A1–A1.2)
+#################################################################
+
+    dcat:distribution <https://zbmath.org/dataset/zbmath-kg/distribution/rdf-turtle> ;
+    void:sparqlEndpoint <https://zbmath.org/sparql> ;
+    dcat:landingPage <https://zbmath.org/> ;
+
+#################################################################
+# LICENSE & REUSE (R1.1)
+#################################################################
+
+    dcterms:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    dcterms:rightsHolder <https://zbmath.org/organization/zbmath> ;
+
+#################################################################
+# INTEROPERABILITY (I1–I3)
+#################################################################
+
+    void:vocabulary 
+        <http://schema.org/> ,
+        <http://purl.org/dc/terms/> ,
+        <http://www.w3.org/2004/02/skos/core#> ,
+        <http://purl.org/spar/cito/> ,
+        <http://xmlns.com/foaf/0.1/> ;
+
+    dcterms:conformsTo <https://www.w3.org/TR/vocab-dcat-2/> ,
+                       <https://www.w3.org/TR/void/> ,
+                       <https://www.w3.org/TR/prov-o/> ;
+
+#################################################################
+# RICH METADATA (F2, R1)
+#################################################################
+
+    dcterms:language "en" ;
+    dcterms:temporal [
+        a dcterms:PeriodOfTime ;
+        dcat:startDate "1763"^^xsd:gYear ;
+        dcat:endDate "2026"^^xsd:gYear
+    ] ;
+
+#################################################################
+# GRAPH STATISTICS (F4)
+#################################################################
+
+    void:triples 168670821 ;
+    void:entities 34099406 ;
+    void:distinctSubjects 17853081 ;
+    void:properties 39 ;
+    void:uriSpace "https://zbmath.org/" ;
+
+#################################################################
+# PROVENANCE (R1.2, R1.3)
+#################################################################
+
+    prov:wasGeneratedBy <https://zbmath.org/activity/kg-generation-2026> ;
+    prov:wasAttributedTo <https://zbmath.org/organization/zbmath> ;
+
+#################################################################
+# DISTRIBUTION
+#################################################################
+
+<https://zbmath.org/dataset/zbmath-kg/distribution/rdf-turtle>
+    a dcat:Distribution ;
+    dcterms:title "zbMATH Open Knowledge Graph – RDF Turtle Serialization"@en ;
+    dcat:mediaType "text/turtle" ;
+    dcat:downloadURL <https:doi.org/10.5281/zenodo.21497976> ;
+    dcterms:format "text/turtle" ;
+    dcterms:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+#################################################################
+# ORGANIZATION
+#################################################################
+
+<https://zbmath.org/organization/zbmath>
+    a foaf:Organization , prov:Agent ;
+    foaf:name "FIZ Karlsruhe (Berlin)/zbMATH" ;
+    foaf:homepage <https://fiz-karlsruhe.de/> .
+
+#################################################################
+# INPUT DATA SOURCES
+#################################################################
+
+<https://zbmath.org/source/jsonl-records>
+    a prov:Entity ;
+    dcterms:title "zbMATH Open JSONL Records" ;
+    dcterms:description "Primary input file containing bibliographic records in JSON Lines format." ;
+    prov:atLocation "INPUT_FILE (JSONL)" ;
+    dcterms:format "application/jsonlines" .
+
+<https://zbmath.org/source/msc-codes>
+    a prov:Entity ;
+    dcterms:title "MSC Codes Lookup File" ;
+    dcterms:description "Auxiliary JSONL file (msc_codes.jsonl) providing MSC short titles and zbMATH URLs." ;
+    prov:atLocation "https://github.com/zbMATHOpen/mscHarvester" ;
+    dcterms:format "application/jsonlines" .
+
+#################################################################
+# SOFTWARE AGENTS
+#################################################################
+
+<https://zbmath.org/software/kg-generator-script>
+    a schema:SoftwareApplication , prov:SoftwareAgent ;
+    schema:name "zbMATH KG RDF Generator" ;
+    schema:programmingLanguage "Python" ;
+    schema:softwareRequirements "rdflib, tqdm, argparse, urllib.parse" ;
+    dcterms:description "Python script converting zbMATH JSONL records into RDF (Turtle) using rdflib." .
+
+<https://zbmath.org/software/rdflib>
+    a schema:SoftwareApplication , prov:SoftwareAgent ;
+    schema:name "rdflib" ;
+    schema:programmingLanguage "Python" ;
+    dcterms:description "Python RDF library used to construct RDF graph, bind namespaces, and serialize Turtle output." .
+
+#################################################################
+# GENERATION ACTIVITY
+#################################################################
+
+<https://zbmath.org/activity/kg-generation-2026>
+    a prov:Activity ;
+    dcterms:title "zbMATH Knowledge Graph RDF Generation (2026 Release)" ;
+    dcterms:description """
+Automated pipeline that:
+1. Parses JSONL bibliographic records
+2. Loads MSC lookup table (msc_codes.jsonl)
+3. Constructs RDF triples using rdflib
+4. Declares classes and concept schemes
+5. Creates identifiers as schema:PropertyValue blank nodes
+6. Serializes output in Turtle format
+""" ;
+    prov:used <https://zbmath.org/source/jsonl-records> ,
+              <https://zbmath.org/source/msc-codes> ,
+              <https://zbmath.org/software/rdflib> ;
+    prov:wasAssociatedWith <https://zbmath.org/organization/zbmath> ,
+                           <https://zbmath.org/software/kg-generator-script> ;
+    prov:startedAtTime "2026-07-22T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime "2026-07-22T00:00:00Z"^^xsd:dateTime ;
+    prov:generated <https://zbmath.org/dataset/zbmath-kg> .
+
+#################################################################
+# GENERATED DATASET
+#################################################################
+
+<https://zbmath.org/dataset/zbmath-kg>
+    void:dataDump <http://zenodo.org/records/21497976> .
