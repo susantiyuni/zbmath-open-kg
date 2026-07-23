@@ -1,0 +1,14 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    (YEAR(?date) AS ?year)
+    (COUNT(?publication) AS ?publicationCount)
+WHERE {
+
+    ?publication a schema:ScholarlyArticle ;
+                 dcterms:issued ?date .
+}
+GROUP BY YEAR(?date)
+
+ORDER BY ?year
