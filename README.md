@@ -27,18 +27,19 @@ We provides machine-readable ontology and dataset metadata descriptions for zbMA
 - [zbMATH Open Ontology (OWL)](./data/zbmath-kg-ontology.ttl)
 - [DCAT + VoID + PROV-O Description](./data/zbmath-kg-metadata-fair.ttl) — A DCAT + VoID dataset metadata file enriched with PROV-O provenance and full ETL pipeline documentation
 
-## Key Statistics
-- **Temporal Span**: 1763~2025. See ([`src/retrieval-tasks/year-count.tsv`](./src/retrieval-tasks/year-count.tsv)) for the per-year distribution.  
-- **Triples**: 159M+
-- **Distinct Entities**: 36M+
+## Key Statistics (as of July 2026)
+- **Temporal Span**: 1763~2025.
+  - See [`decade aggregation count`](./src/retrieval-tasks/decade-aggregation-count) for the per-year distribution.  
+- **Triples**: 168M+
+- **Distinct Entities**: 34M+
 - **Publications**: 4M+
 - **Disambiguated Authors/Reviewers**: 1M+
 - **Reviews**: 3M+
 - **Subject Classifications (MSC)**: 6,500+
 - **Keywords**: 3M+
-- **Software**: 30k+ ... (and more)
-
- *as of December 2025
+- **Software**: 30k+
+- **Organization**: 3,500k+
+- **Periodical**: 7,000+ ... (and more)
  
 ## Key Features
 
