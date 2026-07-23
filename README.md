@@ -3,7 +3,7 @@
 
 A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded scholarly exploration and discovery use cases.
 
-**Update**: The zbMATH Open Knowledge Graph has been updated to **version 2 (v2)**. This description reflects the changes and features introduced in the new version.
+**Update**: The zbMATH Open Knowledge Graph has been updated to **version 2 (v2)**; this description reflects the changes and features introduced in the new version. For previous version, see [v01](./v01/).
 
 ---
 ## Contents
