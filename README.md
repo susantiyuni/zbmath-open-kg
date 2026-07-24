@@ -38,13 +38,13 @@ The following statistics are reported as of July 2026. The current KG was constr
 - **Distinct Entities**: 34M+
 - **Publications**: 4M+
 - **Structured identifiers (zbMATH ID, DOI)**: 4M+
-- **Disambiguated Authors/Reviewers**: 1M+
+- **Disambiguated Person (Authors & Reviewers)**: 1M+
 - _(expert-curated)_ **Reviews**: 3M+
-- _(expert-curated)_ **Subject Classifications (MSC)**: 6,500+
+- _(expert-curated)_ **Subject classifications (MSC)**: 6.7K+
 - _(expert-curated)_ **Keywords**: 3M+
-- _(expert-curated)_ **Software**: 30k+
-- **Organization/Publishers**: 3,500k+
-- **Periodical**: 7,000+ ... (and more)
+- _(expert-curated)_ **Software records**: 30K+
+- **Organizations/Publishers**: 3.5K+
+- **Periodicals**: 7.3K+ ... (and more)
 
 ## Key Features
 
