@@ -1,0 +1,37 @@
+PREFIX schema:   <https://schema.org/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT
+    ?reviewedTitle
+    ?reviewYear
+    ?reviewMSC
+    ?authoredTitle
+    ?authorYear
+    ?authorMSC
+
+WHERE {
+
+    ?review a schema:Review ;
+            schema:reviewer <https://zbmath.org/authors/bodlaender.hans-l> ;
+            schema:itemReviewed ?reviewedPaper .
+
+    ?reviewedPaper
+        schema:name ?reviewedTitle ;
+        dcterms:issued ?reviewYear ;
+        dcterms:subject ?reviewMSC .
+
+    FILTER(YEAR(?reviewYear) <= 2000)
+
+    ?authoredPaper
+        schema:author <https://zbmath.org/authors/bodlaender.hans-l> ;
+        schema:name ?authoredTitle ;
+        dcterms:issued ?authorYear ;
+        dcterms:subject ?authorMSC .
+
+    FILTER(YEAR(?authorYear) >= 2000)
+    FILTER(YEAR(?authorYear) <= 2025)
+
+    FILTER(?reviewedPaper != ?authoredPaper)
+}
+ORDER BY ?reviewYear ?authorYear
