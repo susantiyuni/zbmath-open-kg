@@ -1,3 +1,5 @@
+#This creates chains like Reviewer A --> Author B --> Reviewer B --> Author C...  which is an intellectual lineage graph.
+
 PREFIX schema:<https://schema.org/>
 
 SELECT DISTINCT
