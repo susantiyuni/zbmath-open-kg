@@ -1,0 +1,41 @@
+#Intellectual lineage through mathematical concepts
+#Which mathematical concepts reviewed by a mathematician later appeared in that reviewer's own publications?
+# Reviewer reviews paper on MV-algebras --> later publishes paper on MV-algebras
+
+PREFIX schema:<https://schema.org/>
+
+SELECT DISTINCT
+
+?reviewerName
+?keywordLabel
+
+WHERE {
+
+###########
+# reviewer reviews paper
+###########
+
+?review a schema:Review ;
+        schema:reviewer ?person ;
+        schema:itemReviewed ?paperReviewed .
+
+###########
+# concepts in reviewed paper
+###########
+
+?paperReviewed schema:keywords ?keyword .
+
+###########
+# same person later authors a paper
+###########
+
+?paperWritten schema:author ?person ;
+              schema:keywords ?keyword .
+
+###########
+
+?person schema:name ?reviewerName .
+
+?keyword <http://www.w3.org/2004/02/skos/core#prefLabel> ?keywordLabel .
+
+}
