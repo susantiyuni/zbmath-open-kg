@@ -38,11 +38,11 @@ The following statistics are reported as of July 2026. The current KG was constr
 - **Distinct Entities**: 34M+
 - **Publications**: 4M+
 - **Disambiguated Authors/Reviewers**: 1M+
-- **Reviews**: 3M+
-- **Subject Classifications (MSC)**: 6,500+
-- **Keywords**: 3M+
-- **Software**: 30k+
-- **Organization**: 3,500k+
+- _(expert-curated)_ **Reviews**: 3M+
+- _(expert-curated)_ **Subject Classifications (MSC)**: 6,500+
+- _(expert-curated)_ **Keywords**: 3M+
+- _(expert-curated)_ **Software**: 30k+
+- **Organization/Publishers**: 3,500k+
 - **Periodical**: 7,000+ ... (and more)
 
 ## Key Features
