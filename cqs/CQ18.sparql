@@ -1,0 +1,36 @@
+#the authored paper was published after the reviewed paper, this better supports the narrative of intellectual influence.
+PREFIX schema: <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT
+    ?reviewedPaperTitle
+    ?reviewYear
+    ?authoredPaperTitle
+    ?authorYear
+    ?keywordLabel
+
+WHERE {
+
+    ?review a schema:Review ;
+            schema:reviewer <https://zbmath.org/authors/sessa.salvatore> ;
+            schema:itemReviewed ?reviewedPaper .
+
+    ?reviewedPaper
+        schema:name ?reviewedPaperTitle ;
+        dcterms:issued ?reviewYear ;
+        schema:keywords ?keyword .
+
+    ?authoredPaper
+        schema:author <https://zbmath.org/authors/sessa.salvatore> ;
+        schema:name ?authoredPaperTitle ;
+        dcterms:issued ?authorYear ;
+        schema:keywords ?keyword .
+
+    ?keyword skos:prefLabel ?keywordLabel .
+
+    FILTER(?reviewedPaper != ?authoredPaper)
+    FILTER(?authorYear >= ?reviewYear)
+
+}
+ORDER BY ?reviewYear ?authorYear ?keywordLabel
