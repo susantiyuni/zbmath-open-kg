@@ -1,0 +1,23 @@
+#Review influence across generations
+#Find authors whose work has been reviewed by multiple reviewers.
+
+PREFIX schema:<https://schema.org/>
+
+SELECT
+
+?author
+(COUNT(DISTINCT ?reviewer) AS ?reviewerCount)
+
+WHERE {
+
+?review a schema:Review ;
+        schema:reviewer ?reviewer ;
+        schema:itemReviewed ?paper .
+
+?paper schema:author ?author .
+
+}
+
+GROUP BY ?author
+
+ORDER BY DESC(?reviewerCount)
