@@ -1,0 +1,45 @@
+PREFIX schema:<https://schema.org/>
+
+SELECT DISTINCT
+
+?reviewer1Name
+?authorName
+?reviewer2Name
+
+WHERE {
+
+##########
+# reviewer1 reviews author's paper
+##########
+
+?review1 a schema:Review ;
+         schema:reviewer ?reviewer1 ;
+         schema:itemReviewed ?paper .
+
+?paper schema:author ?author .
+
+##########
+# author later becomes reviewer
+##########
+
+?review2 a schema:Review ;
+         schema:reviewer ?author .
+
+##########
+# paper reviewed by author
+##########
+
+?review2 schema:itemReviewed ?paper2 .
+
+?paper2 schema:author ?reviewer2 .
+
+##########
+
+?reviewer1 schema:name ?reviewer1Name .
+?author schema:name ?authorName .
+?reviewer2 schema:name ?reviewer2Name .
+
+FILTER(?reviewer1!=?author)
+FILTER(?reviewer2!=?author)
+
+}
