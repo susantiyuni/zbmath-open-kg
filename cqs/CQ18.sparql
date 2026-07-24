@@ -1,36 +1,41 @@
 #the authored paper was published after the reviewed paper, this better supports the narrative of intellectual influence.
-PREFIX schema: <https://schema.org/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema:   <https://schema.org/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT
-    ?reviewedPaperTitle
+    ?reviewedTitle
     ?reviewYear
-    ?authoredPaperTitle
+    ?authoredTitle
     ?authorYear
     ?keywordLabel
 
 WHERE {
 
+    # Hans L. Bodlaender reviews
     ?review a schema:Review ;
-            schema:reviewer <https://zbmath.org/authors/sessa.salvatore> ;
+            schema:reviewer <https://zbmath.org/authors/bodlaender.hans-l> ;
             schema:itemReviewed ?reviewedPaper .
 
     ?reviewedPaper
-        schema:name ?reviewedPaperTitle ;
         dcterms:issued ?reviewYear ;
+        schema:name ?reviewedTitle ;
         schema:keywords ?keyword .
 
+    FILTER(YEAR(?reviewYear) <= 2000)
+
+    # Hans L. Bodlaender authored papers
     ?authoredPaper
-        schema:author <https://zbmath.org/authors/sessa.salvatore> ;
-        schema:name ?authoredPaperTitle ;
+        schema:author <https://zbmath.org/authors/bodlaender.hans-l> ;
         dcterms:issued ?authorYear ;
+        schema:name ?authoredTitle ;
         schema:keywords ?keyword .
+
+    FILTER(YEAR(?authorYear) >= 2000)
+    FILTER(YEAR(?authorYear) <= 2025)
 
     ?keyword skos:prefLabel ?keywordLabel .
 
     FILTER(?reviewedPaper != ?authoredPaper)
-    FILTER(?authorYear >= ?reviewYear)
-
 }
 ORDER BY ?reviewYear ?authorYear ?keywordLabel
