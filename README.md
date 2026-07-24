@@ -37,6 +37,7 @@ The following statistics are reported as of July 2026. The current KG was constr
 - **Triples**: 168M+
 - **Distinct Entities**: 34M+
 - **Publications**: 4M+
+- **Structured identifiers (zbMATH ID, DOI)**: 4M+
 - **Disambiguated Authors/Reviewers**: 1M+
 - _(expert-curated)_ **Reviews**: 3M+
 - _(expert-curated)_ **Subject Classifications (MSC)**: 6,500+
