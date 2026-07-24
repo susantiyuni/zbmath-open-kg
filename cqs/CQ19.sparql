@@ -1,0 +1,32 @@
+PREFIX schema: <https://schema.org/>
+PREFIX skos:   <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT
+    ?reviewedPaperTitle
+    ?authoredPaperTitle
+    ?keywordLabel
+
+WHERE {
+
+    # Reviews written by Salvatore Sessa
+    ?review a schema:Review ;
+            schema:reviewer <https://zbmath.org/authors/sessa.salvatore> ;
+            schema:itemReviewed ?reviewedPaper .
+
+    ?reviewedPaper
+        schema:name ?reviewedPaperTitle ;
+        schema:keywords ?keyword .
+
+    # Papers authored by the same person
+    ?authoredPaper
+        schema:author <https://zbmath.org/authors/sessa.salvatore> ;
+        schema:name ?authoredPaperTitle ;
+        schema:keywords ?keyword .
+
+    ?keyword skos:prefLabel ?keywordLabel .
+
+    # Avoid matching the same paper if applicable
+    FILTER(?reviewedPaper != ?authoredPaper)
+
+}
+ORDER BY ?keywordLabel ?reviewedPaperTitle ?authoredPaperTitle
