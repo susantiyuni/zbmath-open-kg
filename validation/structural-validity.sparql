@@ -1,0 +1,129 @@
+### Required properties: For each schema:ScholarlyArticle, check that the required properties are present. The number of articles with at least one missing property:
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT (COUNT(DISTINCT ?article) AS ?violatingArticles)
+WHERE {
+    ?article a schema:ScholarlyArticle .
+    VALUES ?property {
+        dcterms:title
+        dcterms:creator
+        dcterms:type
+        schema:author
+        schema:name
+    }
+    FILTER NOT EXISTS {
+        ?article ?property ?value
+    }
+}
+
+### Datatype consistency: dcterms:issued and schema:datePublished are represented as xsd:gYear
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema:  <https://schema.org/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    VALUES ?property {
+        dcterms:issued
+        schema:datePublished
+    }
+
+    ?resource ?property ?value .
+    FILTER (
+        !isLiteral(?value) ||
+        datatype(?value) != xsd:gYear
+    )
+}
+
+### Author references
+PREFIX schema: <https://schema.org/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?article a schema:ScholarlyArticle ;
+             schema:author ?author .
+    FILTER NOT EXISTS {
+        ?author a schema:Person
+    }
+}
+
+### Document-type vocabulary: The KG explicitly defines four document types, the query should check membership in this controlled vocabulary:
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?article a schema:ScholarlyArticle ;
+             dcterms:type ?type .
+    FILTER (
+        ?type NOT IN (
+            <https://zbmath.org/doctype/journal-article>,
+            <https://zbmath.org/doctype/collection-article>,
+            <https://zbmath.org/doctype/book-series>,
+            <https://zbmath.org/doctype/preprints>
+        )
+    )
+}
+
+### MSC references
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?article a schema:ScholarlyArticle ;
+             dcterms:subject ?subject .
+    FILTER NOT EXISTS {
+        ?subject a <https://zbmath.org/ontology/msc-concept>
+    }
+}
+
+### Keyword references
+PREFIX schema: <https://schema.org/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?article a schema:ScholarlyArticle ;
+             schema:keywords ?keyword .
+    FILTER NOT EXISTS {
+        ?keyword a skos:Concept ;
+                 a <https://zbmath.org/ontology/keyword-concept>
+    }
+}
+
+### Review reference
+PREFIX schema: <https://schema.org/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?review a schema:Review ;
+            schema:itemReviewed ?article .
+    FILTER NOT EXISTS {
+        ?article a schema:ScholarlyArticle
+    }
+}
+
+### Reviewer reference
+PREFIX schema: <https://schema.org/>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?review a schema:Review ;
+            schema:reviewer ?reviewer .
+    FILTER NOT EXISTS {
+        ?reviewer a schema:Person
+    }
+}
+
+### SKOS hierarchy
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?broader skos:narrower ?narrower .
+    FILTER NOT EXISTS {
+        ?narrower skos:broader ?broader
+    }
+}
+
+### SKOS hierarchy: reverse direction
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT (COUNT(*) AS ?violations)
+WHERE {
+    ?narrower skos:broader ?broader .
+    FILTER NOT EXISTS {
+        ?broader skos:narrower ?narrower
+    }
+}
