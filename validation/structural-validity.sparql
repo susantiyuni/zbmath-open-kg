@@ -16,6 +16,24 @@ WHERE {
     }
 }
 
+### inspect manually missing properties article
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?article ?missingProperty
+WHERE {
+    ?article a schema:ScholarlyArticle .
+
+    VALUES (?property ?missingProperty) {
+        (dcterms:title   "dcterms:title")
+    }
+
+    FILTER NOT EXISTS {
+        ?article ?property ?value
+    }
+}
+ORDER BY ?article ?missingProperty
+
 ### Datatype consistency: dcterms:issued and schema:datePublished are represented as xsd:gYear
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX schema:  <https://schema.org/>
