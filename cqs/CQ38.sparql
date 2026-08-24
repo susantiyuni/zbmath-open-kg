@@ -1,0 +1,25 @@
+#How did collaboration networks between generations of mathematicians develop over time?
+PREFIX schema: <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT
+    ?author1
+    ?author1Name
+    ?author2
+    ?author2Name
+    ?paper
+    ?title
+    ?year
+WHERE {
+    ?paper
+        a schema:ScholarlyArticle ;
+        schema:author ?author1, ?author2 ;
+        schema:name ?title ;
+        dcterms:issued ?year .
+
+    FILTER(STR(?author1) < STR(?author2))
+
+    ?author1 schema:name ?author1Name .
+    ?author2 schema:name ?author2Name .
+}
+ORDER BY ?year ?author1Name ?author2Name
