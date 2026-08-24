@@ -1,3 +1,4 @@
+#What is the temporal coverage of the knowledge graph?
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX schema: <https://schema.org/>
 
