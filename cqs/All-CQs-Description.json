@@ -1083,7 +1083,7 @@
     "temporal relationships between terms"
   ],
   "queryFile": "CQ43.sparql",
-  "status": "partially supported"
+  "status": "validated - partially supported"
 }
 
 {
