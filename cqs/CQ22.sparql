@@ -1,47 +1,45 @@
-#This creates chains like Reviewer A --> Author B --> Reviewer B --> Author C...  which is an intellectual lineage graph.
-
-PREFIX schema:<https://schema.org/>
+#narrative of intellectual influence.
+PREFIX schema:   <https://schema.org/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT
-
-?reviewer1Name
-?authorName
-?reviewer2Name
+    ?reviewedTitle
+    ?reviewedYear
+    ?reviewedMSC
+    ?authoredTitle
+    ?authoredYear
+    ?authoredMSC
+    ?keywordLabel
 
 WHERE {
 
-##########
-# reviewer1 reviews author's paper
-##########
+    # Hans L. Bodlaender reviews
+    ?review a schema:Review ;
+            schema:reviewer <https://zbmath.org/authors/bodlaender.hans-l> ;
+            schema:itemReviewed ?reviewedPaper .
 
-?review1 a schema:Review ;
-         schema:reviewer ?reviewer1 ;
-         schema:itemReviewed ?paper .
+    ?reviewedPaper
+        dcterms:issued ?reviewedYear ;
+        schema:name ?reviewedTitle ;
+        dcterms:subject ?reviewedMSC ;
+        schema:keywords ?keyword .
 
-?paper schema:author ?author .
+    FILTER(YEAR(?reviewedYear) <= 2000)
 
-##########
-# author later becomes reviewer
-##########
+    # Hans L. Bodlaender authored papers
+    ?authoredPaper
+        schema:author <https://zbmath.org/authors/bodlaender.hans-l> ;
+        dcterms:issued ?authoredYear ;
+        schema:name ?authoredTitle ;
+        dcterms:subject ?authoredMSC ;
+        schema:keywords ?keyword .
 
-?review2 a schema:Review ;
-         schema:reviewer ?author .
+    FILTER(YEAR(?authoredYear) >= 2000)
+    FILTER(YEAR(?authoredYear) <= 2025)
 
-##########
-# paper reviewed by author
-##########
+    ?keyword skos:prefLabel ?keywordLabel .
 
-?review2 schema:itemReviewed ?paper2 .
-
-?paper2 schema:author ?reviewer2 .
-
-##########
-
-?reviewer1 schema:name ?reviewer1Name .
-?author schema:name ?authorName .
-?reviewer2 schema:name ?reviewer2Name .
-
-FILTER(?reviewer1!=?author)
-FILTER(?reviewer2!=?author)
-
+    FILTER(?reviewedPaper != ?authoredPaper)
 }
+ORDER BY ?reviewedYear ?authoredYear ?keywordLabel
