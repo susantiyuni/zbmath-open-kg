@@ -1,0 +1,29 @@
+#Which programming languages have been used to support mathematical research, and how has their use changed over time?
+PREFIX schema:   <https://schema.org/>
+PREFIX semrepo:  <https://semrepo.org/ontology/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+
+SELECT DISTINCT
+    ?language
+    ?languageName
+    ?software
+    ?softwareName
+    ?paper
+    ?paperTitle
+    ?year
+
+WHERE {
+
+    ?software
+        schema:name ?softwareName ;
+        semrepo:programmingLanguage ?language .
+
+    ?language
+        schema:name ?languageName .
+
+    ?paper
+        schema:software ?software ;
+        schema:name ?paperTitle ;
+        dcterms:issued ?year .
+}
+ORDER BY ?year ?languageName
