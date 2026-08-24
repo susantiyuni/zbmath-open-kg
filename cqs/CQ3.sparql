@@ -1,0 +1,8 @@
+#Which publication has the identifier 0935.06018, and what is its title?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?publication ?title
+WHERE {
+    ?publication dcterms:identifier "0935.06018" ;
+                 dcterms:title ?title .
+}
