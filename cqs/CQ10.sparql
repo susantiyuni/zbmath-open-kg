@@ -1,0 +1,13 @@
+#When was a given publication published?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?publication ?year
+WHERE {
+    ?publication
+        dcterms:issued ?year .
+
+    FILTER(
+        ?publication =
+        <https://zbmath.org/1383556>
+    )
+}
