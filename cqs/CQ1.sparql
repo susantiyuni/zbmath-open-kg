@@ -1,0 +1,11 @@
+#Which scholarly publications are available in the knowledge graph, and what are their titles?
+
+PREFIX schema: <https://schema.org/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+
+SELECT ?publication ?title
+WHERE {
+    ?publication a schema:ScholarlyArticle ;
+                 dcterms:title ?title .
+}
+LIMIT 200
