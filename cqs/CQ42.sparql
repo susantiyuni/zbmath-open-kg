@@ -1,0 +1,35 @@
+#
+PREFIX schema: <https://schema.org/>
+
+SELECT DISTINCT
+    ?reviewerName
+    ?reviewerInstitution
+    ?reviewerCountry
+    ?authorName
+    ?authorInstitution
+    ?authorCountry
+WHERE {
+    ?review a schema:Review ;
+            schema:reviewer ?reviewer ;
+            schema:itemReviewed ?paper .
+
+    ?paper schema:author ?author .
+
+    ?reviewer
+        schema:name ?reviewerName ;
+        schema:affiliation ?institution1 .
+
+    ?institution1
+        schema:name ?reviewerInstitution ;
+        schema:address/schema:addressCountry ?reviewerCountry .
+
+    ?author
+        schema:name ?authorName ;
+        schema:affiliation ?institution2 .
+
+    ?institution2
+        schema:name ?authorInstitution ;
+        schema:address/schema:addressCountry ?authorCountry .
+
+    FILTER(?reviewer != ?author)
+}
