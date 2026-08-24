@@ -1,0 +1,16 @@
+#Which MSC concepts are assigned to a given publication?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT
+    ?msc
+    ?notation
+    ?label
+WHERE {
+    <https://zbmath.org/1383556>
+        dcterms:subject ?msc .
+
+    ?msc skos:notation ?notation ;
+         skos:prefLabel ?label .
+}
+ORDER BY ?notation
