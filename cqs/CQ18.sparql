@@ -1,0 +1,22 @@
+#Which publications classified under MSC 03B52 cite other publications classified under the same MSC area?
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT
+    ?sourcePublication
+    ?sourceTitle
+    ?targetPublication
+    ?targetTitle
+WHERE {
+    ?sourcePublication
+        dcterms:subject <http://msc2020.org/03B52> ;
+        dcterms:title ?sourceTitle ;
+        cito:cites ?targetPublication .
+
+    ?targetPublication
+        dcterms:subject <http://msc2020.org/03B52> ;
+        dcterms:title ?targetTitle .
+
+    FILTER(?sourcePublication != ?targetPublication)
+}
+LIMIT 100
