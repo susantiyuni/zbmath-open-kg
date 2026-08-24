@@ -17,7 +17,7 @@
     "up to 200 publications"
   ],
   "queryFile": "CQ1.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -43,7 +43,7 @@
     "publication language"
   ],
   "queryFile": "CQ2.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -63,7 +63,7 @@
     "publication title"
   ],
   "queryFile": "CQ3.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -84,7 +84,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ4.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -105,7 +105,7 @@
     "author name"
   ],
   "queryFile": "CQ5.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -127,7 +127,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ6.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -152,7 +152,7 @@
     "author-publication relationships"
   ],
   "queryFile": "CQ7.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -177,7 +177,7 @@
     "publication-journal relationships"
   ],
   "queryFile": "CQ8.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -200,7 +200,7 @@
     "alphabetically ordered publications"
   ],
   "queryFile": "CQ9.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -220,7 +220,7 @@
     "publication year or date"
   ],
   "queryFile": "CQ10.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -243,7 +243,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ11.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -267,7 +267,7 @@
     "MSC label"
   ],
   "queryFile": "CQ12.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -292,7 +292,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ13.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -318,7 +318,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ14.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -340,7 +340,7 @@
     "keyword label"
   ],
   "queryFile": "CQ15.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -364,7 +364,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ16.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -388,7 +388,7 @@
     "up to 100 publications"
   ],
   "queryFile": "CQ17.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -413,7 +413,7 @@
     "citation relationships within the MSC area"
   ],
   "queryFile": "CQ18.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -440,7 +440,7 @@
     "review language"
   ],
   "queryFile": "CQ19.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -465,7 +465,7 @@
     "review"
   ],
   "queryFile": "CQ20.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -488,12 +488,12 @@
     "ranking of authors by reviewer count"
   ],
   "queryFile": "CQ21.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
   "id": "CQ22",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
   "title": "Temporal coverage of the knowledge graph",
   "naturalLanguageQuestion": "What is the temporal coverage of the knowledge graph?",
 
@@ -513,25 +513,25 @@
     "publication count by year"
   ],
 
-  "queryFile": "CQ23.sparql",
-  "status": "validated"
+  "queryFile": "CQ22.sparql",
+  "status": "validated - fully supported"
 }
 
 {
   "id": "CQ23",
-  "category": "Mathematical Knowledge Evolution",
-  "title": "Specific author's reviewed and authored research across time",
-  "naturalLanguageQuestion": "Which papers reviewed by specific author up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC?",
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Temporal linkage between an author's reviewed and authored research",
+  "naturalLanguageQuestion": "Which papers reviewed by Hans L. Bodlaender up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC?",
   "exampleUseCase": {
-    "focusConcept": "Which papers reviewed by Hans L. Bodlaender up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC? "
+    "focusConcept": "Hans L. Bodlaender"
   },
   "requires": [
     "reviews",
     "reviewer identity",
     "reviewed publications",
     "authored publications",
-    "publication year",
-    "MSC classification",
+    "publication years",
+    "MSC classifications",
     "publication keywords"
   ],
   "expectedOutput": [
@@ -541,40 +541,35 @@
     "authored paper MSC classification",
     "shared keyword labels"
   ],
-  "queryFile": "CQ22.sparql",
-  "status": "validated"
+  "queryFile": "CQ23.sparql",
+  "status": "validated - fully supported"
 }
 
 {
   "id": "CQ24",
-  "category": "Mathematical Knowledge Evolution",
-  "title": "Temporal evolution of research activity in a mathematical topic",
-  "naturalLanguageQuestion": "How has research activity in a mathematical topic changed over time?",
-
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Temporal development of research activity in a mathematical topic",
+  "naturalLanguageQuestion": "How has publication activity in a mathematical topic changed over time?",
   "exampleUseCase": {
     "focusConcept": "MSC 03B52"
   },
-
   "requires": [
-    "publications",
-    "publication year",
-    "MSC classification"
-],
-
-  "expectedOutput": [
-    "yearly publication trends",
-    "research growth curve",
-    "topic development over time",
-    "publication count"
+    "scholarly publications",
+    "publication years",
+    "MSC classifications"
   ],
-
+  "expectedOutput": [
+    "publication count by year",
+    "yearly publication trend",
+    "temporal distribution of research activity"
+  ],
   "queryFile": "CQ24.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
-
+---
 {
   "id": "CQ25",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Identification of newly appearing mathematical topics",
   "naturalLanguageQuestion": "Which mathematical topics first appeared after a given time period?",
 
@@ -602,7 +597,7 @@
 
 {
   "id": "CQ26",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Identification of long-lived mathematical concepts",
   "naturalLanguageQuestion": "Which mathematical concepts have remained active across multiple periods?",
 
@@ -631,7 +626,7 @@
 
 {
   "id": "CQ27",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Identification of declining mathematical topics",
   "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
 
@@ -660,7 +655,7 @@
 
 {
   "id": "CQ28",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Cross-disciplinary citation evolution between mathematical subject areas",
   "naturalLanguageQuestion": "How have citation patterns evolved within mathematical areas?",
 
@@ -687,7 +682,7 @@
 
 {
   "id": "CQ29",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Identification of long-term contributing mathematical authors",
   "naturalLanguageQuestion": "Which authors have published across multiple decades of mathematical research?",
 
@@ -714,7 +709,7 @@
 
 {
   "id": "CQ30",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Historical distribution of mathematical research across journals",
   "naturalLanguageQuestion": "Which journals have historically published research in a mathematical area?",
 
@@ -744,7 +739,7 @@
   "id": "CQ31",
   "title": "Evolution of the conceptual organization of a mathematical discipline",
   "naturalLanguageQuestion": "How have MSC categories, keywords, and citation relationships of a mathematical discipline changed over time?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "MSC 03Bxx"
@@ -772,7 +767,7 @@
   "id": "CQ32",
   "title": "Influence of earlier mathematical areas on the emergence of another area",
   "naturalLanguageQuestion": "Which mathematical areas influenced the emergence of another area?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "MSC 03B52 (influence = citation relationship)"
@@ -801,7 +796,7 @@
   "id": "CQ33",
   "title": "Identification of foundational publications shaping a mathematical discipline",
   "naturalLanguageQuestion": "Which foundational publications shaped a mathematical discipline?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "Foundational publications (early publication + high citation count)"
@@ -830,7 +825,7 @@
   "id": "CQ34",
   "title": "Propagation of mathematical knowledge across journals, authors, citation, or time",
   "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, citation, authors, or journals over time?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "Propagation of mathematical knowledge through citation networks"
@@ -857,7 +852,7 @@
   "id": "CQ35",
   "title": "Reconstruction of mathematical knowledge evolution",
   "naturalLanguageQuestion": "What publication, classification, citation, keyword, and review evidence reconstructs the evolution of mathematical knowledge?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "Knowledge evolution profile"
@@ -887,7 +882,7 @@
 
 {
   "id": "CQ36",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
   "title": "Structural organization of mathematical fields and subfields",
   "naturalLanguageQuestion": "How are mathematical fields organized into hierarchical subfields?",
 
@@ -917,7 +912,7 @@
   "id": "CQ37",
   "title": "Temporal evolution of mathematical citation networks",
   "naturalLanguageQuestion": "How have citation relationships among mathematical publications changed across decades?",
-  "category": "Mathematical Knowledge Evolution",
+  "category": "Mathematical Scholarly History and Lineage",
 
   "exampleUseCase": {
     "focusConcept": "Citation network growth, number of citations, cross-field links"
@@ -937,4 +932,207 @@
 
   "queryFile": "CQ37.sparql",
   "status": "validated"
+}
+
+{
+  "id": "CQ38",
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Collaboration lineage between generations of mathematicians",
+  "naturalLanguageQuestion": "How did collaboration networks between generations of mathematicians develop over time?",
+  "exampleUseCase": {
+    "focusConcept": "co-authorship relationships and mathematician generations"
+  },
+  "requires": [
+    "scholarly publications",
+    "authors",
+    "authorship relationships",
+    "publication years",
+    "author names",
+    "mathematician generations or career generations"
+  ],
+  "expectedOutput": [
+    "co-author pairs",
+    "co-authored publications",
+    "publication years",
+    "collaboration networks",
+    "generational collaboration patterns"
+  ],
+  "queryFile": "CQ38.sparql",
+  "status": "validated - partially supported"
+}
+
+{
+  "id": "CQ39.sparql",
+  "category": "Core Bibliographic and KG Retrieval",
+  "title": "Retrieval of software associated with a publication",
+  "naturalLanguageQuestion": "Which mathematical software is associated with a given publication?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/622433"
+  },
+  "requires": [
+    "publications",
+    "publication titles",
+    "publication-software relationships",
+    "software applications",
+    "software names"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "software",
+    "software name"
+  ],
+  "queryFile": "CQ39.sparql",
+  "status": "validated - fully supported"
+}
+
+{
+  "id": "CQ40",
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Programming languages used in mathematical research",
+  "naturalLanguageQuestion": "Which programming languages have been used to support mathematical research, and how has their use changed over time?",
+  "exampleUseCase": {
+    "focusConcept": "programming languages associated with mathematical software"
+  },
+  "requires": [
+    "programming languages",
+    "mathematical software",
+    "software-publication relationships",
+    "publication years"
+  ],
+  "expectedOutput": [
+    "programming languages",
+    "software packages",
+    "associated publications",
+    "publication years",
+    "temporal patterns of programming-language use"
+  ],
+  "queryFile": "CQ40.sparql",
+  "status": "validated - not supported"
+}
+
+{
+  "id": "CQ41",
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Software activity and continued mathematical research",
+  "naturalLanguageQuestion": "Which mathematical software projects have continued development alongside mathematical research?",
+  "exampleUseCase": {
+    "focusConcept": "mathematical software and associated research publications"
+  },
+  "requires": [
+    "mathematical software",
+    "software-publication relationships",
+    "publication years",
+    "software release history",
+    "repository activity indicators"
+  ],
+  "expectedOutput": [
+    "software projects",
+    "first release",
+    "last release",
+    "repository stars",
+    "number of associated publications"
+  ],
+  "queryFile": "CQ41.sparql",
+  "status": "validated - partially supported"
+}
+
+{
+  "id": "CQ42",
+  "category": "Mathematical Scholarly History and Lineage",
+  "title": "Scholarly relationships across institutions and countries",
+  "naturalLanguageQuestion": "Which researchers from different institutions and countries are connected through scholarly review relationships?",
+  "exampleUseCase": {
+    "focusConcept": "researcher, institution, country, and review relationships"
+  },
+  "requires": [
+    "researchers",
+    "review relationships",
+    "institution affiliations",
+    "institution countries"
+  ],
+  "expectedOutput": [
+    "reviewer",
+    "reviewed author's name",
+    "reviewer institution",
+    "reviewed author's institution",
+    "researcher countries"
+  ],
+  "queryFile": "CQ42.sparql",
+  "status": "validated - partially supported"
+}
+
+{
+  "id": "CQ43",
+  "category": "Mathematical Scholarly History and Relationships",
+  "title": "Temporal changes in mathematical terminology",
+  "naturalLanguageQuestion": "Which mathematical terms occurred in earlier and later research, and how did their usage change over time?",
+  "exampleUseCase": {
+    "focusConcept": "mathematical keywords and terminology over time"
+  },
+  "requires": [
+    "mathematical keywords",
+    "controlled concepts",
+    "publication years",
+    "keyword-publication relationships"
+  ],
+  "expectedOutput": [
+    "earlier terms",
+    "later terms",
+    "first and last years of usage",
+    "temporal relationships between terms"
+  ],
+  "queryFile": "CQ43.sparql",
+  "status": "partially supported"
+}
+
+{
+  "id": "CQ44",
+  "category": "Core Bibliographic and KG Retrieval",
+  "title": "Research publication activity by country",
+  "naturalLanguageQuestion": "Which countries are associated with the authors producing the most mathematical research publications?",
+  "exampleUseCase": {
+    "focusConcept": "author affiliations and countries"
+  },
+  "requires": [
+    "authors",
+    "author affiliations",
+    "institutions",
+    "countries",
+    "publications",
+    "authorship relationships"
+  ],
+  "expectedOutput": [
+    "country",
+    "publication count"
+  ],
+  "queryFile": "CQ44.sparql",
+  "status": "validated - not supported"
+}
+
+{
+  "id": "CQ45",
+  "category": "Mathematical Scholarly History and Relationships",
+  "title": "Community adoption of mathematical software in research",
+  "naturalLanguageQuestion": "Which software projects associated with mathematical publications show the highest levels of community adoption?",
+  "exampleUseCase": {
+    "focusConcept": "mathematical software, research publications, and repository adoption"
+  },
+  "requires": [
+    "mathematical software",
+    "software-publication relationships",
+    "research publications",
+    "software repositories",
+    "repository stars",
+    "repository forks"
+  ],
+  "expectedOutput": [
+    "software projects",
+    "associated publications",
+    "repository stars",
+    "repository forks",
+    "software repository information"
+  ],
+  "queryFile": "CQ45.sparql",
+  "status": "validated - partially supported"
 }
