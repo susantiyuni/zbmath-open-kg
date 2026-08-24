@@ -1,0 +1,13 @@
+#Which publications were published in the International Journal of Approximate Reasoning?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT
+    ?publication
+    ?title
+WHERE {
+    ?publication
+        dcterms:isPartOf
+        <https://zbmath.org/journal/International_Journal_of_Approximate_Reasoning> ;
+        dcterms:title ?title .
+}
+LIMIT 100
