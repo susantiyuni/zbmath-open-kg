@@ -1,0 +1,17 @@
+#Which authors are associated with scholarly publications, and what are the titles of those publications?
+
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?author
+    ?authorName
+    ?publication
+    ?title
+WHERE {
+    ?publication a schema:ScholarlyArticle ;
+                 schema:author ?author ;
+                 schema:name ?title .
+
+    ?author schema:name ?authorName .
+}
+LIMIT 200
