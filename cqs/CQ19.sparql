@@ -1,0 +1,28 @@
+#What reviews exist for a given publication, who wrote them, and what review content and language are available?
+
+PREFIX schema: <https://schema.org/>
+
+SELECT DISTINCT
+    ?review
+    ?reviewer
+    ?reviewerName
+    ?reviewBody
+    ?reviewLanguage
+WHERE {
+    ?review
+        a schema:Review ;
+        schema:itemReviewed <https://zbmath.org/1383556> ;
+        schema:reviewer ?reviewer .
+
+    ?reviewer
+        schema:name ?reviewerName .
+
+    OPTIONAL {
+        ?review schema:reviewBody ?reviewBody .
+    }
+
+    OPTIONAL {
+        ?review schema:inLanguage ?reviewLanguage .
+    }
+}
+LIMIT 100
