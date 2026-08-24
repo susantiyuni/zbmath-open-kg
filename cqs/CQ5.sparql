@@ -1,0 +1,10 @@
+##Who are the authors of the publication identified by https://zbmath.org/1383556?
+PREFIX schema: <https://schema.org/>
+
+SELECT ?author ?authorName
+WHERE {
+    <https://zbmath.org/1383556>
+        schema:author ?author .
+
+    ?author schema:name ?authorName .
+}
