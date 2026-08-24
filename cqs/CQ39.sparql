@@ -1,0 +1,22 @@
+#Which mathematical software is associated with a given publication?
+PREFIX schema: <https://schema.org/>
+
+SELECT DISTINCT
+    ?paper
+    ?paperTitle
+    ?software
+    ?softwareName
+
+WHERE {
+    VALUES ?paper {
+        <https://zbmath.org/622433>
+    }
+
+    ?paper
+        schema:name ?paperTitle ;
+        schema:software ?software .
+
+    ?software
+        a schema:SoftwareApplication ;
+        schema:name ?softwareName .
+}
