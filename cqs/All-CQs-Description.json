@@ -1,6 +1,6 @@
 {
   "id": "CQ1",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of scholarly publications by title",
   "naturalLanguageQuestion": "Which scholarly publications are available in the knowledge graph, and what are their titles?",
   "exampleUseCase": {
@@ -22,7 +22,7 @@
 
 {
   "id": "CQ2",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of scholarly publication metadata",
   "naturalLanguageQuestion": "What bibliographic metadata is available for scholarly publications, including their titles, publication years, identifiers, and languages?",
   "exampleUseCase": {
@@ -48,7 +48,7 @@
 
 {
   "id": "CQ3",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of a publication by identifier",
   "naturalLanguageQuestion": "Which publication has the identifier 0935.06018, and what is its title?",
   "exampleUseCase": {
@@ -68,7 +68,7 @@
 
 {
   "id": "CQ4",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Keyword-based retrieval of scholarly publications",
   "naturalLanguageQuestion": "Which scholarly publications have titles containing the keyword \"fuzzy\"?",
   "exampleUseCase": {
@@ -89,7 +89,7 @@
 
 {
   "id": "CQ5",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of authors of a publication",
   "naturalLanguageQuestion": "Who are the authors of the publication identified by https://zbmath.org/1383556?",
   "exampleUseCase": {
@@ -110,7 +110,7 @@
 
 {
   "id": "CQ6",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications by author",
   "naturalLanguageQuestion": "Which publications were authored by Cheong-Seng Hoo, and what are their titles?",
   "exampleUseCase": {
@@ -132,7 +132,7 @@
 
 {
   "id": "CQ7",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of authors and publications",
   "naturalLanguageQuestion": "Which authors are associated with scholarly publications, and what are the titles of those publications?",
   "exampleUseCase": {
@@ -157,7 +157,7 @@
 
 {
   "id": "CQ8",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications and their journals",
   "naturalLanguageQuestion": "Which journals contain scholarly publications, and what are the titles of those publications?",
   "exampleUseCase": {
@@ -182,7 +182,7 @@
 
 {
   "id": "CQ9",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications from a journal",
   "naturalLanguageQuestion": "Which publications were published in the International Journal of Approximate Reasoning?",
   "exampleUseCase": {
@@ -205,7 +205,7 @@
 
 {
   "id": "CQ10",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of a publication date",
   "naturalLanguageQuestion": "When was a given publication published?",
   "exampleUseCase": {
@@ -225,7 +225,7 @@
 
 {
   "id": "CQ11",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications by publication year",
   "naturalLanguageQuestion": "Which publications were published in a given year?",
   "exampleUseCase": {
@@ -248,7 +248,7 @@
 
 {
   "id": "CQ12",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of MSC classifications assigned to a publication",
   "naturalLanguageQuestion": "Which MSC concepts are assigned to a given publication?",
   "exampleUseCase": {
@@ -272,7 +272,7 @@
 
 {
   "id": "CQ13",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications by MSC classification",
   "naturalLanguageQuestion": "Which publications belong to the MSC classification 06D35, and when were they published?",
   "exampleUseCase": {
@@ -297,7 +297,7 @@
 
 {
   "id": "CQ14",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications in broader and narrower MSC contexts",
   "naturalLanguageQuestion": "Which publications are associated with the broader and narrower MSC concepts of MSC 03B52?",
   "exampleUseCase": {
@@ -323,7 +323,7 @@
 
 {
   "id": "CQ15",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of controlled keywords for a publication",
   "naturalLanguageQuestion": "Which controlled or curated keywords are associated with a given publication?",
   "exampleUseCase": {
@@ -345,7 +345,7 @@
 
 {
   "id": "CQ16",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications cited by a publication",
   "naturalLanguageQuestion": "Which publications are cited by a given publication, and when were the cited publications published?",
   "exampleUseCase": {
@@ -369,7 +369,7 @@
 
 {
   "id": "CQ17",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications citing a publication",
   "naturalLanguageQuestion": "Which publications cite a given publication, and when were the citing publications published?",
   "exampleUseCase": {
@@ -393,7 +393,7 @@
 
 {
   "id": "CQ18",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of citation relationships within an MSC area",
   "naturalLanguageQuestion": "Which publications classified under MSC 03B52 cite other publications classified under the same MSC area?",
   "exampleUseCase": {
@@ -418,7 +418,7 @@
 
 {
   "id": "CQ19",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of reviews and reviewers for a publication",
   "naturalLanguageQuestion": "What reviews exist for a given publication, who wrote them, and what review content and language are available?",
   "exampleUseCase": {
@@ -445,7 +445,7 @@
 
 {
   "id": "CQ20",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Retrieval of publications reviewed by a reviewer",
   "naturalLanguageQuestion": "Which publications were reviewed by a given reviewer, and when were those publications published?",
   "exampleUseCase": {
@@ -470,7 +470,7 @@
 
 {
   "id": "CQ21",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Authors ranked by diversity of reviewers",
   "naturalLanguageQuestion": "Which authors have publications reviewed by the largest number of distinct reviewers?",
   "exampleUseCase": {
@@ -493,7 +493,7 @@
 
 {
   "id": "CQ22",
-  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "category": "Core Bibliographic and KG Retrieval",
   "title": "Temporal coverage of the knowledge graph",
   "naturalLanguageQuestion": "What is the temporal coverage of the knowledge graph?",
 
@@ -519,7 +519,7 @@
 
 {
   "id": "CQ23",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Temporal linkage between an author's reviewed and authored research",
   "naturalLanguageQuestion": "Which papers reviewed by Hans L. Bodlaender up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC?",
   "exampleUseCase": {
@@ -547,7 +547,7 @@
 
 {
   "id": "CQ24",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Temporal development of research activity in a mathematical topic",
   "naturalLanguageQuestion": "How has publication activity in a mathematical topic changed over time?",
   "exampleUseCase": {
@@ -569,7 +569,7 @@
 ---
 {
   "id": "CQ25",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Identification of newly appearing mathematical topics",
   "naturalLanguageQuestion": "Which mathematical topics first appeared after a given time period?",
 
@@ -597,7 +597,7 @@
 
 {
   "id": "CQ26",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Identification of long-lived mathematical concepts",
   "naturalLanguageQuestion": "Which mathematical concepts have remained active across multiple periods?",
 
@@ -626,7 +626,7 @@
 
 {
   "id": "CQ27",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Identification of declining mathematical topics",
   "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
 
@@ -655,7 +655,7 @@
 
 {
   "id": "CQ28",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Cross-disciplinary citation evolution between mathematical subject areas",
   "naturalLanguageQuestion": "How have citation patterns evolved within mathematical areas?",
 
@@ -682,7 +682,7 @@
 
 {
   "id": "CQ29",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Identification of long-term contributing mathematical authors",
   "naturalLanguageQuestion": "Which authors have published across multiple decades of mathematical research?",
 
@@ -709,7 +709,7 @@
 
 {
   "id": "CQ30",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Historical distribution of mathematical research across journals",
   "naturalLanguageQuestion": "Which journals have historically published research in a mathematical area?",
 
@@ -739,7 +739,7 @@
   "id": "CQ31",
   "title": "Evolution of the conceptual organization of a mathematical discipline",
   "naturalLanguageQuestion": "How have MSC categories, keywords, and citation relationships of a mathematical discipline changed over time?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "MSC 03Bxx"
@@ -767,7 +767,7 @@
   "id": "CQ32",
   "title": "Influence of earlier mathematical areas on the emergence of another area",
   "naturalLanguageQuestion": "Which mathematical areas influenced the emergence of another area?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "MSC 03B52 (influence = citation relationship)"
@@ -796,7 +796,7 @@
   "id": "CQ33",
   "title": "Identification of foundational publications shaping a mathematical discipline",
   "naturalLanguageQuestion": "Which foundational publications shaped a mathematical discipline?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "Foundational publications (early publication + high citation count)"
@@ -825,7 +825,7 @@
   "id": "CQ34",
   "title": "Propagation of mathematical knowledge across journals, authors, citation, or time",
   "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, citation, authors, or journals over time?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "Propagation of mathematical knowledge through citation networks"
@@ -852,7 +852,7 @@
   "id": "CQ35",
   "title": "Reconstruction of mathematical knowledge evolution",
   "naturalLanguageQuestion": "What publication, classification, citation, keyword, and review evidence reconstructs the evolution of mathematical knowledge?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "Knowledge evolution profile"
@@ -882,7 +882,7 @@
 
 {
   "id": "CQ36",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Structural organization of mathematical fields and subfields",
   "naturalLanguageQuestion": "How are mathematical fields organized into hierarchical subfields?",
 
@@ -912,7 +912,7 @@
   "id": "CQ37",
   "title": "Temporal evolution of mathematical citation networks",
   "naturalLanguageQuestion": "How have citation relationships among mathematical publications changed across decades?",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
 
   "exampleUseCase": {
     "focusConcept": "Citation network growth, number of citations, cross-field links"
@@ -936,7 +936,7 @@
 
 {
   "id": "CQ38",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Collaboration lineage between generations of mathematicians",
   "naturalLanguageQuestion": "How did collaboration networks between generations of mathematicians develop over time?",
   "exampleUseCase": {
@@ -988,7 +988,7 @@
 
 {
   "id": "CQ40",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Programming languages used in mathematical research",
   "naturalLanguageQuestion": "Which programming languages have been used to support mathematical research, and how has their use changed over time?",
   "exampleUseCase": {
@@ -1013,7 +1013,7 @@
 
 {
   "id": "CQ41",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Software activity and continued mathematical research",
   "naturalLanguageQuestion": "Which mathematical software projects have continued development alongside mathematical research?",
   "exampleUseCase": {
@@ -1039,7 +1039,7 @@
 
 {
   "id": "CQ42",
-  "category": "Mathematical Scholarly History and Lineage",
+  "category": "Mathematical Scholarly History and Relationships",
   "title": "Scholarly relationships across institutions and countries",
   "naturalLanguageQuestion": "Which researchers from different institutions and countries are connected through scholarly review relationships?",
   "exampleUseCase": {
