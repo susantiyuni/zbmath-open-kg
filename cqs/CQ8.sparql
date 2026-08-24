@@ -1,0 +1,17 @@
+#Which journals contain scholarly publications, and what are the titles of those publications?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?publication
+    ?title
+    ?journal
+    ?journalName
+WHERE {
+    ?publication
+        dcterms:title ?title ;
+        dcterms:isPartOf ?journal .
+
+    ?journal schema:name ?journalName .
+}
+LIMIT 100
