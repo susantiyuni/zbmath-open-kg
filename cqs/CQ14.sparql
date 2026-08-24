@@ -1,0 +1,32 @@
+#Which publications are associated with the broader and narrower MSC concepts of MSC 03B52?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT
+    ?relatedConcept
+    ?relatedLabel
+    ?relation
+    ?publication
+    ?title
+WHERE {
+    VALUES ?concept {
+        <http://msc2020.org/03B52>
+    }
+
+    {
+        ?concept skos:broader ?relatedConcept .
+        BIND("broader" AS ?relation)
+    }
+    UNION
+    {
+        ?relatedConcept skos:broader ?concept .
+        BIND("narrower" AS ?relation)
+    }
+
+    ?relatedConcept skos:prefLabel ?relatedLabel .
+
+    ?publication
+        dcterms:subject ?relatedConcept ;
+        dcterms:title ?title .
+}
+ORDER BY ?relation ?relatedLabel ?title
