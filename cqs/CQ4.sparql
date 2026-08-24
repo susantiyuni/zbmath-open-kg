@@ -1,0 +1,10 @@
+#Which scholarly publications have titles containing the keyword "fuzzy"?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?publication ?title
+WHERE {
+    ?publication dcterms:title ?title .
+
+    FILTER(CONTAINS(LCASE(STR(?title)), "fuzzy"))
+}
+LIMIT 100
