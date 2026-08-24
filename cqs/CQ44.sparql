@@ -1,0 +1,21 @@
+PREFIX schema: <https://schema.org/>
+
+SELECT
+    ?country
+    (COUNT(DISTINCT ?paper) AS ?publicationCount)
+WHERE {
+    ?paper
+        a schema:ScholarlyArticle ;
+        schema:author ?author .
+
+    ?author
+        schema:affiliation ?institution .
+
+    ?institution
+        schema:address ?address .
+
+    ?address
+        schema:addressCountry ?country .
+}
+GROUP BY ?country
+ORDER BY DESC(?publicationCount)
