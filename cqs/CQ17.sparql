@@ -1,0 +1,23 @@
+# Which publications cite a given publication, and when were the citing publications published?
+PREFIX cito:   <http://purl.org/spar/cito/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT
+    ?citingPublication
+    ?citingTitle
+    ?citingYear
+WHERE {
+    ?citingPublication
+        cito:cites <https://zbmath.org/1383556> .
+
+    OPTIONAL {
+        ?citingPublication
+            dcterms:title ?citingTitle .
+    }
+
+    OPTIONAL {
+        ?citingPublication
+            dcterms:issued ?citingYear .
+    }
+}
+LIMIT 100
