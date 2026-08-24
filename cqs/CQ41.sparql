@@ -1,0 +1,33 @@
+#Which mathematical software projects have remained active alongside continued mathematical research?
+PREFIX schema:   <https://schema.org/>
+PREFIX dcterms:  <http://purl.org/dc/terms/>
+PREFIX semrepo:  <https://semrepo.org/ontology/>
+
+SELECT
+    ?software
+    ?softwareName
+    ?firstRelease
+    ?lastRelease
+    ?repositoryStars
+    (COUNT(DISTINCT ?paper) AS ?publicationCount)
+
+WHERE {
+
+    ?software
+        a schema:SoftwareApplication ;
+        schema:name ?softwareName ;
+        semrepo:firstRelease ?firstRelease ;
+        semrepo:lastRelease ?lastRelease ;
+        semrepo:repositoryStars ?repositoryStars .
+
+    ?paper
+        schema:software ?software ;
+        dcterms:issued ?year .
+}
+GROUP BY
+    ?software
+    ?softwareName
+    ?firstRelease
+    ?lastRelease
+    ?repositoryStars
+ORDER BY DESC(?publicationCount)
