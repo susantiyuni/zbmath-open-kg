@@ -1,13 +1,15 @@
-#the authored paper was published after the reviewed paper, this better supports the narrative of intellectual influence.
+#narrative of intellectual influence.
 PREFIX schema:   <https://schema.org/>
 PREFIX dcterms:  <http://purl.org/dc/terms/>
 PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT
     ?reviewedTitle
-    ?reviewYear
+    ?reviewedYear
+    ?reviewedMSC
     ?authoredTitle
-    ?authorYear
+    ?authoredYear
+    ?authoredMSC
     ?keywordLabel
 
 WHERE {
@@ -18,24 +20,26 @@ WHERE {
             schema:itemReviewed ?reviewedPaper .
 
     ?reviewedPaper
-        dcterms:issued ?reviewYear ;
+        dcterms:issued ?reviewedYear ;
         schema:name ?reviewedTitle ;
+        dcterms:subject ?reviewedMSC ;
         schema:keywords ?keyword .
 
-    FILTER(YEAR(?reviewYear) <= 2000)
+    FILTER(YEAR(?reviewedYear) <= 2000)
 
     # Hans L. Bodlaender authored papers
     ?authoredPaper
         schema:author <https://zbmath.org/authors/bodlaender.hans-l> ;
-        dcterms:issued ?authorYear ;
+        dcterms:issued ?authoredYear ;
         schema:name ?authoredTitle ;
+        dcterms:subject ?authoredMSC ;
         schema:keywords ?keyword .
 
-    FILTER(YEAR(?authorYear) >= 2000)
-    FILTER(YEAR(?authorYear) <= 2025)
+    FILTER(YEAR(?authoredYear) >= 2000)
+    FILTER(YEAR(?authoredYear) <= 2025)
 
     ?keyword skos:prefLabel ?keywordLabel .
 
     FILTER(?reviewedPaper != ?authoredPaper)
 }
-ORDER BY ?reviewYear ?authorYear ?keywordLabel
+ORDER BY ?reviewedYear ?authoredYear ?keywordLabel
