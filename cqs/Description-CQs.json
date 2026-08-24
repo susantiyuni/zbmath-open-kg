@@ -1,0 +1,940 @@
+{
+  "id": "CQ1",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of scholarly publications by title",
+  "naturalLanguageQuestion": "Which scholarly publications are available in the knowledge graph, and what are their titles?",
+  "exampleUseCase": {
+    "focusConcept": "scholarly publications"
+  },
+  "requires": [
+    "scholarly publications",
+    "publication titles",
+    "publication type"
+  ],
+  "expectedOutput": [
+    "publication identifier",
+    "publication title",
+    "up to 200 publications"
+  ],
+  "queryFile": "CQ1.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ2",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of scholarly publication metadata",
+  "naturalLanguageQuestion": "What bibliographic metadata is available for scholarly publications, including their titles, publication years, identifiers, and languages?",
+  "exampleUseCase": {
+    "focusConcept": "scholarly publication metadata"
+  },
+  "requires": [
+    "scholarly publications",
+    "publication titles",
+    "publication years",
+    "publication identifiers",
+    "publication languages"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "publication year",
+    "publication identifier",
+    "publication language"
+  ],
+  "queryFile": "CQ2.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ3",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of a publication by identifier",
+  "naturalLanguageQuestion": "Which publication has the identifier 0935.06018, and what is its title?",
+  "exampleUseCase": {
+    "focusConcept": "publication identifier 0935.06018"
+  },
+  "requires": [
+    "publication identifiers",
+    "publication titles"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title"
+  ],
+  "queryFile": "CQ3.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ4",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Keyword-based retrieval of scholarly publications",
+  "naturalLanguageQuestion": "Which scholarly publications have titles containing the keyword \"fuzzy\"?",
+  "exampleUseCase": {
+    "focusConcept": "fuzzy"
+  },
+  "requires": [
+    "publication titles",
+    "case-insensitive title matching"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ4.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ5",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of authors of a publication",
+  "naturalLanguageQuestion": "Who are the authors of the publication identified by https://zbmath.org/1383556?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publication",
+    "publication authors",
+    "author names"
+  ],
+  "expectedOutput": [
+    "author",
+    "author name"
+  ],
+  "queryFile": "CQ5.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ6",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications by author",
+  "naturalLanguageQuestion": "Which publications were authored by Cheong-Seng Hoo, and what are their titles?",
+  "exampleUseCase": {
+    "focusConcept": "author https://zbmath.org/authors/hoo.cheong-seng"
+  },
+  "requires": [
+    "author",
+    "authorship relationships",
+    "publication titles"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ6.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ7",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of authors and publications",
+  "naturalLanguageQuestion": "Which authors are associated with scholarly publications, and what are the titles of those publications?",
+  "exampleUseCase": {
+    "focusConcept": "author-publication relationships"
+  },
+  "requires": [
+    "scholarly publications",
+    "publication authors",
+    "author names",
+    "publication titles"
+  ],
+  "expectedOutput": [
+    "author",
+    "author name",
+    "publication",
+    "publication title",
+    "author-publication relationships"
+  ],
+  "queryFile": "CQ7.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ8",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications and their journals",
+  "naturalLanguageQuestion": "Which journals contain scholarly publications, and what are the titles of those publications?",
+  "exampleUseCase": {
+    "focusConcept": "publication-journal relationships"
+  },
+  "requires": [
+    "publications",
+    "publication titles",
+    "publication-journal relationships",
+    "journal names"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "journal",
+    "journal name",
+    "publication-journal relationships"
+  ],
+  "queryFile": "CQ8.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ9",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications from a journal",
+  "naturalLanguageQuestion": "Which publications were published in the International Journal of Approximate Reasoning?",
+  "exampleUseCase": {
+    "focusConcept": "International Journal of Approximate Reasoning"
+  },
+  "requires": [
+    "publications",
+    "publication titles",
+    "journal-publication relationships",
+    "journal identity"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "alphabetically ordered publications"
+  ],
+  "queryFile": "CQ9.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ10",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of a publication date",
+  "naturalLanguageQuestion": "When was a given publication published?",
+  "exampleUseCase": {
+    "focusConcept": "publication year of https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publication",
+    "publication date"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication year or date"
+  ],
+  "queryFile": "CQ10.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ11",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications by publication year",
+  "naturalLanguageQuestion": "Which publications were published in a given year?",
+  "exampleUseCase": {
+    "focusConcept": "publication year = 2023"
+  },
+  "requires": [
+    "publications",
+    "publication dates or years",
+    "publication titles"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "publication year",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ11.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ12",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of MSC classifications assigned to a publication",
+  "naturalLanguageQuestion": "Which MSC concepts are assigned to a given publication?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publication",
+    "MSC classifications",
+    "MSC notation",
+    "MSC preferred labels",
+    "publication-MSC relationships"
+  ],
+  "expectedOutput": [
+    "MSC concept",
+    "MSC notation",
+    "MSC label"
+  ],
+  "queryFile": "CQ12.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ13",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications by MSC classification",
+  "naturalLanguageQuestion": "Which publications belong to the MSC classification 06D35, and when were they published?",
+  "exampleUseCase": {
+    "focusConcept": "MSC 06D35"
+  },
+  "requires": [
+    "MSC classifications",
+    "publication-MSC relationships",
+    "publication titles",
+    "publication years"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "publication year",
+    "MSC classification",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ13.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ14",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications in broader and narrower MSC contexts",
+  "naturalLanguageQuestion": "Which publications are associated with the broader and narrower MSC concepts of MSC 03B52?",
+  "exampleUseCase": {
+    "focusConcept": "MSC 03B52"
+  },
+  "requires": [
+    "MSC concepts",
+    "MSC concept hierarchy",
+    "SKOS broader relationships",
+    "publication-MSC relationships",
+    "publication titles"
+  ],
+  "expectedOutput": [
+    "broader MSC concepts",
+    "narrower MSC concepts",
+    "associated publications",
+    "publication titles",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ14.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ15",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of controlled keywords for a publication",
+  "naturalLanguageQuestion": "Which controlled or curated keywords are associated with a given publication?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publications",
+    "controlled or curated keywords",
+    "keyword preferred labels",
+    "publication-keyword relationships"
+  ],
+  "expectedOutput": [
+    "keyword",
+    "keyword label"
+  ],
+  "queryFile": "CQ15.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ16",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications cited by a publication",
+  "naturalLanguageQuestion": "Which publications are cited by a given publication, and when were the cited publications published?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publications",
+    "citation relationships",
+    "cited publication titles",
+    "cited publication years"
+  ],
+  "expectedOutput": [
+    "cited publication",
+    "cited publication title",
+    "cited publication year",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ16.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ17",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications citing a publication",
+  "naturalLanguageQuestion": "Which publications cite a given publication, and when were the citing publications published?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "publications",
+    "citation relationships",
+    "citing publication titles",
+    "citing publication years"
+  ],
+  "expectedOutput": [
+    "citing publication",
+    "citing publication title",
+    "citing publication year",
+    "up to 100 publications"
+  ],
+  "queryFile": "CQ17.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ18",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of citation relationships within an MSC area",
+  "naturalLanguageQuestion": "Which publications classified under MSC 03B52 cite other publications classified under the same MSC area?",
+  "exampleUseCase": {
+    "focusConcept": "MSC 03B52"
+  },
+  "requires": [
+    "publications",
+    "MSC classifications",
+    "publication titles",
+    "citation relationships"
+  ],
+  "expectedOutput": [
+    "source publication",
+    "source publication title",
+    "target publication",
+    "target publication title",
+    "citation relationships within the MSC area"
+  ],
+  "queryFile": "CQ18.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ19",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of reviews and reviewers for a publication",
+  "naturalLanguageQuestion": "What reviews exist for a given publication, who wrote them, and what review content and language are available?",
+  "exampleUseCase": {
+    "focusConcept": "publication https://zbmath.org/1383556"
+  },
+  "requires": [
+    "reviews",
+    "reviewed publications",
+    "reviewers",
+    "reviewer names",
+    "review bodies",
+    "review languages"
+  ],
+  "expectedOutput": [
+    "review",
+    "reviewer",
+    "reviewer name",
+    "review body",
+    "review language"
+  ],
+  "queryFile": "CQ19.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ20",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Retrieval of publications reviewed by a reviewer",
+  "naturalLanguageQuestion": "Which publications were reviewed by a given reviewer, and when were those publications published?",
+  "exampleUseCase": {
+    "focusConcept": "reviewer https://zbmath.org/authors/sessa.salvatore"
+  },
+  "requires": [
+    "reviews",
+    "reviewers",
+    "reviewed publications",
+    "publication titles",
+    "publication years"
+  ],
+  "expectedOutput": [
+    "publication",
+    "publication title",
+    "publication year",
+    "review"
+  ],
+  "queryFile": "CQ20.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ21",
+  "category": "Core Bibliographic and KG Retrieval Capabilities",
+  "title": "Authors ranked by diversity of reviewers",
+  "naturalLanguageQuestion": "Which authors have publications reviewed by the largest number of distinct reviewers?",
+  "exampleUseCase": {
+    "focusConcept": "author-reviewer relationships"
+  },
+  "requires": [
+    "reviews",
+    "reviewers",
+    "reviewed publications",
+    "publication authorship"
+  ],
+  "expectedOutput": [
+    "author",
+    "number of distinct reviewers",
+    "ranking of authors by reviewer count"
+  ],
+  "queryFile": "CQ21.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ22",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Temporal coverage of the knowledge graph",
+  "naturalLanguageQuestion": "What is the temporal coverage of the knowledge graph?",
+
+  "exampleUseCase": {
+    "focusConcept": "Overall publication timeline of the knowledge graph"
+  },
+
+  "requires": [
+    "publications",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "earliest publication year",
+    "latest publication year",
+    "temporal publication span",
+    "publication count by year"
+  ],
+
+  "queryFile": "CQ23.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ23",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Specific author's reviewed and authored research across time",
+  "naturalLanguageQuestion": "Which papers reviewed by specific author up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC?",
+  "exampleUseCase": {
+    "focusConcept": "Which papers reviewed by Hans L. Bodlaender up to 2000 share keywords with papers he authored from 2000 to 2025, and how are these papers classified by MSC? "
+  },
+  "requires": [
+    "reviews",
+    "reviewer identity",
+    "reviewed publications",
+    "authored publications",
+    "publication year",
+    "MSC classification",
+    "publication keywords"
+  ],
+  "expectedOutput": [
+    "reviewed paper title and year",
+    "reviewed paper MSC classification",
+    "authored paper title and year",
+    "authored paper MSC classification",
+    "shared keyword labels"
+  ],
+  "queryFile": "CQ22.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ24",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Temporal evolution of research activity in a mathematical topic",
+  "naturalLanguageQuestion": "How has research activity in a mathematical topic changed over time?",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC 03B52"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC classification"
+],
+
+  "expectedOutput": [
+    "yearly publication trends",
+    "research growth curve",
+    "topic development over time",
+    "publication count"
+  ],
+
+  "queryFile": "CQ24.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ25",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of newly appearing mathematical topics",
+  "naturalLanguageQuestion": "Which mathematical topics first appeared after a given time period?",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC topics whose earliest associated publication is after 2000"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "emerging mathematical topics",
+    "first appearance year of concepts",
+    "new field identification",
+    "topic emergence timeline"
+  ],
+
+  "queryFile": "CQ25.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ26",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of long-lived mathematical concepts",
+  "naturalLanguageQuestion": "Which mathematical concepts have remained active across multiple periods?",
+
+  "exampleUseCase": {
+    "focusConcept": "Keywords active from the 1970s to the present"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "keywords",
+    "keyword labels"
+  ],
+
+  "expectedOutput": [
+    "first publication year",
+    "latest publication year",
+    "active publication years",
+    "number of active decades",
+    "concept lifespan"
+  ],
+
+  "queryFile": "CQ26.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ27",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of declining mathematical topics",
+  "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC areas with decreasing publication activity (highly active before 1990 but have received substantially fewer publications since 2000), e.g., publication count in 1970–1999 compared with 2000–2025"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "declining mathematical topics",
+    "historical publication comparison",
+    "research activity trends",
+    "publication counts by period"
+  ],
+
+  "queryFile": "CQ27.sparql",
+  "status": "validated"
+}
+
+
+{
+  "id": "CQ28",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Cross-disciplinary citation evolution between mathematical subject areas",
+  "naturalLanguageQuestion": "How have citation patterns evolved within mathematical areas?",
+
+  "exampleUseCase": {
+    "focusConcept": "Cross-field citations between MSC areas"
+  },
+
+  "requires": [
+    "publications",
+    "citation relationships",
+    "MSC labels"
+  ],
+
+  "expectedOutput": [
+    "cross-field citation patterns",
+    "source and target mathematical fields",
+    "citation counts",
+    "interdisciplinary knowledge flow"
+  ],
+
+  "queryFile": "CQ28.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ29",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Identification of long-term contributing mathematical authors",
+  "naturalLanguageQuestion": "Which authors have published across multiple decades of mathematical research?",
+
+  "exampleUseCase": {
+    "focusConcept": "Authors publishing from 1980 to 2020"
+  },
+
+  "requires": [
+    "publications",
+    "author identifiers",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "long-term contributing authors",
+    "first publication year",
+    "latest publication year",
+    "publication count"
+  ],
+
+  "queryFile": "CQ29.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ30",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Historical distribution of mathematical research across journals",
+  "naturalLanguageQuestion": "Which journals have historically published research in a mathematical area?",
+
+  "exampleUseCase": {
+    "focusConcept": "Journals publishing MSC 03B52"
+  },
+
+  "requires": [
+    "publications",
+    "journals",
+    "publication year",
+    "MSC concepts"
+  ],
+
+  "expectedOutput": [
+    "journals publishing the discipline",
+    "yearly publication counts",
+    "historical publication trends",
+    "journal evolution"
+  ],
+
+  "queryFile": "CQ30.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ31",
+  "title": "Evolution of the conceptual organization of a mathematical discipline",
+  "naturalLanguageQuestion": "How have MSC categories, keywords, and citation relationships of a mathematical discipline changed over time?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC 03Bxx"
+  },
+
+   "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "keywords"
+  ],
+
+   "expectedOutput": [
+    "MSC distribution over time",
+    "keyword evolution",
+    "citation relationships",
+    "publication trends"
+  ],
+
+  "queryFile": "CQ31.sparql"
+  "status": "validated"
+}
+
+{
+  "id": "CQ32",
+  "title": "Influence of earlier mathematical areas on the emergence of another area",
+  "naturalLanguageQuestion": "Which mathematical areas influenced the emergence of another area?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC 03B52 (influence = citation relationship)"
+  },
+
+  "requires": [
+    "publications",
+    "citation relationships",
+    "MSC concepts",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "influential MSC areas",
+    "source mathematical fields",
+    "citation influence count",
+    "ranked influencing areas",
+    "citation count"
+  ],
+
+  "queryFile": "CQ32.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ33",
+  "title": "Identification of foundational publications shaping a mathematical discipline",
+  "naturalLanguageQuestion": "Which foundational publications shaped a mathematical discipline?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "Foundational publications (early publication + high citation count)"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "citation relationships",
+    "publication title",
+    "publication identifier"
+  ],
+
+  "expectedOutput": [
+    "early publications",
+    "highly cited works",
+    "citation count",
+    "potential foundational papers"
+  ],
+
+  "queryFile": "CQ33.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ34",
+  "title": "Propagation of mathematical knowledge across journals, authors, citation, or time",
+  "naturalLanguageQuestion": "How did mathematical knowledge propagate through publications, citation, authors, or journals over time?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "Propagation of mathematical knowledge through citation networks"
+  },
+
+  "requires": [
+    "publications",
+    "authors",
+    "journals",
+    "citation relationships",
+    "publication year"
+  ],
+
+  "expectedOutput": [
+    "citation paths",
+    "publication propagation paths",
+  ],
+
+  "queryFile": "CQ34.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ35",
+  "title": "Reconstruction of mathematical knowledge evolution",
+  "naturalLanguageQuestion": "What publication, classification, citation, keyword, and review evidence reconstructs the evolution of mathematical knowledge?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "Knowledge evolution profile"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "MSC concepts",
+    "citation relationships",
+    "reviews",
+    "keywords"
+  ],
+
+  "expectedOutput": [
+    "knowledge evolution timeline",
+    "publication history",
+    "MSC concept development",
+    "citation impact",
+    "review activity",
+    "keyword evolution profile"
+  ],
+
+  "queryFile": "CQ35.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ36",
+  "category": "Mathematical Knowledge Evolution",
+  "title": "Structural organization of mathematical fields and subfields",
+  "naturalLanguageQuestion": "How are mathematical fields organized into hierarchical subfields?",
+
+  "exampleUseCase": {
+    "focusConcept": "MSC hierarchy and descendant mathematical areas"
+  },
+
+  "requires": [
+    "MSC concepts",
+    "MSC hierarchy",
+    "broader/narrower relationships",
+    "concept labels"
+  ],
+
+  "expectedOutput": [
+    "parent mathematical areas",
+    "subfield relationships",
+    "MSC specialization structure",
+    "mathematical field hierarchy"
+  ],
+
+  "queryFile": "CQ36.sparql",
+  "status": "validated"
+}
+
+{
+  "id": "CQ37",
+  "title": "Temporal evolution of mathematical citation networks",
+  "naturalLanguageQuestion": "How have citation relationships among mathematical publications changed across decades?",
+  "category": "Mathematical Knowledge Evolution",
+
+  "exampleUseCase": {
+    "focusConcept": "Citation network growth, number of citations, cross-field links"
+  },
+
+  "requires": [
+    "publications",
+    "publication year",
+    "citation relationships"
+  ],
+
+  "expectedOutput": [
+    "decade-based citation trends",
+    "citation link growth",
+    "historical citation network evolution"
+  ],
+
+  "queryFile": "CQ37.sparql",
+  "status": "validated"
+}
