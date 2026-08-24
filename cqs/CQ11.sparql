@@ -1,0 +1,13 @@
+#Which publications were published in a given year?
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT
+    ?publication
+    ?title
+
+WHERE {
+    ?publication
+        dcterms:issued "2023"^^xsd:gYear ;
+        dcterms:title ?title .
+}
+LIMIT 100
