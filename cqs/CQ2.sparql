@@ -1,0 +1,19 @@
+#What bibliographic metadata is available for scholarly publications, including their titles, publication years, identifiers, and languages?
+PREFIX schema: <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT
+    ?publication
+    ?title
+    ?year
+    ?identifier
+    ?language
+WHERE {
+    ?publication a schema:ScholarlyArticle ;
+                 schema:name ?title .
+
+    OPTIONAL { ?publication dcterms:issued ?year . }
+    OPTIONAL { ?publication dcterms:identifier ?identifier . }
+    OPTIONAL { ?publication dcterms:language ?language . }
+}
+LIMIT 100
