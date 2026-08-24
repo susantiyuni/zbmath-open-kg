@@ -1,0 +1,32 @@
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT
+    ?oldKeyword
+    ?oldLabel
+    ?newKeyword
+    ?newLabel
+    (MIN(?oldYear) AS ?oldFirstYear)
+    (MAX(?oldYear) AS ?oldLastYear)
+    (MIN(?newYear) AS ?newFirstYear)
+    (MAX(?newYear) AS ?newLastYear)
+WHERE {
+    ?oldKeyword skos:closeMatch ?newKeyword ;
+                skos:prefLabel ?oldLabel .
+
+    ?newKeyword skos:prefLabel ?newLabel .
+
+    ?oldPaper schema:keywords ?oldKeyword ;
+              dcterms:issued ?oldYear .
+
+    ?newPaper schema:keywords ?newKeyword ;
+              dcterms:issued ?newYear .
+
+    FILTER(?oldYear < ?newYear)
+}
+GROUP BY
+    ?oldKeyword ?oldLabel
+    ?newKeyword ?newLabel
+ORDER BY
+    ?oldFirstYear ?newFirstYear
