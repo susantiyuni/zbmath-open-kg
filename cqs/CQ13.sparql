@@ -1,0 +1,18 @@
+#Which publications belong to the MSC classification 06D35, and when were they published?",
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT
+    ?publication
+    ?title
+    ?year
+WHERE {
+    ?publication
+        dcterms:subject <http://msc2020.org/06D35> ;
+        dcterms:title ?title .
+
+    OPTIONAL {
+        ?publication dcterms:issued ?year .
+    }
+}
+ORDER BY ?year ?title
+LIMIT 100
