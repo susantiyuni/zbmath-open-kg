@@ -1,0 +1,46 @@
+#Which software projects associated with mathematical publications have high levels of community adoption?
+PREFIX schema: <https://schema.org/>
+
+SELECT DISTINCT
+    ?software
+    ?softwareName
+    ?paper
+    ?paperTitle
+    ?repository
+    ?created
+    ?lastUpdated
+    ?archived
+    ?stars
+    ?forks
+
+WHERE {
+    ?software
+        a schema:SoftwareSourceCode ;
+        schema:name ?softwareName ;
+        schema:codeRepository ?repository .
+
+    ?paper
+        schema:software ?software ;
+        schema:name ?paperTitle .
+
+    OPTIONAL {
+        ?software schema:dateCreated ?created .
+    }
+
+    OPTIONAL {
+        ?software schema:dateModified ?lastUpdated .
+    }
+
+    OPTIONAL {
+        ?software schema:archived ?archived .
+    }
+
+    OPTIONAL {
+        ?software schema:starCount ?stars .
+    }
+
+    OPTIONAL {
+        ?software schema:forkCount ?forks .
+    }
+}
+ORDER BY DESC(?stars) DESC(?forks)
