@@ -1,0 +1,10 @@
+#Which publications were authored by Cheong-Seng Hoo, and what are their titles?
+PREFIX schema: <https://schema.org/>
+
+SELECT ?publication ?title
+WHERE {
+    ?publication schema:author
+        <https://zbmath.org/authors/hoo.cheong-seng> ;
+        schema:name ?title .
+}
+LIMIT 100
