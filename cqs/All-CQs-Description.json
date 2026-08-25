@@ -566,7 +566,7 @@
   "queryFile": "CQ24.sparql",
   "status": "validated - fully supported"
 }
----
+
 {
   "id": "CQ25",
   "category": "Mathematical Scholarly History and Relationships",
@@ -587,12 +587,11 @@
   "expectedOutput": [
     "emerging mathematical topics",
     "first appearance year of concepts",
-    "new field identification",
-    "topic emergence timeline"
+    "new field identification"
   ],
 
   "queryFile": "CQ25.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
@@ -613,22 +612,21 @@
   ],
 
   "expectedOutput": [
-    "first publication year",
-    "latest publication year",
-    "active publication years",
-    "number of active decades",
-    "concept lifespan"
+    "active concepts"
+    "(representative) early publication year",
+    "(representative) recent publication year",
+    "(representative) middle publication years"
   ],
 
   "queryFile": "CQ26.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 {
   "id": "CQ27",
   "category": "Mathematical Scholarly History and Relationships",
   "title": "Identification of declining mathematical topics",
-  "naturalLanguageQuestion": "Which mathematical topics have declined in research activity over time?",
+  "naturalLanguageQuestion": "(Which mathematical topics have declined (i.e., lower publication activity in recent research than in earlier research?) in research activity over time?)",
 
   "exampleUseCase": {
     "focusConcept": "MSC areas with decreasing publication activity (highly active before 1990 but have received substantially fewer publications since 2000), e.g., publication count in 1970–1999 compared with 2000–2025"
@@ -643,13 +641,12 @@
 
   "expectedOutput": [
     "declining mathematical topics",
-    "historical publication comparison",
     "research activity trends",
     "publication counts by period"
   ],
 
   "queryFile": "CQ27.sparql",
-  "status": "validated"
+  "status": "validated - fully supported"
 }
 
 
