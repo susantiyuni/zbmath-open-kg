@@ -7,24 +7,20 @@ SELECT
     ?mscLabel
     (SUM(IF(?year < 1990, 1, 0)) AS ?before1990)
     (SUM(IF(?year >= 2000, 1, 0)) AS ?after2000)
-
 WHERE {
-
-    ?paper a schema:ScholarlyArticle ;
-           dcterms:subject ?msc ;
-           dcterms:issued ?date .
+    ?paper
+        a schema:ScholarlyArticle ;
+        dcterms:subject ?msc ;
+        dcterms:issued ?date .
 
     ?msc skos:prefLabel ?mscLabel .
 
     BIND(YEAR(?date) AS ?year)
-
 }
-
 GROUP BY ?msc ?mscLabel
-
-HAVING(
+HAVING (
     SUM(IF(?year < 1990, 1, 0)) >
     SUM(IF(?year >= 2000, 1, 0))
 )
-
 ORDER BY DESC(?before1990)
+LIMIT 100
