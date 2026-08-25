@@ -1,34 +1,88 @@
-PREFIX schema:<https://schema.org/>
-PREFIX dcterms:<http://purl.org/dc/terms/>
-PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX schema:  <https://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
 
 SELECT
-
     ?keyword
     ?keywordLabel
-
-    (MIN(?year) AS ?firstYear)
-    (MAX(?year) AS ?lastYear)
-    (COUNT(DISTINCT ?year) AS ?activeYears)
-
-
+    ?earlyYear
+    ?middleYear
+    ?recentYear
 WHERE {
-
-    ?paper schema:keywords ?keyword ;
-           dcterms:issued ?date .
-
     ?keyword skos:prefLabel ?keywordLabel .
 
-    BIND(YEAR(?date) AS ?year)
+    {
+        SELECT ?keyword (MIN(YEAR(?date)) AS ?earlyYear)
+        WHERE {
+            ?paper
+                schema:keywords ?keyword ;
+                dcterms:issued ?date .
 
+            FILTER(YEAR(?date) <= 1970)
+        }
+        GROUP BY ?keyword
+    }
+
+    {
+        SELECT ?keyword (MIN(YEAR(?date)) AS ?middleYear)
+        WHERE {
+            ?paper
+                schema:keywords ?keyword ;
+                dcterms:issued ?date .
+
+            FILTER(YEAR(?date) >= 1971 &&
+                   YEAR(?date) <= 1999)
+        }
+        GROUP BY ?keyword
+    }
+
+    {
+        SELECT ?keyword (MIN(YEAR(?date)) AS ?recentYear)
+        WHERE {
+            ?paper
+                schema:keywords ?keyword ;
+                dcterms:issued ?date .
+
+            FILTER(YEAR(?date) >= 2000)
+        }
+        GROUP BY ?keyword
+    }
 }
+ORDER BY ?keywordLabel
+LIMIT 100
 
-GROUP BY ?keyword ?keywordLabel
 
-HAVING(
-    MIN(?year) <= 1970
-    &&
-    MAX(?year) >= 2020
-)
+# PREFIX schema:<https://schema.org/>
+# PREFIX dcterms:<http://purl.org/dc/terms/>
+# PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
 
-ORDER BY DESC(?activeYears)
+# SELECT
+
+#     ?keyword
+#     ?keywordLabel
+
+#     (MIN(?year) AS ?firstYear)
+#     (MAX(?year) AS ?lastYear)
+#     (COUNT(DISTINCT ?year) AS ?activeYears)
+
+
+# WHERE {
+
+#     ?paper schema:keywords ?keyword ;
+#            dcterms:issued ?date .
+
+#     ?keyword skos:prefLabel ?keywordLabel .
+
+#     BIND(YEAR(?date) AS ?year)
+
+# }
+
+# GROUP BY ?keyword ?keywordLabel
+
+# HAVING(
+#     MIN(?year) <= 1970
+#     &&
+#     MAX(?year) >= 2020
+# )
+
+# ORDER BY DESC(?activeYears)
