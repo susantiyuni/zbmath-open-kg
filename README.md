@@ -1,7 +1,7 @@
 # zbMATH Open Knowledge Graph
 ## Overview
 
-A large-scale, historically comprehensive knowledge graph (KG) constructed from the zbMATH Open platform, designed to capture historical and conceptual connections across centuries of mathematical research. The KG spans over 250 years and incorporates curated publications dating back to 1763. This temporal depth makes it particularly suitable for longitudinal analyses and historically grounded scholarly exploration and discovery use cases.
+A large-scale RDF knowledge graph spanning over 250 years of mathematical scholarship, grounded in expert-curated semantic content. Its combination of temporal depth and domain-specific curation provides an open semantic infrastructure for studying the development of mathematical knowledge and tracing scholarly connections across centuries of scholarship.
 
 **Update**: The zbMATH Open Knowledge Graph has been updated; this description reflects the changes and features introduced in the latest version. For previous version, see [v01](./v01/).
 
@@ -49,19 +49,19 @@ The following statistics are reported as of July 2026. The current KG was constr
 ## Key Features
 
 - **RDF-Based Semantic Knowledge Graph**  
-  Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting semantic interoperability and adheres to Linked Open Data principles. The full RDF dumps will be published on [**Zenodo**](http://zenodo) after the anonymous review period concludes. A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). 
+  Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting interoperability and adheres to Linked Open Data principles. The full RDF dumps is published on [**Zenodo**](http://zenodo). A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). 
 
 - **Expert-Curated, High-Quality Mathematical Metadata**  
-  In addition to standard bibliographic metadata, it incorporates annotated mathematical publications with expert-curated reviews and keywords, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes — a fine-grained ontology for math subject classification.
+  In addition to standard bibliographic metadata, the KG incorporates annotated mathematical publications with expert-curated reviews and controlled keywords, software references, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes -- a fine-grained ontology for math subject classification.
 
 - **Historically-Grounded Scholarly Discovery and Exploration**  
-  Its comprehensive and long-term coverage enable long-range intellectual analysis such as historically-grounded retrieval tasks e.g., identifying overlooked precursors and tracing conceptual lineages across (_sub_)disciplines.
+  Its comprehensive and long-term coverage enable long-range intellectual analysis such as historically-grounded retrieval tasks e.g., identifying connections beyond citation and tracing conceptual lineages across (_sub_)disciplines.
 
 - **SPARQL Query Interface**  
   A SPARQL endpoint (temporarily at [**SPARQL endpoint url**](http://212.227.170.235:8890/sparql)) for directly executing queries over the KG.
   
 - **Linked Data Integration**  
-Cross-links with external URLs and persistent identifiers (e.g., DOI).
+URI resolution for core entities (i.e., publications, scholars, software references). Cross-links with external URLs and persistent identifiers (e.g., DOI). 
   
 ## Construction and Setup
 
@@ -125,6 +125,8 @@ For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
 - [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
 - [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded scholarly exploration and discovery.
 - [`use-case/`](./use-case) – Use case-specific results and visualizations
+- [`cqs/`](./cqs) – All competency questions along with their SPARQL queries and description.
+- [`v01/`](./v01) – Earlier version of the KG
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
 
@@ -141,4 +143,7 @@ In those cases, we replaced the data with the string "zbMATH Open Web Interface 
 ```
 
 ## Contact and Maintenance:
+
+The construction process is designed as a reproducible pipeline over the continuously maintained zbMATH Open platform. The knowledge graph is planned to be updated periodically, approximately twice per year subject to the availability of the underlying data stream, resource and infrastructure constraint.
+
 📧 yuni.susanti@fiz-karlsruhe.de
