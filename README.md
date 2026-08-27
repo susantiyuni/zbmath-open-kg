@@ -120,13 +120,14 @@ For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
 
 ## Repository Structure
 
+- [`cqs/`](./cqs) – All competency questions along with their SPARQL queries and description.
 - [`data/`](./data) – `.jsonl` raw data and `.ttl` RDF KG (subset), ontology files (`.ttl`), etc.
 - [`front/`](./front) – Fuseki triple store setup for serving the RDF subset (example only — SPARQL endpoint runs on Virtuoso for scalability)
 - [`src/`](./src) – Source code for KG construction (data harvest, statistics calculation, RDF transformation, etc).
 - [`src/retrieval-tasks/`](./src/retrieval-tasks/) – Source code and SPARQL queries for historically-grounded scholarly exploration and discovery.
-- [`use-case/`](./use-case) – Use case-specific results and visualizations
-- [`cqs/`](./cqs) – All competency questions along with their SPARQL queries and description.
+- [`use-case/`](./use-case) – Evaluation and Use case-specific results and visualizations
 - [`v01/`](./v01) – Earlier version of the KG
+- [`zb-virtuoso/`](./zb-virtuoso) – Docker settings for the Virtuoso triple store
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
 
