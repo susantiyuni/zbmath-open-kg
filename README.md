@@ -48,11 +48,11 @@ The following statistics are reported as of July 2026. The current KG was constr
 
 ## Key Features
 
-- **RDF-Based Semantic Knowledge Graph**  
+- **RDF-Based Knowledge Graph**  
   Compliant with RDF and Semantic Web standards, the zbMATH Open KG is built entirely from RDF triples using widely adopted ontologies and vocabularies (e.g., ``schema:, dcterms:, skos:, cito:``), supporting interoperability and adheres to Linked Open Data principles. The full RDF dumps is published on [**Zenodo**](http://zenodo). A sample of 200 records is available here: [`data/subset-200.ttl`](./data/subset-200-v2.ttl). 
 
 - **Expert-Curated, High-Quality Mathematical Metadata**  
-  In addition to standard bibliographic metadata, the KG incorporates annotated mathematical publications with expert-curated reviews and controlled keywords, software references, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes -- a fine-grained ontology for math subject classification.
+  In addition to standard bibliographic metadata, the KG incorporates annotated mathematical publications with expert-curated reviews and controlled keywords, software references, disambiguated authors, and *Mathematics Subject Classification* (MSC) codes -- a fine-grained ontology for mathematical subject classification.
 
 - **Historically-Grounded Scholarly Discovery and Exploration**  
   Its comprehensive and long-term coverage enable long-range intellectual analysis such as historically-grounded retrieval tasks e.g., identifying connections beyond citation and tracing conceptual lineages across (_sub_)disciplines.
