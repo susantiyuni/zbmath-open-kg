@@ -18,6 +18,7 @@ The zbMATH Open Knowledge Graph (KG) is a large-scale RDF knowledge graph constr
   - [RDF Triple Store Setup](#rdf-triple-store-setup)
 - [Repository Structure](#repository-structure)
 - [License](#license)
+- [Citation](#citation)
 - [Contact and Maintenance](#contact-and-maintenance)
 
 ## Ontology and Metadata Descriptions
@@ -131,6 +132,9 @@ For Virtuoso setup, see the [`zb-virtuoso`](./zb-virtuoso) directory.
 - [`run-convert.sh`](./run-convert.sh) – Shell script to convert raw data into RDF format
 - [`README.md`](./README.md) – Project documentation
 
+## Citation
+
+```to be added```
 
 ## License
 
