@@ -1,7 +1,7 @@
 # zbMATH Open Knowledge Graph
 ## Overview
 
-A large-scale RDF knowledge graph spanning over 250 years of mathematical scholarship, grounded in expert-curated semantic content. Its combination of temporal depth and domain-specific curation provides an open semantic infrastructure for studying the development of mathematical knowledge and tracing scholarly connections across centuries of scholarship.
+The zbMATH Open Knowledge Graph (KG) is a large-scale RDF knowledge graph constructed from the zbMATH Open platform. Its combination of temporal depth spanning over centuries of mathematical scholarship and expert-curated domain-specific contents provides an open semantic infrastructure for studying the development of mathematical knowledge and tracing scholarly connections across centuries of scholarship. To support interoperability, the knowledge graph is constructed using established Semantic Web vocabularies and ontologies and designed to align with FAIR principles. 
 
 **Update**: The zbMATH Open Knowledge Graph has been updated; this description reflects the changes and features introduced in the latest version. For previous version, see [v01](./v01/).
 
