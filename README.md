@@ -24,7 +24,7 @@ A large-scale RDF knowledge graph spanning over 250 years of mathematical schola
 
 We provides machine-readable ontology and dataset metadata descriptions for zbMATH Open KG:
 
-- [zbMATH Open Ontology (OWL)](./data/zbmath-kg-ontology.ttl)
+- [zbMATH Open Ontology (OWL)](./data/v01/zbmath-kg-ontology.ttl)
 - [DCAT + VoID + PROV-O Description](./data/zbmath-kg-dcat-void-prov.ttl) — A DCAT + VoID dataset metadata file with PROV-O provenance and full ETL pipeline documentation
 
 ## Key Statistics
